@@ -12,3 +12,4 @@ plt.xlim(0, 10)
 
 # Display the plot
 plt.show()
+
