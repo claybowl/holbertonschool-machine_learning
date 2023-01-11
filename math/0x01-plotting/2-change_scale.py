@@ -2,23 +2,28 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-mean = [69, 0]
-cov = [[15, 8], [8, 15]]
-np.random.seed(5)
-x, y = np.random.multivariate_normal(mean, cov, 2000).T
-y += 180
+x = np.arange(0, 28651, 5730)
+r = np.log(0.5)
+t = 5730
+y = np.exp((r / t) * x)
 
-# Plot the data as a scatter plot
-plt.scatter(x, y, c='magenta', marker='o')
+# Plot the data as a line graph
+plt.plot(x, y)
 
-# Label the x-axis as "Height (in)"
-plt.xlabel('Height (in)')
+# Label the x-axis as "Time (years)"
+plt.xlabel('Time (years)')
 
-# Label the y-axis as "Weight (lbs)"
-plt.ylabel('Weight (lbs)')
+# Label the y-axis as "Fraction Remaining"
+plt.ylabel('Fraction Remaining')
 
-# Set the title as "Men's Height vs Weight"
-plt.title("Men's Height vs Weight")
+# Set the title as "Exponential Decay of C-14"
+plt.title("Exponential Decay of C-14")
+
+# Set y-axis to be logarithmically scaled
+plt.yscale("log")
+
+# Set the x-axis range from 0 to 28650
+plt.xlim(0, 28650)
 
 # Display the plot
 plt.show()
