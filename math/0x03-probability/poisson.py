@@ -3,6 +3,7 @@
 Creates a class: Poisson
 """
 
+
 class Poisson:
     """Class Poisson"""
     def __init__(self, data=None, lambtha=1.):
