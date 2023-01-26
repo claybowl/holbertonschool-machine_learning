@@ -10,8 +10,9 @@ class Binomial:
 
     def __init__(self, data=None, n=1, p=0.5):
         """Represents a binomial distribution"""
-        self.n = n
-        self.p = p
+        self.n = int(n)
+        self.p = float(p)
+        self.data = data
         if data is None:
             if not isinstance(n, int) or n <= 0:
                 raise ValueError("n must be a positive integer")
