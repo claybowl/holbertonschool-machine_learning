@@ -21,7 +21,7 @@ class Poisson:
             self.lambtha = float(sum(data)/len(data))
 
     def pmf(self, k):
-		"""pmf"""
+        """pmf"""
         e = 2.7182818285
         k = int(k)
         if k <= 0:
@@ -33,7 +33,6 @@ class Poisson:
 
     def cdf(self, k):
         """cdf"""
-        """calculates the CDF for given number of successes"""
         e = 2.7182818285
         k = int(k)
         if k <= 0:
