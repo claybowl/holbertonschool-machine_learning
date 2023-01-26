@@ -9,6 +9,7 @@ class Exponential:
 
     def __init__(self, data=None, lambtha=1.):
         """initialize the exponential"""
+        self.lambtha = float(lambtha)
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
@@ -24,10 +25,10 @@ class Exponential:
         """calculates the pdf of time period"""
         if x <= 0:
             return 0
-        return format(self.lambtha * 2.7182818285**(-self.lambtha*x), '.6f')
+        return self.lambtha * 2.7182818285**(-self.lambtha*x)
 
     def cdf(self, x):
         """Calculates the CDF for time peroid"""
         if x <= 0:
             return 0
-        return format(1 - 2.7182818285**(-self.lambtha*x), '.6f')
+        return 1 - 2.7182818285**(-self.lambtha*x)
