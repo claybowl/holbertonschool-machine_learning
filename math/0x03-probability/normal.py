@@ -2,6 +2,8 @@
 """module normal
 initialize normal.py
 """
+pi = 3.1415926536
+e = 2.7182818285
 
 
 class Normal:
