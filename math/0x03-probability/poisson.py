@@ -45,7 +45,7 @@ class Poisson:
             cdf += (self.lambtha ** x) * ((e ** -self.lambtha) / xFact)
         return cdf
 
-    def factorial(self,n):
+    def factorial(self, n):
         """factorial"""
         if n == 0 or n == 1:
             return 1
