@@ -18,16 +18,16 @@ class Exponential:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            self.lambtha = float(1/sum(data)/len(data))
+            self.lambtha = 1 / (sum(data) / len(data))
 
     def pdf(self, x):
         """calculates the pdf of time period"""
-        if x < 0:
+        if x <= 0:
             return 0
         return self.lambtha * 2.7182818285**(-self.lambtha*x)
 
     def cdf(self, x):
         """Calculates the CDF for time peroid"""
-        if x < 0:
+        if x <= 0:
             return 0
         return 1 - 2.7182818285**(-self.lambtha*x)
