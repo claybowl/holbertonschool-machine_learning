@@ -2,6 +2,7 @@
 """Module poisson
 Creates a class: Poisson
 """
+import math
 
 
 class Poisson:
@@ -23,3 +24,12 @@ class Poisson:
         if k < 0:
             return 0
         return (self.lambtha**k * math.exp(-self.lambtha)) / math.factorial(k)
+
+    def cdf(self, k):
+        k = int(k)
+        if k < 0:
+            return 0
+        cdf = 0
+        for i in range(k+1):
+            cdf += (self.lambtha**i * math.exp(-self.lambtha)) / math.factorial(i)
+        return cdf
