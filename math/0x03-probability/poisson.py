@@ -20,14 +20,14 @@ class Poisson:
 
     def pmf(self, k):
 		"""pmf"""
-        ## convert k to int if it's not already
+        # convert k to int if it's not already
         k = int(k)
-        ## if k is out of range, return 0
+        # if k is out of range, return 0
         if k <= 0:
             return 0
-        ## calculate and return the PMF value for k
+        # calculate and return the PMF value for k
         return (self.lambtha**k * 2.7182818285**(-self.lambtha)) /
-		       self.factorial(k)
+               self.factorial(k)
 
     def cdf(self, k):
         # convert k to int if it's not already
@@ -39,7 +39,7 @@ class Poisson:
         cdf = 0
         for i in range(k+1):
             cdf += (self.lambtha**i * 2.7182818285**(-self.lambtha)) /
-			       self.factorial(i)
+                   self.factorial(i)
         return cdf
 
     def factorial(self,n):
