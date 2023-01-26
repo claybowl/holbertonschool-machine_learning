@@ -34,3 +34,15 @@ class Normal:
         z : float : z-score
         """
         return z * self.stddev + self.mean
+
+    def pdf(self, x):
+        """Calculates PDF for given x-value"""
+        return (1 / (self.stddev * ((2 * pi) ** .5))) * \
+            (e ** (-.5 * (((x - self.mean) / self.stddev) ** 2)))
+
+    def cdf(self, x):
+        """calculates the CDF for given x-value"""
+        def erf(x):
+            return 2 / (pi ** .5) * \
+                (x - (x**3 / 3) + (x**5 / 10) - (x**7 / 42) + (x**9 / 216))
+        return .5 * (1 + erf((x - self.mean) / (self.stddev * 2**.5)))
