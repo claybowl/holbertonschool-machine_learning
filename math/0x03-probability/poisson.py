@@ -21,7 +21,7 @@ class Poisson:
             self.lambtha = float(sum(data)/len(data))
 
     def pmf(self, k):
-        """pmf"""
+        """Calculates the probablity mass function"""
         e = 2.7182818285
         k = int(k)
         if k <= 0:
@@ -32,7 +32,7 @@ class Poisson:
         return (self.lambtha ** k) * ((e ** -self.lambtha) / kFact)
 
     def cdf(self, k):
-        """cdf"""
+        """Calculates the Cumulative Distribution Function"""
         e = 2.7182818285
         k = int(k)
         if k <= 0:
@@ -46,7 +46,7 @@ class Poisson:
         return cdf
 
     def factorial(self, n):
-        """factorial"""
+        """Returns the factorial of a given number"""
         if n == 0 or n == 1:
             return 1
         else:
