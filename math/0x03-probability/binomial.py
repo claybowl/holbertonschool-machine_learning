@@ -14,19 +14,20 @@ class Binomial:
         self.p = float(p)
         self.data = data
         if data is None:
-            if not isinstance(n, int) or n <= 0:
-                raise ValueError("n must be a positive integer")
-            if not 0 < p < 1:
+            if n < 1:
+                raise ValueError("n must be a positive value")
+            if p <= 0 or p >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
         else:
-            if not isinstance(data, list):
+            if type(data) is not list:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            p = sum(data) / len(data)
-            n = round(len(data) / p)
-            self.n = n
-            self.p = p
+            mean = sum(data) / len(data)
+            variance = sum([(value - mean) ** 2 for value in data]) / len(data)
+            self.p = 1 - (variance / mean)
+            self.n = round(mean / self.p)
+            self.p = mean / self.n
 
     def pmf(self, k):
         """Calculates the PMF for a given number of successes"""
