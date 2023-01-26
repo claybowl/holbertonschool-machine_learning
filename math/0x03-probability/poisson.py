@@ -6,7 +6,9 @@ Creates a class: Poisson
 
 class Poisson:
     """Class Poisson"""
+
     def __init__(self, data=None, lambtha=1.):
+        """initializes Poisson class"""
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
@@ -20,26 +22,28 @@ class Poisson:
 
     def pmf(self, k):
 		"""pmf"""
-        # convert k to int if it's not already
+        e = 2.7182818285
         k = int(k)
-        # if k is out of range, return 0
         if k <= 0:
             return 0
-        # calculate and return the PMF value for k
-        return (self.lambtha**k * 2.7182818285**(-self.lambtha)) /
-               self.factorial(k)
+        kFact = 1
+        for i in range(1, k + 1):
+            kFact *= i
+        return (self.lambtha ** k) * ((e ** -self.lambtha) / kFact)
 
     def cdf(self, k):
-        # convert k to int if it's not already
+        """cdf"""
+        """calculates the CDF for given number of successes"""
+        e = 2.7182818285
         k = int(k)
-        # if k is out of range, return 0
         if k <= 0:
             return 0
-        # calculate and return the CDF value for k
         cdf = 0
-        for i in range(k+1):
-            cdf += (self.lambtha**i * 2.7182818285**(-self.lambtha)) /
-                   self.factorial(i)
+        for x in range(0, k + 1):
+            xFact = 1
+            for i in range(1, x + 1):
+                xFact *= i
+            cdf += (self.lambtha ** x) * ((e ** -self.lambtha) / xFact)
         return cdf
 
     def factorial(self,n):
