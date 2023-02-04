@@ -41,6 +41,6 @@ class Neuron:
     def forward_prop(self, X):
         """calculates the forward propagation of the neuron"""
         # Calculates linear activation.
-        Z = np.matmul(self.W, X) + self.b
+        Z = np.matmul(self.__W, X) + self.__b
         # Weighted sum Z passed through activation function
         self.__A = self.sigmoid(Z)
