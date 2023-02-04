@@ -118,6 +118,8 @@ class Neuron():
         # calculates gradient
         dW = (1 / m) * np.dot(X, (A - Y).T)
         db = (1 / m) * np.sum(A - Y)
+        # reshape dW array
+        dW = dW.reshape(self.__W.shape)
         # updates weights and bias
         self.__W -= alpha * dW
         self.__b -= alpha * db
