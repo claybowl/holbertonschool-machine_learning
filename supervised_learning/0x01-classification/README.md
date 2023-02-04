@@ -75,6 +75,8 @@ At the end of this project, you should be able to build your own binary image cl
 - Predictive analytics
 - Maximum Likelihood Estimation
 
+![image](https://user-images.githubusercontent.com/103296303/216742528-94c04b7a-6e81-48b8-9540-84a3d240eb82.png)
+
 ## Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 - What is a model?
