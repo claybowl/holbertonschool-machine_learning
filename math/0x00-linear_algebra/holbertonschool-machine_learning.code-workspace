@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "SSH FS - ubuntu_20_04",
+			"uri": "ssh://ubuntu_20_04/"
+		}
+	],
+	"settings": {}
+}
