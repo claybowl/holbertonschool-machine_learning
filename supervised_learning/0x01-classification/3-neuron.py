@@ -48,6 +48,6 @@ class Neuron():
         """calculates the cost model using logistic regression"""
         # m is number of examples
         m = Y.shape[1]
-        # formula for calculating cost
+        # formula calculating cost
         cost = -(1 / m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
         return cost
