@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """module 0-neuron
 Writes a class Neuron that defines a single neuron performing binary classification.
 """
