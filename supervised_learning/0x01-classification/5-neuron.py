@@ -93,8 +93,9 @@ class Neuron():
         cost = self.cost(Y, A)
         return predict, cost
 
-    def gradient_descent(self, X, Y, A, alpha-0.05):
-        """Calculates one iteration of gradient descent
+    def gradient_descent(self, X, Y, A, alpha=0.05):
+        """
+        Calculates one iteration of gradient descent
         algorithm to update weights '__W' and bias '__b'
         of neuron.
 
