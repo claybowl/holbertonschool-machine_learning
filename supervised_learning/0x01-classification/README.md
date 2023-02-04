@@ -1,5 +1,7 @@
 # 0x01. Classification
 
+![image](https://user-images.githubusercontent.com/103296303/216742562-aeff5092-f8e0-4612-9586-554e276ae59b.png)
+
 By: Alexa Orrico, Software Engineer at Holberton School
 
 ## Project Information
