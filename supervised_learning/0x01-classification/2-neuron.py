@@ -43,4 +43,4 @@ class Neuron:
         # Calculates linear activation.
         Z = np.matmul(self.W, X) + self.b
         # Weighted sum Z passed through activation function
-        self.A = self.sigmoid(Z)
+        self.__A = self.sigmoid(Z)
