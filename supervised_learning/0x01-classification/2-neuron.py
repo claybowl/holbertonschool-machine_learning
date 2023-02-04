@@ -38,13 +38,9 @@ class Neuron:
         """sigmoid activation function"""
         return 1/(1 + np.exp(-x))
 
-    def setter_A(self, A):
-        """setter function for A"""
-        self.__A = A
-
     def forward_prop(self, X):
         """calculates the forward propagation of the neuron"""
         # Calculates linear activation.
         Z = np.matmul(self.W, X) + self.b
         # Weighted sum Z passed through activation function
-        self.A = self.sigmoid(Z)
+        self.__A = self.sigmoid(Z)
