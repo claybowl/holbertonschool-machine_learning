@@ -147,11 +147,21 @@ class Neuron():
             raise ValueError("Iterations must be a positive integer")
         if type(alpha) != float:
             raise TypeError("alpha must be a float")
-        if alpha < 0:
+        if alpha <= 0:
             raise ValueError("alpha must be positive")
 
+        nx, m = X.shape
+        self.__W = np.random.randn(1, nx)
+        self.__b = 0
+        self.__A = np.zeros((1, m))
+
         for i in range(iterations):
-            A = self.forward_prop(X)
-            self.gradient_descent(X, Y, A, alpha)
+            Z = np.matmul(self.__W, X) + self.__b
+            A = self.sigmoid(Z)
+            dZ = A - Y
+            dW = (1 / m) * np.matmul(dZ, X.T)
+            db = (1 / m) * np.sum(dZ)
+            self.__W -= alpha * dW
+            self.__b -= alpha * db
 
         return self.evaluate(X, Y)
