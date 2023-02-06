@@ -141,16 +141,16 @@ class Neuron():
         -------
         Evaluation of training data after iterations complete.
         """
-        if type(iterations) != int:
+        if type(iterations) is not int:
             raise TypeError("Iterations must be an integer")
         if iterations <= 0:
             raise ValueError("Iterations must be a positive integer")
-        if type(alpha) != float:
+        if type(alpha) is not float:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
 
-        for i in range(iterations):
+        for _ in range(iterations):
             self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A, alpha)
 
