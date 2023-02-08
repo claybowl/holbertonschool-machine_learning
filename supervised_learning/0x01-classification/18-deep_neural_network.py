@@ -29,6 +29,7 @@ class DeepNeuralNetwork:
             nx = layers[l - 1]
 
     def forward_prop(self, X):
+        """forward propagation"""
         self.__cache["A0"] = X
         for l in range(1, self.__L + 1):
             W = self.__weights["W" + str(l)]
