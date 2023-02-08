@@ -6,6 +6,8 @@ import numpy as np
 
 
 class DeepNeuralNetwork:
+    """Class Deep Neural Network"""
+
     def __init__(self, nx, layers):
         """Initialize the neural network"""
         if type(nx) is not int:
