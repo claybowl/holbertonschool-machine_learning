@@ -9,5 +9,5 @@ def one_hot_decode(one_hot):
     try:
         m = one_hot.shape[1]
         return np.argmax(one_hot, axis=0).reshape(m,)
-    except:
+    except Exception:
         return None
