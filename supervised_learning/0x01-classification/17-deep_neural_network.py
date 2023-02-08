@@ -18,12 +18,12 @@ class DeepNeuralNetwork:
         self.__cache = {}
         self.__weights = {}
 
-        for i in range(1, self.L + 1):
+        for l in range(1, self.L + 1):
             he_init = np.sqrt(2 / nx)
             self.weights['W' +
-                         str(i)] = np.random.randn(layers[i - 1], nx) * he_init
-            self.weights['b' + str(l)] = np.zeros((layers[i - 1], 1))
-            nx = layers[i - 1]
+                         str(l)] = np.random.randn(layers[l - 1], nx) * he_init
+            self.weights['b' + str(l)] = np.zeros((layers[l - 1], 1))
+            nx = layers[l - 1]
 
     @property
     def L(self):

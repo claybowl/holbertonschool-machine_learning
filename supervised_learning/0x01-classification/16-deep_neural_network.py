@@ -19,7 +19,7 @@ class DeepNeuralNetwork:
         self.cache = {}
         self.weights = {}
 
-        for i in range(1, self.L + 1):
+        for l in range(1, self.L + 1):
             he_init = np.sqrt(2 / nx)
             self.weights['W' +
                          str(l)] = np.random.randn(layers[l - 1], nx) * he_init
