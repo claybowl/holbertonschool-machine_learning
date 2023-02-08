@@ -6,7 +6,7 @@ import numpy as np
 
 
 def one_hot_encode(Y, classes):
-    if not isinstance(Y, np.ndarray) or Y.ndim != 1:
+    if type(Y) is not np.ndarray:
         return None
 
     m = Y.shape[0]
