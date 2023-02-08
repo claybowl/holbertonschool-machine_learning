@@ -7,6 +7,7 @@ import numpy as np
 
 class DeepNeuralNetwork:
     def __init__(self, nx, layers):
+        """initializes the neural network"""
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
@@ -27,12 +28,15 @@ class DeepNeuralNetwork:
 
     @property
     def L(self):
+        """getter for the number of layers"""
         return self.__L
 
     @property
     def cache(self):
+        """getter for the cache"""
         return self.__cache
 
     @property
     def weights(self):
+        """getter for the weights"""
         return self.__weights
