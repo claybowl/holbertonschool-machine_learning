@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""module 5-neuron
+"""module 6-neuron
 Writes a class Neuron that defines a single neuron
 performing binary classification.
 """
@@ -150,7 +150,7 @@ class Neuron():
         if alpha <= 0:
             raise ValueError("alpha must be positive")
 
-        for i in np.arange(float(iterations)):
+        for i in range(iterations):
             self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A, alpha)
 
