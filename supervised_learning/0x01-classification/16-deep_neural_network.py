@@ -7,6 +7,7 @@ import numpy as np
 
 class DeepNeuralNetwork:
     def __init__(self, nx, layers):
+        """Initialize the neural network"""
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
@@ -18,9 +19,9 @@ class DeepNeuralNetwork:
         self.cache = {}
         self.weights = {}
 
-        for l in range(1, self.L + 1):
+        for i in range(1, self.L + 1):
             he_init = np.sqrt(2 / nx)
             self.weights['W' +
-                         str(l)] = np.random.randn(layers[l - 1], nx) * he_init
-            self.weights['b' + str(l)] = np.zeros((layers[l - 1], 1))
-            nx = layers[l - 1]
+                         str(i)] = np.random.randn(layers[i - 1], nx) * he_init
+            self.weights['b' + str(l)] = np.zeros((layers[i - 1], 1))
+            nx = layers[i - 1]
