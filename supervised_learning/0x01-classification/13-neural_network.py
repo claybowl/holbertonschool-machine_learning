@@ -76,6 +76,7 @@ class NeuralNetwork:
         return prediction, cost
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
+        """calculates one pass of gradient descent"""
         m = X.shape[1]
         dz2 = A2 - Y
         dw2 = np.matmul(A1, dz2.T) / m
