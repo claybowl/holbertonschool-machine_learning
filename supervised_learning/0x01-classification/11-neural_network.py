@@ -62,6 +62,7 @@ class NeuralNetwork:
         return self.__A1, self.__A2
 
     def cost(self, Y, A):
+        """Calculates the cost of the model using logistic regression"""
         cost = -(np.matmul(Y, np.log(A).T) + np.matmul(1 -
                  Y, np.log(1.0000001 - A).T)) / Y.shape[1]
         cost = np.squeeze(cost)
