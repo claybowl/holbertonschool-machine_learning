@@ -3,6 +3,7 @@
 Defines a neural network with one hidden layer performing binary classification
 """
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class NeuralNetwork:
