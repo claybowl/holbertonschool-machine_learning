@@ -110,7 +110,7 @@ class DeepNeuralNetwork:
             if i % step == 0 or i == iterations:
                 costs.append(cost)
                 if verbose:
-                    print(f"Cost after {i} iterations: {cost}")
+                    print("Cost after {} iterations: {}".format(i, cost))
 
         if graph:
             iterations = np.arange(0, iterations + 1, step)
