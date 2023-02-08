@@ -42,7 +42,7 @@ class DeepNeuralNetwork:
             self.__cache["A" + str(l)] = A
 
         return A, self.__cache
-+-
+
     @property
     def L(self):
         """getter for the number of layers"""
@@ -121,6 +121,7 @@ class DeepNeuralNetwork:
             plt.show()
 
         return self.evaluate(X, Y)
+
 
     def save(self, filename):
         """saves the model"""
