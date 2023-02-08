@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""module 19-deep_neural_network
+"""module 20-deep_neural_network
 Class Deep Neural Network
 """
 import numpy as np
