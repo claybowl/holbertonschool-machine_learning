@@ -86,6 +86,7 @@ class DeepNeuralNetwork:
             dZ = np.matmul(W.T, dZ) * (A * (1 - A))
 
     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100):
+        """train the model"""
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
         if iterations <= 0:
