@@ -42,7 +42,7 @@ class DeepNeuralNetwork:
             self.__cache["A" + str(l)] = A
 
         return A, self.__cache
-
++-
     @property
     def L(self):
         """getter for the number of layers"""
@@ -124,17 +124,23 @@ class DeepNeuralNetwork:
 
     def save(self, filename):
         """saves the model"""
-        if not filename.endswith('.pkl'):
-            filename += '.pkl'
-        with open(filename, 'wb') as f:
-            pickle.dump(self, f)
-
+        if filename[-4:] != ".pkl":
+            filename = filename + ".pkl"
+        try:
+            fileObject = open(filename, 'wb')
+            pickle.dump(self, fileObject)
+            fileObject.close()
+        except Exception:
+            return None
 
     @staticmethod
     def load(filename):
         """loads the model"""
         try:
-            with open(filename, 'rb') as f:
-                return pickle.load(f)
-        except FileNotFoundError:
+            fileObject = open(filename, 'rb')
+            deepneuralnetwork = pickle.load(fileObject)
+            fileObject.close()
+            return (deepneuralnetwork)
+
+        except Exception:
             return None
