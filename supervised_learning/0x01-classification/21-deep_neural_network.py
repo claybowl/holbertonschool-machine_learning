@@ -64,11 +64,10 @@ class DeepNeuralNetwork:
 
     def evaluate(self, X, Y):
         """evaluates the model"""
-        cache = self.forward_prop(X)
-        A = cache["A" + str(self.__L)]
-        prediction = np.where(A >= 0.5, 1, 0)
-        cost = self.cost(Y, A)
-        return prediction, cost
+        predictions, cache = self.forward_prop(X)
+        cost = self.cost(Y, predictions)
+        evaluation = np.rint(predictions).astype(int)
+        return evaluation, cost
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """gradient descent"""
