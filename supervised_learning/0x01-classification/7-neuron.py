@@ -143,9 +143,9 @@ class Neuron():
         Evaluation of training data after iterations complete.
         """
         if type(iterations) is not int:
-            raise TypeError("Iterations must be an integer")
+            raise TypeError("iterations must be an integer")
         if iterations <= 0:
-            raise ValueError("Iterations must be a positive integer")
+            raise ValueError("iterations must be a positive integer")
         if type(alpha) is not float:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
