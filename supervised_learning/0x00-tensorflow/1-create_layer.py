@@ -13,7 +13,7 @@ def create_layer(prev, n, activation):
         mode="FAN_AVG"
     )
     # Specifies number of nodes, activation function and initializer
-    layer = tf.layers.Dense(
+    layer = tf.layers.dense(
         units=n,
         activation=activation,
         kernel_initializer=initializer
