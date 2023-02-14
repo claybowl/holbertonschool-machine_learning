@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """module 0-create_placeholders
-Function that returns two placeholders, 
+Function that returns two placeholders,
 x and y, for a neural network.
 """
 import tensorflow as tf
