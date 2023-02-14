@@ -18,6 +18,6 @@ def create_layer(prev, n, activation):
         n,
         activation=activation,
         kernel_initializer=initializer
-	)
+    )
     # Applies the layer to the input 'prev'
     return layer
