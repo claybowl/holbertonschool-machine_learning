@@ -7,6 +7,13 @@ import matplotlib.pyplot as plt
 import pickle
 
 
+A = [1, 4]
+B = [4, 6]
+
+matrix_product = np.matmul(A, B)
+print(matrix_product)
+
+
 class DeepNeuralNetwork:
     """Class Deep Neural Network"""
 
