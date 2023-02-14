@@ -14,9 +14,10 @@ def create_layer(prev, n, activation):
     )
     # Specifies number of nodes, activation function and initializer
     layer = tf.layers.dense(
-        units=n,
+        prev,
+        n,
         activation=activation,
         kernel_initializer=initializer
 	)
     # Applies the layer to the input 'prev'
-    return layer(prev)
+    return layer
