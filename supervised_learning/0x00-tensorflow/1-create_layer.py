@@ -8,7 +8,7 @@ import tensorflow as tf
 
 def create_layer(prev, n, activation):
     """Creates layer and activation function"""
-    # Implements He et. al initializations for the layer weights
+    # Implements 'He et. al' initializations for the layer weights
     initializer = tf.contrib.layers.variance_scaling_initializer(
         mode="FAN_AVG"
     )
@@ -17,7 +17,6 @@ def create_layer(prev, n, activation):
         units=n,
         activation=activation,
         kernel_initializer=initializer
-        name='layer'
-    )
+	)
     # Applies the layer to the input 'prev'
     return layer(prev)
