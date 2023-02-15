@@ -4,6 +4,7 @@
 		"softmax"
 	],
 	"cSpell.ignoreWords": [
+		"ckpt",
 		"logits"
 	]
 }
