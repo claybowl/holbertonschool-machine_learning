@@ -2,5 +2,8 @@
 	"cSpell.words": [
 		"ndarray",
 		"softmax"
+	],
+	"cSpell.ignoreWords": [
+		"logits"
 	]
 }
