@@ -47,11 +47,22 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, i
         sess.run(init)
 
         for i in range(iterations + 1):
-            train_cost, train_accuracy = sess.run(
-                [loss, accuracy], feed_dict={x: X_train, y: Y_train})
-            valid_cost, valid_accuracy = sess.run(
-                [loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
+            # Train the network on the training data
+            train_cost = sess.run([train_op, loss], feed_dict={
+                                     x: X_train, y: Y_train})
 
+            # Calculate the accuracy of the network's predictions on the training data
+            train_accuracy = sess.run(
+                accuracy, feed_dict={x: X_train, y: Y_train})
+
+            # Calculate the loss of the network's predictions on the validation data
+            valid_cost = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
+
+            # Calculate the accuracy of the network's predictions on the validation data
+            valid_accuracy = sess.run(
+                accuracy, feed_dict={x: X_valid, y: Y_valid})
+
+            # Print the training and validation information after every 100 iterations, the 0th iteration, and the final iteration
             if i % 100 == 0 or i == 0 or i == iterations:
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(train_cost))
@@ -59,6 +70,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, i
                 print("\tValidation Cost: {}".format(valid_cost))
                 print("\tValidation Accuracy: {}".format(valid_accuracy))
 
+        # Save the trained model
         saver = tf.train.Saver()
         saver.save(sess, save_path)
+
     return save_path
