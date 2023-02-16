@@ -6,6 +6,7 @@ import tensorflow as tf
 
 
 def evaluate(X, Y, save_path):
+    """evaluates the output of a neural network"""
     # Create a tensorflow session
     sess = tf.Session()
 
