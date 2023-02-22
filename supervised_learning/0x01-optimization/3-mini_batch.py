@@ -3,7 +3,6 @@
 Trains a loaded neural network model using mini-batch
 gradient descent.
 """
-import numpy as np
 import tensorflow as tf
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
