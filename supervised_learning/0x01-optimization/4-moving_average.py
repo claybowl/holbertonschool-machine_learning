@@ -13,9 +13,10 @@ def moving_average(data, window_size):
     for i in range(len(data)):
         if i == 0:
             prev = data[i]
+            moving_averages.append(data[i])
         else:
             curr = window_size * data[i] + (1 - window_size) * prev
-            moving_average.append(curr)
+            moving_averages.append(curr)
             prev = curr
 
     return moving_averages
