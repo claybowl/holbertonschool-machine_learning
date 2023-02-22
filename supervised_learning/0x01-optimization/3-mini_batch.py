@@ -11,6 +11,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                      epochs=5, load_path="/tmp/model.ckpt",
                      save_path="/tmp/model.ckpt"):
     """Trains  a loaded neural network model using mini-batch"""
+
     # Load model from save path
     saver = tf.train.import_meta_graph(load_path + ".meta")
     with tf.Session() as sess:
@@ -25,7 +26,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
 
     # Obtaining the number of training and validation data points
     m_train = X_train.shape[0]
-    m_valid = X_valid.shape[0]
+    # m_valid = X_valid.shape[0]
 
     for epoch in range(epochs + 1):
         # Shuffle training data
