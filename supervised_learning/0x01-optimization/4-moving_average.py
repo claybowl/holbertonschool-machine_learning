@@ -9,15 +9,13 @@ import numpy as np
 def moving_average(data, window_size):
     """The function returns an array of the moving averages"""
     moving_averages = []
-    for i in range(len(data) - window_size + 1):
-        window_sum = 0
-        for j in range(window_size):
-            window_sum += data[i + j]
-        moving_averages.append(window_sum / window_size)
+    prev = 0
+    for i in range(len(data)):
+        if i == 0:
+            prev = data[i]
+        else:
+            curr = window_size * data[i] + (1 - window_size) * prev
+            moving_average.append(curr)
+            prev = curr
+
     return moving_averages
-
-
-data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-window_size = 3
-
-print(moving_average(data, window_size))
