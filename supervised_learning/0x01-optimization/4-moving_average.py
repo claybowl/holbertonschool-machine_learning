@@ -4,7 +4,6 @@ This function calculates the moving average
  of a given array of data.
 """
 import numpy as np
-import tensorflow as tf
 
 
 def moving_average(data, window_size):
