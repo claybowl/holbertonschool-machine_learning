@@ -64,5 +64,5 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
             step += 1
 
             # Save the model
-            saver.save(sess, save_path)
-            return save_path
+    saver.save(sess, save_path)
+    return save_path
