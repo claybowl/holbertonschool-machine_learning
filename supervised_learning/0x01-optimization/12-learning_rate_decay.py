@@ -15,5 +15,5 @@ def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
     `decay_step`: The step size (number of global steps) between each decay.
     """
     updated_alpha = tf.train.inverse_time_decay(alpha, global_step, decay_step,
-									   decay_rate, staircase=True)
+                                                decay_rate, staircase=True)
     return updated_alpha
