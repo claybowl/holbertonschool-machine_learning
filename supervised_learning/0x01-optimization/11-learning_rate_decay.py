@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """module 11-learning_rate_decay
-A Python module that updates the learning rate 
+A Python module that updates the learning rate
 using inverse time decay in numpy.
 `alpha` - the initial learning rate
 `decay_rate` - the learning rate decay rate
