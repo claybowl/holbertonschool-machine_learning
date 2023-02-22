@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Module 2-shuffle_data
 Shuffles the data points of two
 matrices the same way.

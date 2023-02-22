@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Module 1-normalize
 subtracts the mean of each feature
 from the feature values, and
