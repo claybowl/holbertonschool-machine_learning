@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """module 4-moving_average
 This function calculates the moving average
- of a given array of data.
+of a given array of data.
 """
 import numpy as np
 
