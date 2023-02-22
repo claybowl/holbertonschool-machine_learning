@@ -7,7 +7,9 @@ import tensorflow as tf
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
-def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5, load_path="/tmp/model.ckpt", save_path="/tmp/model.ckpt"):
+def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
+                     epochs=5, load_path="/tmp/model.ckpt",
+                     save_path="/tmp/model.ckpt"):
     """Trains  a loaded neural network model using mini-batch"""
     # Load model from save path
     saver = tf.train.import_meta_graph(load_path + ".meta")
@@ -30,8 +32,10 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5
         X_train, Y_train = shuffle_data(X_train, Y_train)
 
         # Calculate the cost and accuracy
-        train_cost, train_accuracy = sess.run([loss, accuracy], feed_dict={x: X_train, y: Y_train})
-        valid_cost, valid_accuracy = sess.run([loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
+        train_cost = train_accuracy = sess.run([loss, accuracy], feed_dict={
+                              x: X_train, y: Y_train})
+        valid_cost, valid_accuracy = sess.run([loss, accuracy], feed_dict={
+                              x: X_valid, y: Y_valid})
 
         # Print cost and accuracy
         print("After {} epochs:".format(epoch))
@@ -50,7 +54,8 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, epochs=5
             sess.run(train_op, feed_dict={x: X_batch, y: Y_batch})
 
             # Calculate the cost and accuracy for current mini-batch
-            step_cost, step_accuracy = sess.run([loss, accuracy], feed_dict={x: X_batch, y: Y_batch})
+            step_cost, step_accuracy = sess.run([loss, accuracy], feed_dict={
+                              x: X_batch, y: Y_batch})
 
             if step % 100 == 0:
                 print("\tStep {}:".format(step))
