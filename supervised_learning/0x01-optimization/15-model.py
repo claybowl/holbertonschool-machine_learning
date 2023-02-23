@@ -39,7 +39,7 @@ def model(Data_train, Data_valid, layers, activations,
     X = tf.placeholder(tf.float32, shape=[None, n_features], name="X")
     y = tf.placeholder(tf.float32, shape=[None, n_classes], name="y")
 
-    # Create a list to store the weights and biases for each layer of the network
+    # Create list to store weights and biases for each layer
     weights = []
     biases = []
 
@@ -82,7 +82,8 @@ def model(Data_train, Data_valid, layers, activations,
 
     # Define the optimizer
     optimizer = tf.train.AdamOptimizer(
-        learning_rate=alpha, beta1=beta1, beta2=beta2, epsilon=epsilon).minimize(loss)
+        learning_rate=alpha, beta1=beta1,
+        beta2=beta2, epsilon=epsilon).minimize(loss)
 
     # Define the initializer
     init = tf.global_variables_initializer()
@@ -102,12 +103,25 @@ def model(Data_train, Data_valid, layers, activations,
                 batch_y = y_train[batch:batch+batch_size]
 
                 _, batch_loss = sess.run([optimizer, loss], feed_dict={
-                                         X: batch_x, y: batch_y, learningRateDecaySteps: decay_rate})
+                                         X: batch_x, y: batch_y,
+                                         learningRateDecaySteps: decay_rate})
 
                 epoch_loss += batch_loss
 
             # Evaluate the model after each epoch
             train_accuracy = np.mean(np.argmax(y_train, axis=1) == sess.run(
-                tf.argmax(activations[-1], axis=1), feed_dict={X: X_train, y: y_train}))
-            validation_accuracy = np.mean(np.argmax(y_valid, axis=1) == sess.run(
-                tf.argmax(activations[-1], axis=1), feed_dict={X: X_valid, y: y_valid}))
+                tf.argmax(activations[-1], axis=1),
+                          feed_dict={X: X_train, y: y_train}))
+            validation_accuracy = np.mean(np.argmax(
+                  y_valid, axis=1) == sess.run(
+                tf.argmax(activations[-1], axis=1),
+                          feed_dict={X: X_valid, y: y_valid}))
+
+            print("Epoch:", epoch+1, "Loss:", epoch_loss, "Train Accuracy:",
+                  train_accuracy, "Validation Accuracy:", validation_accuracy)
+
+      # Save the model
+        saver = tf.train.Saver()
+        save_path = saver.save(sess, save_path)
+
+    return save_path
