@@ -110,18 +110,14 @@ def model(Data_train, Data_valid, layers, activations,
 
             # Evaluate the model after each epoch
             train_accuracy = np.mean(np.argmax(y_train, axis=1) == sess.run(
-                tf.argmax(activations[-1], axis=1),
-                          feed_dict={X: X_train, y: y_train}))
-            validation_accuracy = np.mean(np.argmax(
-                  y_valid, axis=1) == sess.run(
-                tf.argmax(activations[-1], axis=1),
-                          feed_dict={X: X_valid, y: y_valid}))
+                tf.argmax(activations[-1], axis=1), feed_dict={X: X_train, y: y_train}))
+    validation_accuracy = np.mean(np.argmax(y_valid, axis=1) == sess.run(
+        tf.argmax(activations[-1], axis=1), feed_dict={X: X_valid, y: y_valid}))
+    print("Epoch:", epoch+1, "Loss:", epoch_loss, "Train Accuracy:",
+          train_accuracy, "Validation Accuracy:", validation_accuracy)
 
-            print("Epoch:", epoch+1, "Loss:", epoch_loss, "Train Accuracy:",
-                  train_accuracy, "Validation Accuracy:", validation_accuracy)
-
-      # Save the model
-        saver = tf.train.Saver()
-        save_path = saver.save(sess, save_path)
+    # Save the model
+    saver = tf.train.Saver()
+    save_path = saver.save(sess, save_path)
 
     return save_path
