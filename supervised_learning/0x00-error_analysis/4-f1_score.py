@@ -19,10 +19,9 @@ precision = __import__('2-precision').precision
 def f1_score(confusion):
     """calculates the F1 score of a confusion matrix"""
     # import sensitivity and precision functions
-    sensitivity = sensitivity(confusion)
-    precision = precision(confusion) 
+    sens = sensitivity(confusion)
+    prec = precision(confusion)
 
     # Calculate F1 score
-    f1 = 2 * (precision * sensitivity) / (precision + sensitivity)
-
+    f1 = 2 * (prec * sens) / (prec + sens)
     return f1
