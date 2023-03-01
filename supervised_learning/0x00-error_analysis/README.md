@@ -1,7 +1,49 @@
-**Outline:**
+# **0x00. Error Analysis**
+```python
+ By: Alexa Orrico, Software Engineer at Holberton School
+ Weight: 1
+ Project will start Feb 24, 2023 12:00 AM, must end by Mar 2, 2023 12:00 AM
+ was released at Feb 24, 2023 12:00 AM
+ An auto review will be launched at the deadline
+```
+```
+- Allowed editors: vi, vim, emacs
+- All your files will be interpreted/compiled on Ubuntu 16.04 LTS using python3 (version 3.5)
+- Your files will be executed with numpy (version 1.15)
+- All your files should end with a new line
+- The first line of all your files should be exactly #!/usr/bin/env python3
+- A README.md file, at the root of the folder of the project, is mandatory
+- Your code should use the pycodestyle style (version 2.4)
+- All your modules should have documentation (python3 -c 'print(__import__("my_module").__doc__)')
+- All your classes should have documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
+- All your functions (inside and outside a class) should have documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
+- Unless otherwise noted, you are not allowed to import any module except import numpy as np
+- All your files must be executable
+- The length of your files will be tested using wc
+```
 
-![
-](https://ibb.co/3ft649t)
+---
+---
+## Learning Objectives
+At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
+
+## General
+python
+What is the confusion matrix?
+What is type I error? type II?
+What is sensitivity? specificity? precision? recall?
+What is an F1 score?
+What is bias? variance?
+What is irreducible error?
+What is Bayes error?
+How can you approximate Bayes error?
+How to calculate bias and variance
+How to create a confusion matrix
+
+---
+--------------
+
+# **Lesson:**
 
 **I. Introduction**
 A. Definition of Machine Learning
@@ -209,3 +251,85 @@ Understanding these concepts is crucial for anyone working with machine learning
 
 ## C. Final thoughts and recommendations for further study
 In conclusion, this lecture provides a comprehensive overview of key concepts in machine learning with Python. For those interested in further study, I recommend exploring these concepts in more depth through books, online courses, and hands-on projects. Additionally, it is important to stay up-to-date with the latest developments in the field of machine learning, as new techniques and algorithms are constantly being developed and refined.
+
+---
+---
+
+# Tasks:
+## 0. Create Confusion
+mandatory
+Write the function def create_confusion_matrix(labels, logits): that creates a confusion matrix:
+
+labels is a one-hot numpy.ndarray of shape (m, classes) containing the correct labels for each data point
+m is the number of data points
+classes is the number of classes
+logits is a one-hot numpy.ndarray of shape (m, classes) containing the predicted labels
+Returns: a confusion numpy.ndarray of shape (classes, classes) with row indices representing the correct labels and column indices representing the predicted labels
+To accompany the following main file, you are provided with labels_logits.npz. This file does not need to be pushed to GitHub, nor will it be used to check your code.
+
+## 1. Sensitivity
+mandatory
+Write the function def sensitivity(confusion): that calculates the sensitivity for each class in a confusion matrix:
+
+confusion is a confusion numpy.ndarray of shape (classes, classes) where row indices represent the correct labels and column indices represent the predicted labels
+classes is the number of classes
+Returns: a numpy.ndarray of shape (classes,) containing the sensitivity of each class
+
+## 2. Precision
+mandatory
+Write the function def precision(confusion): that calculates the precision for each class in a confusion matrix:
+
+confusion is a confusion numpy.ndarray of shape (classes, classes) where row indices represent the correct labels and column indices represent the predicted labels
+classes is the number of classes
+Returns: a numpy.ndarray of shape (classes,) containing the precision of each class
+
+## 3. Specificity
+mandatory
+Write the function def specificity(confusion): that calculates the specificity for each class in a confusion matrix:
+
+confusion is a confusion numpy.ndarray of shape (classes, classes) where row indices represent the correct labels and column indices represent the predicted labels
+classes is the number of classes
+Returns: a numpy.ndarray of shape (classes,) containing the specificity of each class
+
+## 4. F1 score
+mandatory
+Write the function def f1_score(confusion): that calculates the F1 score of a confusion matrix:
+
+confusion is a confusion numpy.ndarray of shape (classes, classes) where row indices represent the correct labels and column indices represent the predicted labels
+classes is the number of classes
+Returns: a numpy.ndarray of shape (classes,) containing the F1 score of each class
+You must use sensitivity = __import__('1-sensitivity').sensitivity and precision = __import__('2-precision').precision create previously
+
+5. ## Dealing with Error
+mandatory
+In the text file 5-error_handling, write the lettered answer to the question of how you should approach the following scenarios. Please write the answer to each scenario on a different line. If there is more than one way to approach a scenario, please use CSV formatting and place your answers in alphabetical order (ex. A,B,C):
+
+```
+Scenarios:
+
+1. High Bias, High Variance
+2. High Bias, Low Variance
+3. Low Bias, High Variance
+4. Low Bias, Low Variance
+
+Approaches:
+
+A. Train more
+B. Try a different architecture
+C. Get more data
+D. Build a deeper network
+E. Use regularization
+F. Nothing
+
+```
+## 6. Compare and Contrast
+mandatory
+Given the following training and validation confusion matrices and the fact that human level performance has an error of ~14%, determine what the most important issue is and write the lettered answer in the file 6-compare_and_contrast
+
+```
+Most important issue:
+
+A. High Bias
+B. High Variance
+C. Nothing
+```
