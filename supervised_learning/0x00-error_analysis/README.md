@@ -41,9 +41,9 @@ How to calculate bias and variance
 How to create a confusion matrix
 
 ---
---------------
 
-# **Lesson:**
+# **~:|. GPT Lesson .|:~**
+### **Outline:**
 
 **I. Introduction**
 A. Definition of Machine Learning
@@ -101,8 +101,8 @@ A. Summary of key points
 B. Importance of understanding these concepts in Machine Learning with Python
 C. Final thoughts and recommendations for further study.
 
-
------------------------------------------------------
+---
+---
 
 # I. Introduction
 
