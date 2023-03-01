@@ -8,7 +8,6 @@ network without L2 regularization
 Returns: a tensor containing the cost of the
 network accounting for L2 regularization
 """
-import numpy as np
 import tensorflow as tf
 
 
