@@ -21,6 +21,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     """conducts forward propagation using Dropout"""
     cache = {}
     cache['A0'] = X
+    A = X
     for l in range(1, L):
         W = weights['W' + str(l)]
         b = weights['b' + str(l)]
