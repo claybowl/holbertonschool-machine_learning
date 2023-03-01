@@ -20,7 +20,7 @@ def precision(confusion):
 
     # Calculate precision for each class
     for i in range(classes):
-        # Precision calculated as ratio of true positive to sum of true positive and false positive
+        # Precision calculated as ratio of true positive
         true_positive = confusion[i][i]
         false_positive = np.sum(confusion[:, i]) - true_positive
         precision[i] = true_positive / (true_positive + false_positive)
