@@ -42,7 +42,7 @@ How to create a confusion matrix
 
 ---
 
-# **~| GPT Lesson |~**
+# -- **GPT Lesson:**
 ### **Outline:**
 
 **I. Introduction**
