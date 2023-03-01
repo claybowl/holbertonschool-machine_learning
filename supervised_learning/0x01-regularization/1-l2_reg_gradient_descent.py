@@ -25,13 +25,14 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     """updates the weights and biases of neural network"""
     m = Y.shape[1]
     dZ = cache["A" + str(L)] - Y
-    for l in range(L, 0, -1):
-        dW = (1/m) * np.dot(dZ, cache['A' + str(l-1)
-                                      ].T) + (lambtha/m) * weights['W' + str(l)]
+    for i in range(L, 0, -1):
+        dW = (1/m) * np.dot(dZ, cache['A' + str(i-1)
+                                      ].T) + (lambtha/m) * weights[
+                                      'W' + str(i)]
         db = (1/m) * np.sum(dZ, axis=1, keepdims=True)
-        dA = np.dot(weights['W' + str(l)].T, dZ)
-        if l > 1:
-            dZ = dA * (1 - np.power(cache['A' + str(l-1)], 2))
-        weights["W" + str(l)] = weights["W" + str(l)] - alpha * dW
-        weights["b" + str(l)] = weights["b" + str(l)] - alpha * db
+        dA = np.dot(weights['W' + str(i)].T, dZ)
+        if i > 1:
+            dZ = dA * (1 - np.power(cache['A' + str(i-1)], 2))
+        weights["W" + str(i)] = weights["W" + str(i)] - alpha * dW
+        weights["b" + str(i)] = weights["b" + str(i)] - alpha * db
     return weights
