@@ -13,12 +13,9 @@ import tensorflow as tf
 
 def l2_reg_cost(cost, weights, lambtha, L):
     """calculates the cost of a neural network with L2 regularization"""
-    l2_regularization_cost = 0
+    regularization_cost = 0
     for l in range(1, L + 1):
-        l2_regularization_cost += tf.reduce_sum(
-            tf.square(weights['W' + str(l)]))
-
-    l2_regularization_cost = lambtha / (2 * m) * l2_regularization_cost
-    cost = cost + l2_regularization_cost
-
+        regularization_cost += tf.reduce_sum(tf.square(weights['W' + str(l)]))
+    regularization_cost = lambtha / (2 * m) * regularization_cost
+    cost = cost + regularization_cost
     return cost
