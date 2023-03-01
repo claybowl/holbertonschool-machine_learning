@@ -1,4 +1,4 @@
-# **0x00. Error Analysis**
+# **0x01. Regularization**
 ```python
  By: Alexa Orrico, Software Engineer at Holberton School
  Weight: 3
