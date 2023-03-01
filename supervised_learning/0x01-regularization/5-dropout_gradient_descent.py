@@ -25,7 +25,7 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     """updates the weights of a neural network with Dropout regularization"""
     m = Y.shape[1]
     for i in range(L, 0, -1):
-        A_cur_layer = cache['A' + str(l)]
+        A_cur_layer = cache['A' + str(i)]
         if i == L:
             dZ = A_cur_layer - Y
         else:
