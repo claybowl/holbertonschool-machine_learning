@@ -24,17 +24,16 @@ import numpy as np
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     """updates the weights of a neural network with Dropout regularization"""
     m = Y.shape[1]
-    dZ = cache['A' + str(L)] - Y
     for l in range(L, 0, -1):
-        A = cache['A' + str(l - 1)]
-        D = cache['D' + str(l - 1)]
-        W = weights['W' + str(l)]
-        b = weights['b' + str(l)]
-        dW = (1 / m) * np.dot(dZ, A.T) + (lambda / m) * W
-        db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
-        dA = np.dot(W.T, dZ)
-        dA = np.multiply(dA, D)
-        dA = dA / keep_prob
-        dZ = dA * (1 - np.power(A, 2))
-        weights['W' + str(l)] = W - alpha * dW
-        weights['b' + str(l)] = b - alpha * db
+        A_cur_layer = cache['A' + str(l)]
+        if l == L:
+            dZ = A_cur_layer - Y
+        else:
+            dZ = np.dot(weights['W' + str(l + 1)].T, dZ) * \
+                (1 - np.power(A_cur_layer, 2))
+            dZ = dZ * cache['D' + str(l)]
+            dZ = dZ / keep_prob
+        dW = np.dot(dZ, cache['A' + str(l - 1)].T) / m
+        db = np.sum(dZ, axis=1, keepdims=True) / m
+        weights['W' + str(l)] = weights['W' + str(l)] - alpha * dW
+        weights['b' + str(l)] = weights['b' + str(l)] - alpha * db
