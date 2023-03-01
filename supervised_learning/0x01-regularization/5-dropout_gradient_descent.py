@@ -18,6 +18,7 @@ All layers use the tanh activation function except the last,
 which uses the softmax activation function
 The weights of the network should be updated in place
 """
+import numpy as np
 
 
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
