@@ -20,10 +20,13 @@ should be stopped early, followed by the updated count
 
 
 def early_stopping(cost, opt_cost, threshold, patience, count):
+    """determines if you should stop gradient descent early"""
     if (opt_cost - cost) / opt_cost > threshold:
         count = 0
     else:
         count += 1
     if count == patience:
         return True, count
+    else:
+        return False
     return False, count
