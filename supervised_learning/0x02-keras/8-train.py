@@ -13,7 +13,8 @@ def train_model(network, data, labels, batch_size, epochs,
         early_stopping_callback = None
         if early_stopping:
             early_stopping_callback = K.callbacks.EarlyStopping(
-                monitor='val_loss', patience=patience, restore_best_weights=True)
+                monitor='val_loss', patience=patience,
+                restore_best_weights=True)
         learning_rate_decay_callback = None
         if learning_rate_decay:
             def schedule(epoch):
@@ -23,12 +24,16 @@ def train_model(network, data, labels, batch_size, epochs,
         save_best_callback = None
         if save_best:
             save_best_callback = K.callbacks.ModelCheckpoint(
-                filepath, monitor='val_loss', save_best_only=True, save_weights_only=False, mode='min', verbose=1)
+                filepath, monitor='val_loss', save_best_only=True,
+                save_weights_only=False, mode='min', verbose=1)
         callbacks = [early_stopping_callback,
                      learning_rate_decay_callback, save_best_callback]
-        history = network.fit(data, labels, batch_size=batch_size, epochs=epochs, verbose=verbose,
-                              shuffle=shuffle, validation_data=validation_data, callbacks=callbacks)
+        history = network.fit(data, labels, batch_size=batch_size,
+                              epochs=epochs, verbose=verbose,
+                              shuffle=shuffle, validation_data=validation_data,
+                              callbacks=callbacks)
     else:
         history = network.fit(data, labels, batch_size=batch_size,
-                              epochs=epochs, verbose=verbose, shuffle=shuffle)
+                              epochs=epochs, verbose=verbose,
+                              shuffle=shuffle)
     return history
