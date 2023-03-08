@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ 0x02. Keras """
 import tensorflow.keras as k
 
