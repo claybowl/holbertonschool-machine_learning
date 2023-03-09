@@ -6,6 +6,7 @@ import numpy as np
 
 
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
+    """Performs a convolution on grayscale images."""
     m, h, w = images.shape
     kh, kw = kernel.shape
     sh, sw = stride
