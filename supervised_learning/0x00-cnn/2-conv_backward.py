@@ -4,6 +4,8 @@ import numpy as np
 
 
 def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
+    """Function that performs back propagation
+    over a convolutional layer"""
     m, h_new, w_new, c_new = dZ.shape
     m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw, _, _ = W.shape

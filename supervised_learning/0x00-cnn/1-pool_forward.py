@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def pool_forward(A-prev, kernel_shape, stride=(1, 1), mode='max'):
+def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
     """function that performs forward propagation
     over a pooling layer of a neural network:"""
     m, h_prev, w_prev, c_prev = A_prev.shape
