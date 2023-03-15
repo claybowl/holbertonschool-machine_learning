@@ -3,7 +3,7 @@ import numpy as np
 """Function for convolutional Back Prop"""
 
 
-def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
+def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
     m, h_new, w_new, c_new = dZ.shape
     m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw, _, _ = W.shape
