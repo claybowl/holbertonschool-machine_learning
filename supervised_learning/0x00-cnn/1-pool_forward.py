@@ -4,8 +4,7 @@ import numpy as np
 
 
 def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
-    """function that performs forward propagation
-    over a pooling layer of a neural network:"""
+    """function that performs forward propagation over a pooling layer"""
     m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw = kernel_shape
     sh, sw = stride
@@ -13,7 +12,7 @@ def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
     h_new = (h_prev - kh) // sh + 1
     w_new = (w_prev - kw) // sw + 1
 
-    A_pool = np.zeros((m, h_new, w_new, c_prev))
+    A_new = np.zeros((m, h_new, w_new, c_prev))
 
     for i in range(m):
         for h in range(h_new):
@@ -27,8 +26,8 @@ def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
                     A_slice = A_prev[i, h_start:h_end, w_start:w_end, c]
 
                     if mode == 'max':
-                        A_pool[i, h, w, c] = np.max(A_slice)
+                        A_new[i, h, w, c] = np.max(A_slice)
                     elif mode == 'avg':
-                        A_pool[i, h, w, c] = np.mean(A_slice)
+                        A_new[i, h, w, c] = np.mean(A_slice)
 
-    return A_pool
+    return A_new
