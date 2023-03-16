@@ -36,8 +36,11 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
                     A_slice = A_prev_pad[i, h_start:h_end, w_start:w_end, :]
                     dZ_value = dZ[i, h, w, c]
 
-                    dA_prev_pad[i, h_start:h_end, w_start:w_end,
-                                :] += W[:, :, :, c] * dZ_value
+                    dA_prev_pad[i, h_start:h_end,
+                                w_start:w_end,
+                                :] += W[:, :,
+                                        :, c] * dZ_value[np.newaxis,
+                                                         np.newaxis]
                     dW[:, :, :, c] += A_slice * dZ_value
 
     if padding == "same":
