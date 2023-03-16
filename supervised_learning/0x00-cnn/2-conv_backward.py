@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 import numpy as np
-"""Function for convolutional Back Prop"""
+"""Function for convolutional back prop. It takes in 5
+parameters:
+dZ : numpy.ndarray of shape (m, h_new, w_new, c_new)
+A_prev : numpy.ndarray of shape (m, h_prev, w_prev, c_prev)
+W : numpy.ndarray of shape (kh, kw, c_prev, c_new)
+b : numpy.ndarray of shape (1, 1, 1, c_new)
+padding : string that is either same or valid, indicating
+the type of padding used
+stride : tuple of (sh, sw)
+"""
 
 
 def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
