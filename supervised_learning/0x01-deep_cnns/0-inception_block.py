@@ -7,6 +7,7 @@ import tensorflow.keras as K
 
 
 def inception_block(A_prev, filters):
+    """Function that builds an inception block"""
     F1, F3R, F3, F5R, F5, FPP = filters
 
     # 1x1 convolution
