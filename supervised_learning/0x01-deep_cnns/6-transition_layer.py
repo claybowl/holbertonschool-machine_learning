@@ -7,6 +7,7 @@ import tensorflow.keras as K
 
 
 def transition_layer(X, nb_filters, compression):
+    """Function that builds a transition layer"""
     # Batch normalization, ReLU activation
     X = K.layers.BatchNormalization(axis=-1)(X)
     X = K.layers.Activation('relu')(X)
