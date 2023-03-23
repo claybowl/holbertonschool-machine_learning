@@ -4,15 +4,13 @@ builds the ResNet-50 architecture as described in
 Deep Residual Learning for Image Recognition (2015)
 """
 import tensorflow.keras as K
+identity_block = __import__('2-identity_block').identity_block
+projection_block = __import__('3-projection_block').projection_block
 
 
 def resnet50():
     """Function that builds the ResNet-50 architecture"""
     input_shape = (224, 224, 3)
-
-    # Import the identity_block and projection_block functions if they're in other files
-    identity_block = __import__('2-identity_block').identity_block
-    projection_block = __import__('3-projection_block').projection_block
 
     # Define the input layer
     input_layer = K.Input(shape=input_shape)
