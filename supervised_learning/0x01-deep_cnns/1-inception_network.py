@@ -11,9 +11,6 @@ def inception_network():
     """Function that builds the inception network"""
     input_shape = (224, 224, 3)
 
-    # Import the inception_block function if it's in another file
-    # inception_block = __import__('0-inception_block').inception_block
-
     # Define the input layer
     input_layer = K.Input(shape=input_shape)
 
