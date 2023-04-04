@@ -1,8 +1,11 @@
 {
 	"cSpell.words": [
+		"CIFAR",
 		"dtype",
 		"Keras",
 		"ndarray",
+		"numpy",
+		"preprocesses",
 		"softmax"
 	],
 	"cSpell.ignoreWords": [
