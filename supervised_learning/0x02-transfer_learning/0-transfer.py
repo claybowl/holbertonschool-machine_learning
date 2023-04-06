@@ -37,17 +37,15 @@ def create_model():
     output = Dense(10, activation='softmax')(x)
 
     # Create new model with our custum top layers
-    model = Model(input=base_model.input, output=output)
+    model = Model(inputs=base_model.input, outputs=output)
 
     # Compile model
     model.compile(optimizer=Adam(lr=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
     return model
 
-
-if __name__ == '__main__':
-    """Loads, creates and evaluates a model for CIFAR-10 dataset"""
     # load and pre-process CIFAR-10 dataset
+if __name__ == '__main__':
     (X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
     X_train, Y_train = preprocess_data(X_train, Y_train)
     X_test, Y_test = preprocess_data(X_test, Y_test)
