@@ -22,3 +22,51 @@ def preprocess_data(X, Y):
     Y_p = to_categorical(Y, 10)
 
     return X_p, Y_p
+
+def create_model():
+    """creates the model for training"""
+    base_model = ResNet50(weights='imagenet', input_shape=(224,224, 3), include_top=False)
+
+    for layer in base_model.layers:
+        layer.trainable = False
+
+    resize_layer = Lambda(lambda image: tf.image.resize(image, (224,224)))
+
+    x = base_model.output
+    x = GlobalAveragePooling2D()(x)
+    output = Dense(10, activation='softmax')(x)
+
+    # Create new model with our custum top layers
+    model = Model(input=base_model.input, output=output)
+
+    # Compile model
+    model.compile(optimizer=Adam(lr=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
+
+    return model
+
+
+if __name__ == '__main__':
+    # load and pre-process CIFAR-10 dataset
+    (X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
+    X_train, Y_train = preprocess_data(X_train, Y_train)
+    X_test, Y_test = preprocess_data(X_test, Y_test)
+
+    # create model
+    model = create_model()
+
+    # train model
+    datagen = ImageDataGenerator(
+        rotation_range=10, width_shift_range=0.1, height_shift_range=0.1, horizontal_flip=True)
+    datagen.fit(X_train)
+    history = model.fit(datagen.flow(X_train, Y_train, batch_size=64),
+                        epochs=50, validation_data=(X_test, Y_test))
+
+    # save model
+    model.save('cifar10.h5')
+
+    # evaluate model
+    _, val_acc = model.evaluate(X_test, Y_test, verbose=0)
+    print("Validation accuracy: {:.2f}%".format(val_acc * 100))
+
+    # Check if the validation accuracy is 87% or higher
+    assert val_acc >= 0.87, "The validation accuracy should be 87% or higher."
