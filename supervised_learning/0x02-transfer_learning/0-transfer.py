@@ -46,7 +46,7 @@ def create_model():
 
     # load and pre-process CIFAR-10 dataset
 if __name__ == '__main__':
-    (X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
+    (X_train, Y_train), (X_test, Y_test) = cifar10.load_data('data/cifar-10-batches-py/')
     X_train, Y_train = preprocess_data(X_train, Y_train)
     X_test, Y_test = preprocess_data(X_test, Y_test)
 
