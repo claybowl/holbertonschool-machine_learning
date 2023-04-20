@@ -25,6 +25,7 @@ class Yolo:
         return class_names
 
     def process_outputs(self, outputs, image_size):
+        """Process Darknet outputs"""
         boxes = []
         box_confidences = []
         box_class_probs = []
@@ -48,14 +49,14 @@ class Yolo:
                         bh = ph * np.exp(th)
                         bx /= grid_width
                         by /= grid_height
-                        bw /= self.model.input.shape[1]
-                        bh /= self.model.input.shape[2]
+                        bw /= self.model.input.shape[1].value
+                        bh /= self.model.input.shape[2].value
                         x1 = (bx - (bw / 2)) * image_width
                         y1 = (by - (bh / 2)) * image_height
                         x2 = (bx + (bw / 2)) * image_width
                         y2 = (by + (bh / 2)) * image_height
                         boxes[i][cy, cx, b] = [x1, y1, x2, y2]
-        return (boxes, box_confidences, box_class_probs)
+        return boxes, box_confidences, box_class_probs
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
         """
