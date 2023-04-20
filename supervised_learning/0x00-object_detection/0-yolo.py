@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""Module 0-yolo.py
+Yolo v3 algorithm to perform object detection
+"""
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
