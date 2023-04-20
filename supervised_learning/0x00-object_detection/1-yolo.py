@@ -57,4 +57,4 @@ class Yolo:
                         x2 = (bx + (bw / 2)) * image_width
                         y2 = (by + (bh / 2)) * image_height
                         boxes[i][cy, cx, b] = [x1, y1, x2, y2]
-        return (boxes, box_confidences, box_class_probs)
+        return boxes, box_confidences, box_class_probs
