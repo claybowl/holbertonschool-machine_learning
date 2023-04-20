@@ -39,13 +39,13 @@ class Yolo:
                 for j in range(grid_width):
                     for k in range(anchor_boxes):
                         pw, ph = self.anchors[index][k]
-                        tx, ty, tw, th = box[i, j, k]
+                        t_x, t_y, t_w, t_h = box[i, j, k]
 
                         # Calculate box coordinates
-                        bx = (np.exp(tx) + j) / grid_width
-                        by = (np.exp(ty) + i) / grid_height
-                        bw = (np.exp(tw) * pw) / image_size[1]
-                        bh = (np.exp(th) * ph) / image_size[0]
+                        bx = (np.exp(t_x) + j) / grid_width
+                        by = (np.exp(t_y) + i) / grid_height
+                        bw = (np.exp(t_w) * pw) / image_size[1]
+                        bh = (np.exp(t_h) * ph) / image_size[0]
 
                         x1 = bx - bw / 2
                         y1 = by - bh / 2
