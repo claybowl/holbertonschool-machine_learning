@@ -26,36 +26,35 @@ class Yolo:
         return class_names
 
     def process_outputs(self, outputs, image_size):
-        """Returns a tuple of (boxes, box_confidences, box_class_probs)"""
+        """Process Darknet outputs"""
         boxes = []
         box_confidences = []
         box_class_probs = []
-
-        for index, output in enumerate(outputs):
-            grid_height, grid_width, anchor_boxes, _ = output.shape
-
-            box = output[..., :4]
-            for i in range(grid_height):
-                for j in range(grid_width):
-                    for k in range(anchor_boxes):
-                        pw, ph = self.anchors[index][k]
-                        t_x, t_y, t_w, t_h = box[i, j, k]
-
-                        # Calculate box coordinates
-                        bx = (1 / (1 + np.exp(-t_x)) + j) / grid_width
-                        by = (1 / (1 + np.exp(-t_y)) + i) / grid_height
-                        bw = (1 / (np.exp(-t_w)) * pw) / image_size[1]
-                        bh = (1 / (np.exp(-t_h)) * ph) / image_size[0]
-
-                        x1 = bx - bw / 2
-                        y1 = by - bh / 2
-                        x2 = x1 + bw
-                        y2 = y1 + bh
-
-                        box[i, j, k] = [x1, y1, x2, y2]
-
-            boxes.append(box)
-            box_confidences.append(output[..., 4:5])
-            box_class_probs.append(output[..., 5:])
-
-        return boxes, box_confidences, box_class_probs
+        for i in range(len(outputs)):
+            boxes.append(outputs[i][..., :4])
+            box_confidences.append(1 / (1 + np.exp(-outputs[i][..., 4:5])))
+            box_class_probs.append(1 / (1 + np.exp(-outputs[i][..., 5:])))
+        image_height, image_width = image_size
+        for i in range(len(boxes)):
+            grid_width = outputs[i].shape[1]
+            grid_height = outputs[i].shape[0]
+            anchor_boxes = outputs[i].shape[2]
+            for cy in range(grid_height):
+                for cx in range(grid_width):
+                    for b in range(anchor_boxes):
+                        tx, ty, tw, th = boxes[i][cy, cx, b]
+                        pw, ph = self.anchors[i][b]
+                        bx = (1 / (1 + np.exp(-tx))) + cx
+                        by = (1 / (1 + np.exp(-ty))) + cy
+                        bw = pw * np.exp(tw)
+                        bh = ph * np.exp(th)
+                        bx /= grid_width
+                        by /= grid_height
+                        bw /= self.model.input.shape[1]
+                        bh /= self.model.input.shape[2]
+                        x1 = (bx - (bw / 2)) * image_width
+                        y1 = (by - (bh / 2)) * image_height
+                        x2 = (bx + (bw / 2)) * image_width
+                        y2 = (by + (bh / 2)) * image_height
+                        boxes[i][cy, cx, b] = [x1, y1, x2, y2]
+        return (boxes, box_confidences, box_class_probs)
