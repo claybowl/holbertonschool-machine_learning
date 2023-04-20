@@ -2,7 +2,7 @@
 """module 2-yolo.py
 """
 import numpy as np
-from keras.models import load_mode
+from tensorflow.keras.models import load_model
 
 
 class Yolo:
