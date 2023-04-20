@@ -57,14 +57,40 @@ class Yolo:
         return (boxes, box_confidences, box_class_probs)
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
-        filtered_boxes, box_classes, box_scores = None, [], []
+        """
+        Filters the boxes based on class scores, class probabilities, and a predefined threshold.
+
+        Args:
+            boxes: a list of numpy.ndarrays of shape (grid_height, grid_width, anchor_boxes, 4)
+                containing the processed boundary boxes for each output, respectively
+            box_confidences: a list of numpy.ndarrays of shape (grid_height, grid_width,
+                anchor_boxes, 1) containing the processed box confidences for each output, respectively
+            box_class_probs: a list of numpy.ndarrays of shape (grid_height, grid_width,
+                anchor_boxes, classes) containing the processed box class probabilities for
+                each output, respectively
+
+        Returns:
+            tuple: A tuple containing the filtered bounding boxes, the class number that each
+                box predicts, and the box scores for each box, respectively:
+
+            filtered_boxes: a numpy.ndarray of shape (?, 4) containing all of the filtered
+                bounding boxes
+            box_classes: a numpy.ndarray of shape (?,) containing the class number that each
+                box in filtered_boxes predicts, respectively
+            box_scores: a numpy.ndarray of shape (?) containing the box scores for each box
+                in filtered_boxes, respectively
+        """
+        filtered_boxes, box_classes_list, box_scores_list = None, [], []
         for i in range(len(boxes)):
-            box_scores.append(box_confidences[i] * box_class_probs[i])
+            new_box_score = box_confidences[i] * box_class_probs[i]
+            new_box_class = np.argmax(new_box_score, axis=-1)
+            new_box_score = np.max(new_box_score, axis=-1)
 
-        box_scores_list = [score.reshape(-1) for score in box_scores]
+            box_classes_list.append(new_box_class.reshape(-1))
+            box_scores_list.append(new_box_score.reshape(-1))
+
         box_scores_all = np.concatenate(box_scores_list)
-
-        box_classes_all = np.argmax(np.concatenate(box_scores), axis=-1)
+        box_classes_all = np.concatenate(box_classes_list)
         box_mask = box_scores_all >= self.class_t
 
         filtered_boxes = np.concatenate(
