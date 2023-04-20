@@ -19,4 +19,4 @@ class Yolo:
         with open(classes_path, 'r') as f:
             class_names = f.readlines()
         class_names = [c.strip() for c in class_names]
-        return class_name
+        return class_names
