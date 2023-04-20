@@ -57,6 +57,29 @@ class Yolo:
         return (boxes, box_confidences, box_class_probs)
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        """
+        Filters the boxes based on class scores, class probabilities, and a predefined threshold.
+        
+        Args:
+            boxes: a list of numpy.ndarrays of shape (grid_height, grid_width, anchor_boxes, 4)
+                containing the processed boundary boxes for each output, respectively
+            box_confidences: a list of numpy.ndarrays of shape (grid_height, grid_width,
+                anchor_boxes, 1) containing the processed box confidences for each output, respectively
+            box_class_probs: a list of numpy.ndarrays of shape (grid_height, grid_width,
+                anchor_boxes, classes) containing the processed box class probabilities for
+                each output, respectively
+                
+        Returns:
+            tuple: A tuple containing the filtered bounding boxes, the class number that each
+                box predicts, and the box scores for each box, respectively:
+                
+            filtered_boxes: a numpy.ndarray of shape (?, 4) containing all of the filtered
+                bounding boxes
+            box_classes: a numpy.ndarray of shape (?,) containing the class number that each
+                box in filtered_boxes predicts, respectively
+            box_scores: a numpy.ndarray of shape (?) containing the box scores for each box
+                in filtered_boxes, respectively
+        """
         filtered_boxes, box_classes_list, box_scores_list = None, [], []
         for i in range(len(boxes)):
             new_box_score = box_confidences[i] * box_class_probs[i]
