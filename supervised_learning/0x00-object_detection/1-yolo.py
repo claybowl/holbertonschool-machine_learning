@@ -44,8 +44,8 @@ class Yolo:
                         # Calculate box coordinates
                         bx = (1 / (1 + np.exp(-t_x)) + j) / grid_width
                         by = (1 / (1 + np.exp(-t_y)) + i) / grid_height
-                        bw = (np.exp(t_w) * pw) / image_size[1]
-                        bh = (np.exp(t_h) * ph) / image_size[0]
+                        bw = (1 / (np.exp(-t_w)) * pw) / image_size[1]
+                        bh = (1 / (np.exp(-t_h)) * ph) / image_size[0]
 
                         x1 = bx - bw / 2
                         y1 = by - bh / 2
