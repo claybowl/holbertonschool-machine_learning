@@ -29,7 +29,7 @@ class Yolo:
         """Returns a tuple of (boxes, box_confidences, box_class_probs)"""
         boxes = []
         box_confidences = []
-        box_class_prob = []
+        box_class_probs = []
 
         for index, output in enumerate(outputs):
             grid_height, grid_width, anchor_boxes, _ = output.shape
@@ -56,6 +56,6 @@ class Yolo:
 
             boxes.append(box)
             box_confidences.append(output[..., 4:5])
-            box_class_prob.append(output[..., 5:])
+            box_class_probs.append(output[..., 5:])
 
-        return boxes, box_confidences, box_class_prob
+        return boxes, box_confidences, box_class_probs
