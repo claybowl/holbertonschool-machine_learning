@@ -6,7 +6,8 @@
 		"ndarray",
 		"numpy",
 		"preprocesses",
-		"softmax"
+		"softmax",
+		"Yolo"
 	],
 	"cSpell.ignoreWords": [
 		"ckpt",
