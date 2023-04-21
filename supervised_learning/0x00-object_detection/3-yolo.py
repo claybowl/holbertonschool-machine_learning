@@ -86,7 +86,9 @@ class Yolo:
         return filtered_boxes, box_classes, box_scores
 
     def intersection_over_union(self, box1, boxes):
-        """Calculate the Intersection over Union (IoU) for a given box and multiple other boxes."""
+        """Calculate the Intersection over Union (IoU)
+        for a given box and multiple other boxes.
+        """
         x1 = np.maximum(box1[0], boxes[0])
         y1 = np.maximum(box1[1], boxes[1])
         x2 = np.minimum(box1[2], boxes[2])
@@ -104,7 +106,8 @@ class Yolo:
         """
         Applies non-maximum suppression to the filtered boxes.
 
-        If use_tf is True, it uses TensorFlow's non_max_suppression implementation.
+        If use_tf is True, it uses TensorFlow's
+        non_max_suppression implementation.
         Otherwise, it uses the provided custom implementation.
         """
         unique_classes = np.unique(box_classes)
@@ -129,4 +132,7 @@ class Yolo:
                 cls_boxes = np.delete(cls_boxes, to_remove, axis=0)
                 cls_box_scores = np.delete(cls_box_scores, to_remove, axis=0)
 
-        return np.array(box_predictions), np.array(predicted_box_classes), np.array(predicted_box_scores)
+        return (np.array(box_predictions),
+                np.array(predicted_box_classes),
+                np.array(predicted_box_scores))
+    
