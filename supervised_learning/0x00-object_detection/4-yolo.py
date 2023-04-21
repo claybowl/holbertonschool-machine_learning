@@ -145,3 +145,19 @@ class Yolo:
         return (np.array(box_predictions),
                 np.array(predicted_box_classes),
                 np.array(predicted_box_scores))
+
+        def preprocess_images(self, images):
+            """Preprocess images for the YOLO model"""
+            input_h = self.model.input_shape[1]
+            input_w = self.model.input_shape[2]
+            ni = len(images)
+            pimages = np.empty((ni, input_h, input_w, 3))
+            image_shapes = np.empty((ni, 2))
+
+            for i, img in enumerate(images):
+                image_shapes[i] = img.shape[:2]
+                resized_img = cv2.resize(
+                    img, (input_w, input_h), interpolation=cv2.INTER_CUBIC)
+                pimages[i] = resized_img / 255
+
+            return pimages, image_shapes
