@@ -87,69 +87,46 @@ class Yolo:
 
     def intersection_over_union(self, box1, boxes):
         """Calculate the Intersection over Union (IoU) for a given box and multiple other boxes."""
-        x1 = np.maximum(box1[0], boxes[:, 0])
-        y1 = np.maximum(box1[1], boxes[:, 1])
-        x2 = np.minimum(box1[2], boxes[:, 2])
-        y2 = np.minimum(box1[3], boxes[:, 3])
+        x1 = np.maximum(box1[0], boxes[0])
+        y1 = np.maximum(box1[1], boxes[1])
+        x2 = np.minimum(box1[2], boxes[2])
+        y2 = np.minimum(box1[3], boxes[3])
 
-        intersection_area = np.maximum(x2 - x1, 0) * np.maximum(y2 - y1, 0)
+        intersection_area = max(0, x2 - x1) * max(0, y2 - y1)
         box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
-        boxes_area = (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
+        boxes_area = (boxes[2] - boxes[0]) * (boxes[3] - boxes[1])
 
         union_area = box1_area + boxes_area - intersection_area
 
         return intersection_area / union_area
 
-    def non_max_suppression(self, filtered_boxes, box_classes, box_scores, use_tf=True):
+    def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         """
         Applies non-maximum suppression to the filtered boxes.
 
         If use_tf is True, it uses TensorFlow's non_max_suppression implementation.
         Otherwise, it uses the provided custom implementation.
         """
-        if use_tf:
-            indices = tf.image.non_max_suppression(filtered_boxes,
-                                                   box_scores,
-                                                   max_output_size=4096,
-                                                   iou_threshold=self.nms_t,
-                                                   score_threshold=self.class_t)
-            indices = indices.numpy()
+        unique_classes = np.unique(box_classes)
+        box_predictions = []
+        predicted_box_classes = []
+        predicted_box_scores = []
 
-            box_predictions = filtered_boxes[indices]
-            predicted_box_classes = box_classes[indices]
-            predicted_box_scores = box_scores[indices]
-        else:
-            box_predictions = []
-            predicted_box_classes = []
-            predicted_box_scores = []
+        for cls in unique_classes:
+            idxs = np.where(box_classes == cls)
+            cls_boxes = filtered_boxes[idxs]
+            cls_box_scores = box_scores[idxs]
 
-            for c in set(box_classes):
-                idxs = np.where(box_classes == c)
-                class_boxes = filtered_boxes[idxs]
-                class_box_scores = box_scores[idxs]
+            while len(cls_boxes) > 0:
+                max_score_idx = np.argmax(cls_box_scores)
+                box_predictions.append(cls_boxes[max_score_idx])
+                predicted_box_classes.append(cls)
+                predicted_box_scores.append(cls_box_scores[max_score_idx])
 
-                while len(class_boxes) > 0:
-                    max_idx = np.argmax(class_box_scores)
-                    box_predictions.append(class_boxes[max_idx])
-                    predicted_box_classes.append(c)
-                    predicted_box_scores.append(class_box_scores[max_idx])
+                iou_scores = [self.intersection_over_union(cls_boxes[max_score_idx],
+                                                           box) for box in cls_boxes]
+                to_remove = np.where(np.array(iou_scores) > self.nms_t)
+                cls_boxes = np.delete(cls_boxes, to_remove, axis=0)
+                cls_box_scores = np.delete(cls_box_scores, to_remove, axis=0)
 
-                    class_boxes = np.delete(class_boxes, max_idx, axis=0)
-                    class_box_scores = np.delete(
-                        class_box_scores, max_idx, axis=0)
-
-                    if len(class_boxes) == 0:
-                        break
-
-                    iou = self.intersection_over_union(
-                        box_predictions[-1], class_boxes)
-                    iou_mask = iou < self.nms_t
-
-                    class_boxes = class_boxes[iou_mask]
-                    class_box_scores = class_box_scores[iou_mask]
-
-            box_predictions = np.array(box_predictions)
-            predicted_box_classes = np.array(predicted_box_classes)
-            predicted_box_scores = np.array(predicted_box_scores)
-
-        return box_predictions, predicted_box_classes, predicted_box_scores
+        return np.array(box_predictions), np.array(predicted_box_classes), np.array(predicted_box_scores)
