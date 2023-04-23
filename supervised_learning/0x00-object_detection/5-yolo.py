@@ -159,3 +159,45 @@ class Yolo:
             image_shapes.append(image.shape[0:2])
 
         return np.array(pimages), np.array(image_shapes)
+
+    def show_boxes(self, image, boxes, box_classes, box_scores, file_name):
+        """Displays the image with all boundary boxes, class names, and box scores"""
+        for i in range(len(boxes)):
+            x1, y1, x2, y2 = map(int, boxes[i])
+            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
+            text = "{} {:.2f}".format(
+                self.class_names[box_classes[i]], box_scores[i])
+            cv2.putText(image, text, (x1, y1 - 5),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+
+        cv2.imshow(file_name, image)
+        key = cv2.waitKey(0)
+
+        if key == ord('s'):
+            if not os.path.exists('detections'):
+                os.makedirs('detections')
+            save_path = os.path.join('detections', os.path.basename(file_name))
+            cv2.imwrite(save_path, image)
+
+        cv2.destroyAllWindows()
+
+    def predict(self, folder_path):
+        """Predicts objects in images within the folder and displays them using the show_boxes method"""
+        images, image_paths = self.load_images(folder_path)
+        pimages, image_shapes = self.preprocess_images(images)
+
+        predictions = []
+        for i, pimage in enumerate(pimages):
+            outputs = self.model.predict(pimage[np.newaxis, ...])
+            boxes, box_confidences, box_class_probs = self.process_outputs(
+                outputs, image_shapes[i])
+            filtered_boxes, box_classes, box_scores = self.filter_boxes(
+                boxes, box_confidences, box_class_probs)
+            box_predictions, predicted_box_classes, predicted_box_scores = self.non_max_suppression(
+                filtered_boxes, box_classes, box_scores)
+            predictions.append(
+                (box_predictions, predicted_box_classes, predicted_box_scores))
+            self.show_boxes(
+                images[i], box_predictions, predicted_box_classes, predicted_box_scores, image_paths[i])
+
+        return predictions, image_paths
