@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""module 5-yolo.py
+"""module 6-yolo.py
 """
 import os
 import numpy as np
@@ -35,7 +35,6 @@ class Yolo:
         return images, image_paths
 
     def process_outputs(self, outputs, image_size):
-        """Process Darknet outputs"""
         boxes = []
         box_confidences = []
         box_class_probs = []
@@ -59,20 +58,16 @@ class Yolo:
                         bh = ph * np.exp(th)
                         bx /= grid_width
                         by /= grid_height
-                        bw /= self.model.input.shape[1].value
-                        bh /= self.model.input.shape[2].value
+                        bw /= self.model.input.shape[1]
+                        bh /= self.model.input.shape[2]
                         x1 = (bx - (bw / 2)) * image_width
                         y1 = (by - (bh / 2)) * image_height
                         x2 = (bx + (bw / 2)) * image_width
                         y2 = (by + (bh / 2)) * image_height
                         boxes[i][cy, cx, b] = [x1, y1, x2, y2]
-        return boxes, box_confidences, box_class_probs
+        return (boxes, box_confidences, box_class_probs)
 
     def filter_boxes(self, boxes, box_confidences, box_class_probs):
-        """
-        Filters the boxes based on class scores,
-        class probabilities, and a predefined threshold.
-        """
         filtered_boxes, box_classes_list, box_scores_list = None, [], []
         for i in range(len(boxes)):
             new_box_score = box_confidences[i] * box_class_probs[i]
@@ -96,28 +91,25 @@ class Yolo:
         return filtered_boxes, box_classes, box_scores
 
     def intersection_over_union(self, box1, boxes):
-        """Calculate the Intersection over Union (IoU)
-        for a given box and multiple other boxes.
-        """
-        x1 = np.maximum(box1[0], boxes[0])
-        y1 = np.maximum(box1[1], boxes[1])
-        x2 = np.minimum(box1[2], boxes[2])
-        y2 = np.minimum(box1[3], boxes[3])
+            """Calculate the Intersection over Union (IoU) for a given box and multiple other boxes."""
+            x1 = np.maximum(box1[0], boxes[0])
+            y1 = np.maximum(box1[1], boxes[1])
+            x2 = np.minimum(box1[2], boxes[2])
+            y2 = np.minimum(box1[3], boxes[3])
 
-        intersection_area = max(0, x2 - x1) * max(0, y2 - y1)
-        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
-        boxes_area = (boxes[2] - boxes[0]) * (boxes[3] - boxes[1])
+            intersection_area = max(0, x2 - x1) * max(0, y2 - y1)
+            box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
+            boxes_area = (boxes[2] - boxes[0]) * (boxes[3] - boxes[1])
 
-        union_area = box1_area + boxes_area - intersection_area
+            union_area = box1_area + boxes_area - intersection_area
 
-        return intersection_area / union_area
+            return intersection_area / union_area
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         """
         Applies non-maximum suppression to the filtered boxes.
 
-        If use_tf is True, it uses TensorFlow's
-        non_max_suppression implementation.
+        If use_tf is True, it uses TensorFlow's non_max_suppression implementation.
         Otherwise, it uses the provided custom implementation.
         """
         unique_classes = np.unique(box_classes)
@@ -136,29 +128,28 @@ class Yolo:
                 predicted_box_classes.append(cls)
                 predicted_box_scores.append(cls_box_scores[max_score_idx])
 
-                iou = [self.intersection_over_union(cls_boxes[max_score_idx],
-                                                    box) for box in cls_boxes]
-                to_remove = np.where(np.array(iou) > self.nms_t)
+                iou_scores = [self.intersection_over_union(cls_boxes[max_score_idx],
+                                        box) for box in cls_boxes]
+                to_remove = np.where(np.array(iou_scores) > self.nms_t)
                 cls_boxes = np.delete(cls_boxes, to_remove, axis=0)
                 cls_box_scores = np.delete(cls_box_scores, to_remove, axis=0)
 
-        return (np.array(box_predictions),
-                np.array(predicted_box_classes),
-                np.array(predicted_box_scores))
+        return np.array(box_predictions), np.array(predicted_box_classes), np.array(predicted_box_scores)
 
     def preprocess_images(self, images):
         """Preprocess images for the YOLO model"""
-        dsize = (self.model.input.shape[1].value,
-                 self.model.input.shape[2].value)
-        pimages, image_shapes = [], []
-        for image in images:
-            pimages.append(cv2.resize(image,
-                                      dsize=dsize,
-                                      interpolation=cv2.INTER_CUBIC
-                                      ) / 255)
-            image_shapes.append(image.shape[0:2])
+        input_h = self.model.input_shape[1]
+        input_w = self.model.input_shape[2]
+        ni = len(images)
+        pimages = np.empty((ni, input_h, input_w, 3))
+        image_shapes = np.empty((ni, 2))
 
-        return np.array(pimages), np.array(image_shapes)
+        for i, img in enumerate(images):
+            image_shapes[i] = img.shape[:2]
+            resized_img = cv2.resize(img, (input_w, input_h), interpolation=cv2.INTER_CUBIC)
+            pimages[i] = resized_img / 255
+
+        return pimages, image_shapes
 
     def show_boxes(self, image, boxes, box_classes, box_scores, file_name):
         """Displays the image with all boundary boxes, class names, and box scores"""
