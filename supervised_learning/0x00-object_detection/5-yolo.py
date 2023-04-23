@@ -148,7 +148,7 @@ class Yolo:
 
     def preprocess_images(self, images):
         """Preprocess images for the YOLO model"""
-        input_size = (self.model.input_shape[1].value
+        input_size = (self.model.input_shape[1].value,
                       self.model.input_shape[2].value)
         pimages, image_shape = [], []
         for image in images:
