@@ -173,23 +173,28 @@ class Yolo:
 
         cv2.destroyAllWindows()
 
-    def predict(self, folder_path):
-        """Predicts objects in images within the folder and displays them using the show_boxes method"""
-        images, image_paths = self.load_images(folder_path)
-        pimages, image_shapes = self.preprocess_images(images)
 
-        predictions = []
-        for i, pimage in enumerate(pimages):
-            outputs = self.model.predict(pimage[np.newaxis, ...])
-            boxes, box_confidences, box_class_probs = self.process_outputs(
-                outputs, image_shapes[i])
-            filtered_boxes, box_classes, box_scores = self.filter_boxes(
-                boxes, box_confidences, box_class_probs)
-            box_predictions, predicted_box_classes, predicted_box_scores = self.non_max_suppression(
-                filtered_boxes, box_classes, box_scores)
-            predictions.append(
-                (box_predictions, predicted_box_classes, predicted_box_scores))
-            self.show_boxes(
-                images[i], box_predictions, predicted_box_classes, predicted_box_scores, image_paths[i])
+def process_images(self, folder_path):
+    """Process all images located in folder_path"""
+    images, image_paths = self.load_images(folder_path)
+    pimages, image_shapes = self.preprocess_images(images)
+    outputs = self.model.predict(pimages)
 
-        return predictions, image_paths
+    predictions = []
+
+    for i, image in enumerate(images):
+        image_outputs = [output[i] for output in outputs]
+        boxes, box_confidences, box_class_probs = self.process_outputs(
+            image_outputs, image_shapes[i])
+        filtered_boxes, box_classes, box_scores = self.filter_boxes(
+            boxes, box_confidences, box_class_probs)
+        box_predictions, predicted_box_classes, predicted_box_scores = self.non_max_suppression(
+            filtered_boxes, box_classes, box_scores)
+
+        predictions.append(
+            (box_predictions, predicted_box_classes, predicted_box_scores))
+
+    for i, prediction in enumerate(predictions):
+        self.show_boxes(images[i], *prediction, image_paths[i].split('/')[-1])
+
+    return predictions, image_paths
