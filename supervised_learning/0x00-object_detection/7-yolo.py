@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""module 6-yolo.py
+"""module 7-yolo.py
 """
 import os
 import numpy as np
@@ -91,19 +91,19 @@ class Yolo:
         return filtered_boxes, box_classes, box_scores
 
     def intersection_over_union(self, box1, boxes):
-            """Calculate the Intersection over Union (IoU) for a given box and multiple other boxes."""
-            x1 = np.maximum(box1[0], boxes[0])
-            y1 = np.maximum(box1[1], boxes[1])
-            x2 = np.minimum(box1[2], boxes[2])
-            y2 = np.minimum(box1[3], boxes[3])
+        """Calculate the Intersection over Union (IoU) for a given box and multiple other boxes."""
+        x1 = np.maximum(box1[0], boxes[0])
+        y1 = np.maximum(box1[1], boxes[1])
+        x2 = np.minimum(box1[2], boxes[2])
+        y2 = np.minimum(box1[3], boxes[3])
 
-            intersection_area = max(0, x2 - x1) * max(0, y2 - y1)
-            box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
-            boxes_area = (boxes[2] - boxes[0]) * (boxes[3] - boxes[1])
+        intersection_area = max(0, x2 - x1) * max(0, y2 - y1)
+        box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])
+        boxes_area = (boxes[2] - boxes[0]) * (boxes[3] - boxes[1])
 
-            union_area = box1_area + boxes_area - intersection_area
+        union_area = box1_area + boxes_area - intersection_area
 
-            return intersection_area / union_area
+        return intersection_area / union_area
 
     def non_max_suppression(self, filtered_boxes, box_classes, box_scores):
         """
@@ -129,7 +129,7 @@ class Yolo:
                 predicted_box_scores.append(cls_box_scores[max_score_idx])
 
                 iou_scores = [self.intersection_over_union(cls_boxes[max_score_idx],
-                                        box) for box in cls_boxes]
+                                                           box) for box in cls_boxes]
                 to_remove = np.where(np.array(iou_scores) > self.nms_t)
                 cls_boxes = np.delete(cls_boxes, to_remove, axis=0)
                 cls_box_scores = np.delete(cls_box_scores, to_remove, axis=0)
@@ -146,7 +146,8 @@ class Yolo:
 
         for i, img in enumerate(images):
             image_shapes[i] = img.shape[:2]
-            resized_img = cv2.resize(img, (input_w, input_h), interpolation=cv2.INTER_CUBIC)
+            resized_img = cv2.resize(
+                img, (input_w, input_h), interpolation=cv2.INTER_CUBIC)
             pimages[i] = resized_img / 255
 
         return pimages, image_shapes
@@ -171,3 +172,24 @@ class Yolo:
             cv2.imwrite(save_path, image)
 
         cv2.destroyAllWindows()
+
+    def predict(self, folder_path):
+        """Predicts objects in images within the folder and displays them using the show_boxes method"""
+        images, image_paths = self.load_images(folder_path)
+        pimages, image_shapes = self.preprocess_images(images)
+
+        predictions = []
+        for i, pimage in enumerate(pimages):
+            outputs = self.model.predict(pimage[np.newaxis, ...])
+            boxes, box_confidences, box_class_probs = self.process_outputs(
+                outputs, image_shapes[i])
+            filtered_boxes, box_classes, box_scores = self.filter_boxes(
+                boxes, box_confidences, box_class_probs)
+            box_predictions, predicted_box_classes, predicted_box_scores = self.non_max_suppression(
+                filtered_boxes, box_classes, box_scores)
+            predictions.append(
+                (box_predictions, predicted_box_classes, predicted_box_scores))
+            self.show_boxes(
+                images[i], box_predictions, predicted_box_classes, predicted_box_scores, image_paths[i])
+
+        return predictions, image_paths
