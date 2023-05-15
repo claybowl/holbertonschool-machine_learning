@@ -6,7 +6,11 @@ Calculates the determinant of a matrix
 
 def determinant(matrix):
     """Calculates the determinant of a matrix"""
-    # Check if matrix is list of lists
+    # Check if matrix is a list of lists
+    if type(matrix) != list or not all(isinstance(row, list) for row in matrix):
+        raise TypeError("matrix must be a list of lists")
+
+    # Check if matrix is square
     matrix_size = len(matrix)
     if not all(len(row) == matrix_size for row in matrix):
         raise ValueError("matrix must be a square matrix")
@@ -29,7 +33,7 @@ def determinant(matrix):
         # Create a submatrix by removing the first row and the current column
         submatrix = [row[:index] + row[index + 1:] for row in matrix[1:]]
 
-        # Add or subtract the current value times the determinant of the submatrix
+        # Add or subtract current value times determinant of the submatrix
         det += value * determinant(submatrix) * (-1) ** index
 
     return det
