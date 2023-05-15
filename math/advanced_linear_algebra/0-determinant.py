@@ -7,7 +7,7 @@ Calculates the determinant of a matrix
 def determinant(matrix):
     """Calculates the determinant of a matrix"""
     # Check if matrix is a list of lists
-    if type(matrix) != list or not all(isinstance(row, list) for row in matrix):
+    if type(matrix) is not list or not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
     # Check if matrix is square
