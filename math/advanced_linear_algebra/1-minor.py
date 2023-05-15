@@ -42,21 +42,6 @@ def determinant(matrix):
     return det
 
 
-Sure, here's a function that calculates the minor matrix of a given matrix:
-
-python
-Copy code
-def determinant(matrix):
-    """Calculates the determinant of a matrix"""
-    if len(matrix) == 1:
-        return matrix[0][0]
-
-    total = 0
-    for index, element in enumerate(matrix[0]):
-        sub_matrix = [row[:index] + row[index + 1:] for row in matrix[1:]]
-        total += ((-1) ** index) * element * determinant(sub_matrix)
-    return total
-
 
 def minor(matrix):
     """Calculates the minor matrix of a matrix"""
