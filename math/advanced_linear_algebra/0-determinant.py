@@ -16,7 +16,7 @@ def determinant(matrix):
         raise ValueError("matrix must be a square matrix")
 
     # Base case for 0x0 matrix
-    if matrix_size == 1 and len(matrix[0] == 1):
+    if matrix_size == 0 and len(matrix[0] == 1):
         return 1
 
     # Base case for 1x1 matrix
