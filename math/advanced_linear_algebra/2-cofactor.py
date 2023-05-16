@@ -42,10 +42,12 @@ def determinant(matrix):
 
     return det
 
+
 def cofactor(matrix):
     """Calculates the cofactor matrix of a matrix"""
     # Checks if our matrix is a list of list
-    if type(matrix) is not list or not all(isinstance(row, list) for row in matrix):
+    if type(matrix) is not list or not all(isinstance(row, list) for
+                                           row in matrix):
         raise TypeError("matrix must be a list of lists")
 
     # Checks if matrix is a square
@@ -58,7 +60,8 @@ def cofactor(matrix):
     for i in range(size):
         cofactor_row = []
         for j in range(size):
-            sub_matrix = [row[:j] + row[j + 1:] for row in (matrix[:i] + matrix[i + 1:])]
+            sub_matrix = [row[:j] + row[j + 1:] for
+                          row in (matrix[:i] + matrix[i + 1:])]
             cofactor_row.append(((-1) ** (i + j)) * determinant(sub_matrix))
         cofactor_matrix.append(cofactor_row)
 
