@@ -27,6 +27,10 @@ def determinant(matrix):
     if matrix_size == 1:
         return matrix[0][0]
 
+    # Handle 1D matrix (list)
+    if type(matrix[0]) is not list:
+        return matrix[0]
+
     # Base case for 2x2 matrix
     if matrix_size == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
