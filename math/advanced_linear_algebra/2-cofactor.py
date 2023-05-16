@@ -45,15 +45,15 @@ def determinant(matrix):
 
 def cofactor(matrix):
     """Calculates the cofactor matrix of a matrix"""
-    # Checks if our matrix is a list of list
-    if type(matrix) is not list or not all(isinstance(row, list) for
-                                           row in matrix):
+    if type(matrix) is not list or len(matrix) == 0:
         raise TypeError("matrix must be a list of lists")
-
-    # Checks if matrix is a square
-    size = len(matrix)
-    if not all(len(row) == size for row in matrix) or size == 0:
-        raise ValueError("matrix must be a non-empty square matrix")
+    if len(matrix) == 1 and len(matrix[0]) == 0:
+        return 1
+    for i in range(len(matrix)):
+        if type(matrix[i]) is not list:
+            raise TypeError("matrix must be a list of lists")
+        if len(matrix) != len(matrix[i]):
+            raise ValueError("matrix must be a square matrix")
 
     # Calculate the cofactor matrix
     cofactor_matrix = []
