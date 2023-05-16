@@ -46,6 +46,7 @@ def determinant(matrix):
 
     return det
 
+
 def minor(matrix):
     """Calculates the minor matrix of a matrix"""
     # Check if matrix is a list of lists
@@ -64,7 +65,7 @@ def minor(matrix):
         minor_row = []
         for j in range(size):
             sub_matrix = [row[:j] + row[j + 1:] for
-                          row in (matrix[:i] +matrix[i + 1:])]
+                          row in (matrix[:i] + matrix[i + 1:])]
             minor_row.append(determinant(sub_matrix))
         minor_matrix.append(minor_row)
 
