@@ -115,10 +115,10 @@ def inverse(matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
     # Calculate the determinant
-    deter = determinant(matrix)
+    det = determinant(matrix)
 
     # If determinant is 0, matrix has no inverse (singular)
-    if deter == 0:
+    if det == 0:
         return None
 
     # Calculate the cofactor matrix
