@@ -7,9 +7,12 @@ Calculates the minor of a matrix
 def determinant(matrix):
     """Calculates the determinant of a matrix"""
 
-    if type(matrix) is not list or len(matrix) == 0:
+    # Check if matrix is list of lists
+    if not isinstance(matrix, list) or (len(matrix) == 0 and not all
+                                        (isinstance(row, list)
+                                         for row in matrix)):
         raise TypeError("matrix must be a list of lists")
-    if len(matrix) == 1 and len(matrix[0]) == 0:
+    if len(matrix) == 0 or (len(matrix) == 1 and len(matrix[0]) == 0):
         return 1
     for i in range(len(matrix)):
         if type(matrix[i]) is not list:
@@ -26,10 +29,6 @@ def determinant(matrix):
     # Base case for 1x1 matrix
     if matrix_size == 1:
         return matrix[0][0]
-
-    # Handle 1D matrix (list)
-    if type(matrix[0]) is not list:
-        return matrix[0]
 
     # Base case for 2x2 matrix
     if matrix_size == 2:
