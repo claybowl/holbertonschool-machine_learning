@@ -55,7 +55,7 @@ def cofactor(matrix):
     # Checks if matrix is a square
     size = len(matrix)
     if not all(len(row) == size for row in matrix) or size == 0:
-        raise ValueError("matrix must be non-empty square mat")
+        raise ValueError("matrix must be non-empty square matrix")
 
     # Calculate the cofactor matrix
     cofactor_matrix = []
@@ -72,7 +72,6 @@ def cofactor(matrix):
     return cofactor_matrix
 
 
-
 def adjugate(matrix):
     """Calculates the adjugate matrix of a matrix"""
 
@@ -85,7 +84,7 @@ def adjugate(matrix):
     # Check if matrix is square
     size = len(matrix)
     if not all(len(row) == size for row in matrix) or size == 0:
-        raise ValueError("matrix must be a non-empty square mat")
+        raise ValueError("matrix must be a non-empty square matrix")
 
     # If matrix is 1x1, adjugate is same matrix
     if size == 1:
