@@ -9,7 +9,8 @@ def determinant(matrix):
 
     # Check if matrix is list of lists
     if not isinstance(matrix, list) or (len(matrix) == 0 and not all
-                                        (isinstance(row, list) for row in matrix)):
+                                        (isinstance(row, list)
+                                         for row in matrix)):
         raise TypeError("matrix must be a list of lists")
     if len(matrix) == 0 or (len(matrix) == 1 and len(matrix[0]) == 0):
         return 1
@@ -98,6 +99,7 @@ def adjugate(matrix):
     adjugate_matrix = list(map(list, zip(*cofactor_matrix)))
 
     return adjugate_matrix
+
 
 def inverse(matrix):
     """Calculates if matrix is a list of lists"""
