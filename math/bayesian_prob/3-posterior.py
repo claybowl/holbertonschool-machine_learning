@@ -6,7 +6,7 @@ import numpy as np
 
 
 def posterior(x, n, P, Pr):
-    """ Calculates the posterior probability of each probability in P given x and n """
+    """ Calculates posterior probability of probability in P given x and n"""
 
     if type(n) != int or n <= 0:
         raise ValueError("n must be a positive integer")
