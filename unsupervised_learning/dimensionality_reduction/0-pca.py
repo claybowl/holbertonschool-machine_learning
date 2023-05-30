@@ -11,7 +11,7 @@ def pca(X, var=0.95):
     _, _, V = np.linalg.svd(X)
     # Compute the variance explained by each component
     cumulative = np.cumsum(V**2) / np.sum(V**2)
-    # Find the number of principal components that explain 'var' of the variance
-    r = (np.argwhere(cumulative >= var))[0, 0]
+    # number of princ comp that explain 'var' of the variance
+    r = (np.argmax(explained_variance >= var) + 1
     # Return the weights matrix
-    return V.T[:, :r + 1]
+    return V.T[:, :r]
