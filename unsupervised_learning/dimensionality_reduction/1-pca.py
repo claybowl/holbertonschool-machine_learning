@@ -12,6 +12,10 @@ def pca(X, ndim):
     # Compute mean of data and center
     X_mean = X - np.mean(X, axis=0)
     # Compute the SVD of X
-    U, S, V = np.linalg.svd(X_mean)
+    _, _, Vt = np.linalg.svd(X_mean, full_matrices=False)
     # Return the weights matrix
+    Weights = Vt[:ndim].T
+
+    T = np.dot(X_mean, Weights)
+
     return V.T[:, :ndim]
