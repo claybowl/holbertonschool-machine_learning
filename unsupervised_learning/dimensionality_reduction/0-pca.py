@@ -14,4 +14,4 @@ def pca(X, var=0.95):
     # number of princ comp that explain 'var' of the variance
     r = (np.argmax(explained_variance >= var) + 1
     # Return the weights matrix
-    return V.T[:, :r]
+    return V.T[:, :r + 1]

@@ -3,3 +3,6 @@
 
 """
 import numpy as np
+
+
+def pca(X, ndim):
