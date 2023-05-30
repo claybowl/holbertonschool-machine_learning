@@ -12,6 +12,6 @@ def pca(X, var=0.95):
     # Compute the variance explained by each component
     cumulative = np.cumsum(V**2) / np.sum(V**2)
     # number of princ comp that explain 'var' of the variance
-    r = (np.argmax(explained_variance >= var) + 1
+    r = (np.argwhere(cumulative >= var))[0, 0]
     # Return the weights matrix
     return V.T[:, :r + 1]
