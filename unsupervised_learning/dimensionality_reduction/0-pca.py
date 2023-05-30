@@ -10,7 +10,7 @@ def pca(X, var=0.95):
     # Compute the SVD of X
     _, S, Vt = np.linalg.svd(X, full_matrices=False
     # Compute the variance explained by each component
-    evr = (V**2) / np.sum(V**2)
+    evr = S**2 / np.sum(S**2)
     # Calculate the cumsum
     cumsum_evr = np.cumsum(evr)
     # Calculate how many dim should maintain variance
