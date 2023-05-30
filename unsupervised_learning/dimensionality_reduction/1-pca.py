@@ -2,7 +2,7 @@
 """Module 1-pca
 Function pca that performs PCA on a
 dataset and returns the transformed
-version of the dataset.
+version of the dataset
 """
 import numpy as np
 

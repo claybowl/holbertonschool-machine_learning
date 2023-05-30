@@ -128,3 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 supervised_learning/0x00-object_detection/data/yolo.h5
+unsupervised_learning/dimensionality_reduction/0-main.py
+unsupervised_learning/dimensionality_reduction/1-main.py
