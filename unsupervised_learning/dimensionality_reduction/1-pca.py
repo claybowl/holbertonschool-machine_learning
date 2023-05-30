@@ -16,6 +16,6 @@ def pca(X, ndim):
     # Return the weights matrix
     Weights = Vt[:ndim].T
 
-    T = np.dot(X_mean, Weights)
+    Transform = np.dot(X_mean, Weights)
 
-    return V.T[:, :ndim]
+    return Transform
