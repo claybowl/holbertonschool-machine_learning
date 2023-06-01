@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
 """7-maximization
-calculates the expectation step in the EM algorithm for a GMM
+calculates the expectation step in
+the EM algorithm for a GMM
 """
 import numpy as np
 
 
 def maximization(X, g):
     """
-    Calculates the maximization step in the EM algorithm for a GMM.
+    Calculates the maximization step in the
+    EM algorithm for a GMM.
 
     Parameters:
     X (numpy.ndarray): The data set. Shape (n, d).
-    g (numpy.ndarray): The posterior probabilities for each data point in each cluster. Shape (k, n).
+    g (numpy.ndarray): The posterior probabilities for each
+    data point in each cluster. Shape (k, n).
 
     Returns:
     tuple: (pi, m, S)
-        pi is a numpy.ndarray of shape (k,) containing the updated priors for each cluster.
-        m is a numpy.ndarray of shape (k, d) containing the updated centroid means for each cluster.
-        S is a numpy.ndarray of shape (k, d, d) containing the updated covariance matrices for each cluster.
+        pi is a numpy.ndarray of shape (k,) containing the
+        updated priors for each cluster.
+        m is a numpy.ndarray of shape (k, d) containing
+        the updated centroid means for each cluster.
+        S is a numpy.ndarray of shape (k, d, d) containing
+        the updated covariance matrices for each cluster.
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None, None
