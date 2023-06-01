@@ -10,11 +10,13 @@ def initialize(X, k):
     Initializes cluster centroids for K-means.
 
     Parameters:
-    X (numpy.ndarray): The dataset that will be used for K-means clustering. Shape (n, d).
+    X (numpy.ndarray): The dataset that will be used
+    for K-means clustering. Shape (n, d).
     k (int): The number of clusters.
 
     Returns:
-    numpy.ndarray: The initialized centroids for each cluster. Shape (k, d).
+    numpy.ndarray: The initialized centroids
+    for each cluster. Shape (k, d).
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
