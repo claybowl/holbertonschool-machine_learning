@@ -10,9 +10,11 @@ def pdf(X, m, S):
     Calculates the probability density function of a Gaussian distribution.
 
     Parameters:
-    X (numpy.ndarray): The data points whose PDF should be evaluated. Shape (n, d).
+    X (numpy.ndarray): The data points whose
+    PDF should be evaluated. Shape (n, d).
     m (numpy.ndarray): The mean of the distribution. Shape (d,).
-    S (numpy.ndarray): The covariance of the distribution. Shape (d, d).
+    S (numpy.ndarray): The covariance of the distribution.
+    Shape (d, d).
 
     Returns:
     numpy.ndarray: The PDF values for each data point. Shape (n,).
