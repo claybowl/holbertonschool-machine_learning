@@ -5,6 +5,34 @@ Performs Kmeans on a dataset
 import numpy as np
 
 
+def initialize(X, k):
+    """
+    Initializes cluster centroids for K-means.
+
+    Parameters:
+    X (numpy.ndarray): The dataset that will be used
+    for K-means clustering. Shape (n, d).
+    k (int): The number of clusters.
+
+    Returns:
+    numpy.ndarray: The initialized centroids
+    for each cluster. Shape (k, d).
+    """
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+        return None
+    if not isinstance(k, int) or k <= 0 or X.shape[0] < k:
+        return None
+
+    n, d = X.shape
+
+    min_vals = X.min(axis=0)
+    max_vals = X.max(axis=0)
+
+    centroids = np.random.uniform(min_vals, max_vals, (k, d))
+
+    return centroids
+
+
 def kmeans(X, k, iterations=1000):
     """
     Performs K-means on a dataset.
@@ -12,12 +40,15 @@ def kmeans(X, k, iterations=1000):
     Parameters:
     X (numpy.ndarray): The dataset. Shape (n, d).
     k (int): The number of clusters.
-    iterations (int): The maximum number of iterations that should be performed.
+    iterations (int): The maximum number of iterations
+    that should be performed.
 
     Returns:
     tuple: (C, clss)
-        C is a numpy.ndarray of shape (k, d) containing the centroid means for each cluster.
-        clss is a numpy.ndarray of shape (n,) containing the index of the cluster in C that each data point belongs to.
+        C is a numpy.ndarray of shape (k, d) containing the
+        centroid means for each cluster.
+        clss is a numpy.ndarray of shape (n,) containing the
+        index of the cluster in C that each data point belongs to.
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
