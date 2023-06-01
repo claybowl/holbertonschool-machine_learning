@@ -6,6 +6,7 @@ import sklearn.cluster
 
 
 def gmm(X, k):
+    """performs k-means on a dataset"""
     # Perform GMM clustering
     gmm = GaussianMixture(n_components=k).fit(X)
 

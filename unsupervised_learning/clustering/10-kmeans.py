@@ -6,6 +6,7 @@ import sklearn.cluster
 
 
 def kmeans(X, k):
+    """Performs K-me"""
     # Perform K-means clustering
     kmeans = KMeans(n_clusters=k).fit(X)
 

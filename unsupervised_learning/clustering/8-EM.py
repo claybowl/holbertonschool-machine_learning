@@ -10,6 +10,7 @@ maximization = __import__('7-maximization').maximization
 
 def expectation_maximization(X, k, iterations=1000,
                              tol=1e-5, verbose=False):
+    """performs the maximization"""
 
     # Initialize variables
     pi, m, S = initialize(X, k)

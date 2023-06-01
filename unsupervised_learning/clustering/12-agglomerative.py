@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 
 def agglomerative(X, dist):
+    """Performs agglomerative clustering on a dataset"""
     Z = scipy.cluster.hierarchy.linkage(X, 'ward')
 
     dn = scipy.cluster.hierarchy.dendrogram(Z, color_threshold=dist,
