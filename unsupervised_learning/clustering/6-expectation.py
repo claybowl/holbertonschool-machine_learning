@@ -3,6 +3,7 @@
 calculates the expectation step in the EM algorithm for a GMM
 """
 import numpy as np
+pdf = __import__('5-pdf').pdf
 
 
 def expectation(X, pi, m, S):
@@ -13,11 +14,14 @@ def expectation(X, pi, m, S):
     X (numpy.ndarray): The data set. Shape (n, d).
     pi (numpy.ndarray): The priors for each cluster. Shape (k,).
     m (numpy.ndarray): The centroid means for each cluster. Shape (k, d).
-    S (numpy.ndarray): The covariance matrices for each cluster. Shape (k, d, d).
+    S (numpy.ndarray): The covariance matrices for
+    each cluster. Shape (k, d, d).
 
     Returns:
     tuple: (g, l)
-        g is a numpy.ndarray of shape (k, n) containing the posterior probabilities for each data point in each cluster.
+        g is a numpy.ndarray of shape (k, n) containing the
+        posterior probabilities for each
+        data point in each cluster.
         l is the total log likelihood.
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
