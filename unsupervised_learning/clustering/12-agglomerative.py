@@ -2,22 +2,16 @@
 """12-agglomerative
 performs K-means on a dataset
 """
+import scipy.cluster.hierarchy
+import matplotlib.pyplot as plt
 
 
 def agglomerative(X, dist):
-    # Import necessary functions
-    import scipy.cluster.hierarchy as sch
-    import matplotlib.pyplot as plt
+    Z = scipy.cluster.hierarchy.linkage(X, 'ward')
 
-    # Perform agglomerative clustering
-    Z = sch.linkage(X, method='ward')
-
-    # Plot dendrogram
-    plt.figure(figsize=(25, 10))
-    dn = sch.dendrogram(Z, color_threshold=dist)
+    dn = scipy.cluster.hierarchy.dendrogram(Z, color_threshold=dist,
+                                            above_threshold_color='b')
     plt.show()
 
-    # Get cluster labels
-    clss = sch.fcluster(Z, dist, criterion='distance')
-
+    clss = scipy.cluster.hierarchy.fcluster(Z, dist, 'distance')
     return clss

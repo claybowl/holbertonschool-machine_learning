@@ -2,12 +2,10 @@
 """11-gmm
 performs K-means on a dataset
 """
+import sklearn.cluster
 
 
 def gmm(X, k):
-    # Import necessary functions
-    from sklearn.mixture import GaussianMixture
-
     # Perform GMM clustering
     gmm = GaussianMixture(n_components=k).fit(X)
 

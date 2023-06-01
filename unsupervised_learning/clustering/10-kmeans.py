@@ -2,12 +2,10 @@
 """10-kmeans
 performs K-means on a dataset
 """
+import sklearn.cluster
 
 
 def kmeans(X, k):
-    # Import necessary functions
-    from sklearn.cluster import KMeans
-
     # Perform K-means clustering
     kmeans = KMeans(n_clusters=k).fit(X)
 
