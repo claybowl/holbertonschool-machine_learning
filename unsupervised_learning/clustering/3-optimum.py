@@ -4,6 +4,9 @@ tests for the optimum number of
 clusters by variance
 """
 import numpy as np
+kmeans = __import__('1-kmeans').kmeans
+variance = __import__('2-variance').variance
+
 
 
 def optimum_k(X, kmin=1, kmax=None, iterations=1000):
@@ -12,14 +15,19 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
 
     Parameters:
     X (numpy.ndarray): The data set. Shape (n, d).
-    kmin (int): The minimum number of clusters to check for (inclusive).
-    kmax (int): The maximum number of clusters to check for (inclusive).
-    iterations (int): The maximum number of iterations for K-means.
+    kmin (int): The minimum number of
+    clusters to check for (inclusive).
+    kmax (int): The maximum number of
+    clusters to check for (inclusive).
+    iterations (int): The maximum number of
+    iterations for K-means.
 
     Returns:
     tuple: (results, d_vars)
-        results is a list containing the outputs of K-means for each cluster size.
-        d_vars is a list containing the difference in variance from the smallest cluster size for each cluster size.
+        results is a list containing the outputs
+        of K-means for each cluster size.
+        d_vars is a list containing the difference in variance
+        from the smallest cluster size for each cluster size.
     """
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
