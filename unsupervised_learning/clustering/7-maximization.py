@@ -29,17 +29,22 @@ def maximization(X, g):
         return None, None, None
     if not isinstance(g, np.ndarray) or len(g.shape) != 2:
         return None, None, None
+    if False in np.isclose(g.sum(axis=0), np.ones((g.shape[1]))):
+        return None, None, None
 
     n, d = X.shape
     k = g.shape[0]
 
+    if g.shape[1] != n:
+        return None, None, None
+
     pi = np.sum(g, axis=1) / n
-
-    m = np.dot(g, X) / np.sum(g, axis=1, keepdims=True)
-
+    m = np.zeros((k, d))
     S = np.zeros((k, d, d))
+
     for i in range(k):
-        X_m = X - m[i]
-        S[i] = np.dot(g[i] * X_m.T, X_m) / np.sum(g[i])
+        m[i] = np.sum(g[i].reshape(-1, 1) * X, axis=0) / np.sum(g[i])
+        diff = X - m[i]
+        S[i] = np.dot(g[i].reshape(1, -1) * diff.T, diff) / np.sum(g[i])
 
     return pi, m, S
