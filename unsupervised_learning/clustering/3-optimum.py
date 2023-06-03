@@ -32,26 +32,26 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         return None, None
     if not isinstance(kmin, int) or kmin <= 0 or X.shape[0] < kmin:
         return None, None
+    if kmax is None:
+        kmax = X.shape[0]
     if not isinstance(kmax, int) or kmax <= 0 or X.shape[0] < kmax:
         return None, None
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
 
+    # Create empty lists
     results = []
+    vars = []
     d_vars = []
 
-    k = kmin
-    while (k <= kmax):
-        klusters, klss = kmeans(X, k, iterations)
-        if k == kmin:
-            var = variance(X, klusters)
-            results.append((klusters, klss))
-            d_vars.append(0.0)
-            k += 1
-            continue
+    # Calculate kmeans and variance through range of kmin to kmax
+    for k in range(kmin, kmax + 1):
+        C, clss = kmeans(X, k, iterations)
+        results.append((C, clss))
+        vars.append(variance(X, C))
 
-        results.append((klusters, klss))
-        d_vars.append(abs(var - variance(X, klusters)))
-        k += 1
+    # Calculate d_vars from the smallest cluster size 4 each cluster
+    for var in vars:
+        d_vars.append(vars[0] - var)
 
     return results, d_vars

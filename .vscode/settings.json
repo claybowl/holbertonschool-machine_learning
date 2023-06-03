@@ -5,6 +5,8 @@
 		"cofactor",
 		"dtype",
 		"Keras",
+		"kmax",
+		"kmin",
 		"ndarray",
 		"numpy",
 		"preprocesses",
