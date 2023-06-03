@@ -8,28 +8,67 @@ expectation_maximization = __import__('8-EM').expectation_maximization
 
 
 def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
-    """finds the minimum and maximum"""
+    """
+    Finds the best number of clusters for a GMM using the Bayesian
+    Information Criterion.
 
-    # Initialize variables
+    Parameters:
+    X (numpy.ndarray): The data set. Shape (n, d).
+    kmin (int): The minimum number of clusters to check for (inclusive).
+    kmax (int): The maximum number of clusters to check for (inclusive).
+    iterations (int): The maximum number of iterations for the EM algorithm.
+    tol (float): The tolerance for the EM algorithm.
+    verbose (bool): Whether to print information about the algorithm.
+
+    Returns:
+    tuple: The best number of clusters, the best result, the log likelihoods,
+    and the BIC values.
+    """
+    # Validate inputs
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+        return None, None, None, None
+    if not isinstance(kmin, int) or kmin <= 0:
+        return None, None, None, None
+    if kmax is not None and (not isinstance(kmax, int) or kmax <= 0):
+        return None, None, None, None
     if kmax is None:
         kmax = X.shape[0]
-    l = np.empty(kmax - kmin + 1)
-    b = np.empty_like(l)
-    best_result = None
-    best_k = None
-    best_bic = float('-inf')
+    if kmin >= kmax:
+        return None, None, None, None
+    if not isinstance(iterations, int) or iterations <= 0:
+        return None, None, None, None
+    if not isinstance(tol, float) or tol < 0:
+        return None, None, None, None
+    if not isinstance(verbose, bool):
+        return None, None, None, None
 
-    # Perform EM algorithm for each k
+    # Initialize variables
+    n, d = X.shape
+    bic_values = []
+    log_likelihoods = []
+    results = []
+    cluster_counts = []
+
+    # Loop over all possible number of clusters
     for k in range(kmin, kmax + 1):
-        pi, m, S, g, log_likelihood = expectation_maximization(
+        # Perform expectation maximization
+        pi, m, S, _, log_likelihood = expectation_maximization(
             X, k, iterations, tol, verbose)
-        p = k * (X.shape[1] * (X.shape[1] + 1) / 2 + X.shape[1] + 1)
-        bic = p * np.log(X.shape[0]) - 2 * log_likelihood
-        l[k - kmin] = log_likelihood
-        b[k - kmin] = bic
-        if bic > best_bic:
-            best_bic = bic
-            best_k = k
-            best_result = (pi, m, S)
 
-    return best_k, best_result, l, b
+        # Store results
+        results.append((pi, m, S))
+        cluster_counts.append(k)
+        log_likelihoods.append(log_likelihood)
+
+        # Calculate BIC
+        p = k * d * (d + 1) / 2 + d * k + k - 1
+        bic = p * np.log(n) - 2 * log_likelihood
+        bic_values.append(bic)
+
+    # Convert to numpy arrays
+    bic_values = np.array(bic_values)
+
+    # Find the best number of clusters
+    best_k_index = np.argmin(bic_values)
+
+    return cluster_counts[best_k_index], results[best_k_index], log_likelihoods, bic_values
