@@ -53,6 +53,6 @@ def expectation(X, pi, m, S):
     g_sum = np.sum(g, axis=0)
     g /= g_sum
 
-    l = np.sum(np.log(g_sum))
+    r = np.sum(np.log(g_sum))
 
-    return g, l
+    return g, r
