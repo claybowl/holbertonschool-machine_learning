@@ -8,19 +8,16 @@ expectation = __import__('6-expectation').expectation
 maximization = __import__('7-maximization').maximization
 
 
-def expectation_maximization(X, k, iterations=1000,
-                             tol=1e-5, verbose=False):
+def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     """
     Performs the expectation maximization for a GMM.
 
     Parameters:
     X (numpy.ndarray): The data set. Shape (n, d).
     k (int): The number of clusters.
-    iterations (int): The maximum number of
-    iterations for the algorithm.
+    iterations (int): The maximum number of iterations for the algorithm.
     tol (float): The tolerance of the log likelihood.
-    verbose (bool): Whether to print information
-    about the algorithm.
+    verbose (bool): Whether to print information about the algorithm.
 
     Returns:
     tuple: The final values of pi, m, S, g, and ll.
@@ -47,20 +44,14 @@ def expectation_maximization(X, k, iterations=1000,
     for i in range(iterations + 1):
         # Expectation step
         g, log_likelihood[1] = expectation(X, pi, m, S)
-
-        # Print log likelihood every 10 iterations if verbose is True
         if verbose and i % 10 == 0:
             print("Log Likelihood after {} iterations: {}"
                   .format(i, log_likelihood[1].round(5)))
-
-        # Check for convergence
         if abs(log_likelihood[0] - log_likelihood[1]) <= tol:
             if verbose:
                 print("Log Likelihood after {} iterations: {}"
                       .format(i, log_likelihood[1].round(5)))
             break
-
-        # Maximization step
         if i < iterations:
             pi, m, S = maximization(X, g)
 
