@@ -2,19 +2,37 @@
 """11-gmm
 performs K-means on a dataset
 """
-import sklearn.cluster
+import sklearn.mixture
 
 
 def gmm(X, k):
-    """performs k-means on a dataset"""
+    """
+    Performs Gaussian Mixture Model (GMM) clustering on the given data.
+
+    Parameters:
+    X (numpy.ndarray): The data to be clustered. Shape (n, d),
+    where n is the number of data points and d is the number of dimensions.
+    k (int): The number of clusters.
+
+    Returns:
+    tuple: A tuple containing the weights, means, and
+    covariances of the Gaussian components,
+           the labels for each data point, and the
+           Bayesian Information Criterion (BIC).
+    """
     # Perform GMM clustering
-    gmm = GaussianMixture(n_components=k).fit(X)
+    gmm_model = sklearn.mixture.GaussianMixture(n_components=k)
+
+    # Fit the model to the data
+    gmm_model.fit(X)
 
     # Get cluster parameters and labels
-    pi = gmm.weights_
-    m = gmm.means_
-    S = gmm.covariances_
-    clss = gmm.predict(X)
-    bic = gmm.bic(X)
+    weights = gmm_model.weights_
+    means = gmm_model.means_
+    covariances = gmm_model.covariances_
+    labels = gmm_model.predict(X)
 
-    return pi, m, S, clss, bic
+    # Calculate BIC
+    bic = gmm_model.bic(X)
+
+    return weights, means, covariances, labels, bic

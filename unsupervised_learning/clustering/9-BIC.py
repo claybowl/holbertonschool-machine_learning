@@ -71,4 +71,5 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     # Find the best number of clusters
     best_k_index = np.argmin(bic_values)
 
-    return cluster_counts[best_k_index], results[best_k_index], log_likelihoods, bic_values
+    return (cluster_counts[best_k_index], results[best_k_index],
+            log_likelihoods, bic_values)
