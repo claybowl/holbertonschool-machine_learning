@@ -11,7 +11,8 @@ def kmeans(X, k):
 
     Parameters:
     X (numpy.ndarray): The data to be clustered.
-    Shape (n, d), where n is the number of data points and d is the number of dimensions.
+    Shape (n, d), where n is the number of data
+    points and d is the number of dimensions.
     k (int): The number of clusters.
 
     Returns:
