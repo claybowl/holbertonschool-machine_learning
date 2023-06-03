@@ -40,13 +40,18 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     results = []
     d_vars = []
 
-    for k in range(kmin, kmax + 1):
-        C, clss = kmeans(X, k, iterations)
-        results.append((C, clss))
-
-        var = variance(X, C)
+    k = kmin
+    while (k <= kmax):
+        klusters, klss = kmeans(X, k, iterations)
         if k == kmin:
-            min_var = var
-        d_vars.append(var - min_var)
+            var = variance(X, klusters)
+            results.append((klusters, klss))
+            d_vars.append(0.0)
+            k += 1
+            continue
+
+        results.append((klusters, klss))
+        d_vars.append(abs(var - variance(X, klusters)))
+        k += 1
 
     return results, d_vars
