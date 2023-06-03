@@ -10,11 +10,13 @@ def kmeans(X, k):
     Performs K-means clustering on the given data.
 
     Parameters:
-    X (numpy.ndarray): The data to be clustered. Shape (n, d), where n is the number of data points and d is the number of dimensions.
+    X (numpy.ndarray): The data to be clustered.
+    Shape (n, d), where n is the number of data points and d is the number of dimensions.
     k (int): The number of clusters.
 
     Returns:
-    tuple: A tuple containing the cluster centroids and the labels for each data point.
+    tuple: A tuple containing the cluster centroids
+    and the labels for each data point.
     """
     # Perform K-means clustering
     kmeans_model = sklearn.cluster.KMeans(n_clusters=k)
