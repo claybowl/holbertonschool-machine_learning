@@ -57,24 +57,18 @@ def kmeans(X, k, iterations=1000):
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
 
-    n, d = X.shape
-
-    C = initialize(X, k)
-    clss = None
-
-    for _ in range(iterations):
-        C_prev = np.copy(C)
-
-        dist = np.sqrt(((X - C[:, np.newaxis])**2).sum(axis=-1))
-        clss = np.argmin(dist, axis=0)
-
-        for j in range(k):
-            if (clss == j).any():
-                C[j] = np.mean(X[clss == j], axis=0)
+    Cs = initialize(X, k)
+    clss = np.argmin(np.linalg.norm(X[:, np.newaxis] - Cs, axis=2), axis=1)
+    for i in range(iterations):
+        Cs_copy = Cs.copy()
+        for i in range(len(Cs)):
+            if len(X[clss == i] > 0):
+                Cs_copy[i] = np.mean(X[clss == i], axis=0)
             else:
-                C[j] = initialize(X, 1)
-
-        if np.all(C_prev == C):
-            return C, clss
-
-    return C, clss
+                Cs_copy[i] = initialize(X, 1)
+        clss = np.argmin(np.linalg.norm(X[:, np.newaxis] - Cs_copy, axis=2),
+                         axis=1)
+        if np.array_equal(Cs, Cs_copy):
+            break
+        Cs = Cs_copy
+    return Cs, clss
