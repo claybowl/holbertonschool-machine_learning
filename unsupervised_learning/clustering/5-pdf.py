@@ -19,23 +19,25 @@ def pdf(X, m, S):
     Returns:
     numpy.ndarray: The PDF values for each data point. Shape (n,).
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+    _, dimensions = X.shape
+
+    # Calculate the inverse and determinant of the covariance matrix
+    inv_covariance = np.linalg.inv(S)
+    det_covariance = np.linalg.det(S)
+
+    if det_covariance <= 0:
         return None
-    if not isinstance(m, np.ndarray) or len(m.shape) != 1:
-        return None
-    if not isinstance(S, np.ndarray) or len(S.shape) != 2:
-        return None
 
-    n, d = X.shape
+    X_minus_mean = X - m
 
-    X_m = X - m
+    # Calculate the exponent of the PDF formula
+    exponent = -0.5 * np.sum(X_minus_mean @
+                             inv_covariance * X_minus_mean, axis=1)
+    # Calculate the coefficient of the PDF formula
+    coeff = 1 / np.sqrt((2 * np.pi) ** dimensions * det_covariance)
 
-    S_inv = np.linalg.inv(S)
+    # Calculate the PDF values, and set mins to 1e-300
+    pdf_values = coeff * np.exp(exponent)
+    pdf_values = np.maximum(pdf_values, 1e-300)
 
-    fac = np.einsum('...k,kl,...l->...', X_m, S_inv, X_m)
-
-    P = 1. / (np.sqrt((2 * np.pi) ** d * np.linalg.det(S))) * np.exp(-fac / 2)
-
-    P = np.maximum(P, 1e-300)
-
-    return P
+    return pdf_values
