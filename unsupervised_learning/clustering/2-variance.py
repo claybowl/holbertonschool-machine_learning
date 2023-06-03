@@ -22,9 +22,12 @@ def variance(X, C):
     if not isinstance(C, np.ndarray) or len(C.shape) != 2:
         return None
 
-    dist = np.sqrt(((X - C[:, np.newaxis])**2).sum(axis=-1))
-    min_dist = np.min(dist, axis=0)
+    try:
+        dist = np.sqrt(((X - C[:, np.newaxis])**2).sum(axis=-1))
+        min_dist = np.min(dist, axis=0)
 
-    var = np.sum(min_dist ** 2)
+        var = np.sum(min_dist ** 2)
 
-    return var
+        return var
+    except Exception:
+        return None
