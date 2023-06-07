@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import numpy as np
 """module 1-regular
 """
+import numpy as np
 
 
 def regular(P):
