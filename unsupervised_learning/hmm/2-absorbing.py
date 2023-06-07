@@ -9,7 +9,8 @@ def absorbing(P):
     Function that determines if a Markov chain is absorbing.
 
     Parameters:
-    - P is a is a square 2D numpy.ndarray of shape (n, n) representing the transition matrix.
+    - P is a is a square 2D numpy.ndarray of shape
+    (n, n) representing the transition matrix.
 
     Returns:
     - True if the Markov chain is absorbing, or False on failure.
@@ -26,11 +27,13 @@ def absorbing(P):
     if not np.isclose(np.sum(P, axis=1), 1).all():
         return None
 
-    # Check if P is absorbing (there is at least one row with a 1 on its diagonal)
+    # Check if P is absorbing (there is at
+	# least one row with a 1 on its diagonal)
     if not np.any(np.diag(P) == 1):
         return False
 
-    # Check if the states with a 1 on the diagonal are accessible from all other states
+    # Check if the states with a 1 on the diagonal
+	# are accessible from all other states
     for i in range(n):
         if P[i, i] == 1:
             for j in range(n):
