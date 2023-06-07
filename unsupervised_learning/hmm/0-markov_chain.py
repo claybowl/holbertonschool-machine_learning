@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
+"""module 0-markov_chain
+"""
 import numpy as np
+
 
 def markov_chain(P, s, t=1):
     """
@@ -7,14 +10,16 @@ def markov_chain(P, s, t=1):
     particular state after a specified number of iterations.
 
     Parameters:
-    - P is a square 2D numpy.ndarray of shape (n, n) representing the transition
+    - P is a square 2D numpy.ndarray
+    of shape (n, n) representing the transition
       matrix.
     - s is a numpy.ndarray of shape (1, n) representing the probability of
       starting in each state.
     - t is the number of iterations that the Markov chain has been through.
 
     Returns:
-    - a numpy.ndarray of shape (1, n) representing the probability of being in a
+    - a numpy.ndarray of shape (1, n) representing
+    the probability of being in a
       specific state after t iterations, or None on failure.
     """
 
