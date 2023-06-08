@@ -1,4 +1,4 @@
-#!/usr//bin/env python3
+#!/usr/bin/env python3
 """module 6-baum_welch
 """
 import numpy as np
