@@ -39,7 +39,7 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
         return None, None
 
     # Initialize the updated emission probabilities and
-	# transition probabilities
+    # transition probabilities
     Emission_new = np.copy(Emission)
     Transition_new = np.copy(Transition)
 
