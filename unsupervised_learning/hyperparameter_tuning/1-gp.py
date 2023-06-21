@@ -34,10 +34,9 @@ class GaussianProcess:
             X2 = X2[:, None]
         assert X1.shape[1] == X2.shape[1]
 
-        dist = np.sum(X1 ** 2, axis=1)[:, None] + \
-            np.sum(X2 ** 2, axis=1) - 2 * np.dot(X1, X2.T)
-        K = self.sigma_f ** 2 * np.exp(-0.5 / self.l ** 2 * dist)
-        return K
+        sqdist = np.sum(X1**2, 1).reshape(-1, 1) +\
+            np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
+        return self.sigma_f**2 * np.exp(-0.5 / self.l**2 * sqdist)
 
     def predict(self, X_s):
         """
