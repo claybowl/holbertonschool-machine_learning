@@ -28,9 +28,16 @@ class GaussianProcess:
     def kernel(self, X1, X2):
         """Calculates the covariance kernel matrix between
         two matrices using the RBF kernel."""
-        sqdist = np.sum(X1**2, 1).reshape(-1, 1) + \
-            np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
-        return self.sigma_f**2 * np.exp(-0.5 / self.l**2 * sqdist)
+        if X1.ndim == 1:
+            X1 = X1[:, None]
+        if X2.ndim == 1:
+            X2 = X2[:, None]
+        assert X1.shape[1] == X2.shape[1]
+
+        dist = np.sum(X1 ** 2, axis=1)[:, None] + \
+            np.sum(X2 ** 2, axis=1) - 2 * np.dot(X1, X2.T)
+        K = self.sigma_f ** 2 * np.exp(-0.5 / self.l ** 2 * dist)
+        return K
 
     def predict(self, X_s):
         """
@@ -40,13 +47,11 @@ class GaussianProcess:
         s is the number of sample points
         """
         K_s = self.kernel(self.X, X_s)
-        K_ss = self.kernel(X_s, X_s)
+        K_ss = self.kernel(X_s, X_s) + 1e-8 * np.eye(len(X_s))
         K_inv = np.linalg.inv(self.K)
 
-        # Mean
+        # Mean and covariance of posterior predictive distribution
         mu_s = K_s.T.dot(K_inv).dot(self.Y)
-
-        # Covariance
         cov_s = K_ss - K_s.T.dot(K_inv).dot(K_s)
 
-        return mu_s, cov_s
+        return mu_s.flatten(), cov_s
