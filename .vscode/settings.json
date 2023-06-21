@@ -1,8 +1,12 @@
 {
 	"cSpell.words": [
+		"adjugate",
 		"CIFAR",
+		"cofactor",
 		"dtype",
 		"Keras",
+		"kmax",
+		"kmin",
 		"ndarray",
 		"numpy",
 		"preprocesses",
