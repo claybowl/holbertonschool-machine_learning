@@ -46,15 +46,14 @@ class GaussianProcess:
         mean and standard deviation should be calculated
         s is the number of sample points
         """
+        s = X_s.shape[0]
+
         K_s = self.kernel(self.X, X_s)
-        K_ss = self.kernel(X_s, X_s) + 1e-8 * np.eye(len(X_s))
-        K_inv = np.linalg.inv(self.K + 1e-8 * np.eye(len(self.X)))
+        mu = K_s.T @ np.linalg.inv(self.K) @ self.Y
+        mu = mu.reshape(s,)
 
-        # Mean and covariance of posterior predictive distribution
-        mu_s = K_s.T.dot(K_inv).dot(self.Y)
-        cov_s = K_ss - K_s.T.dot(K_inv).dot(K_s)
+        K_ss = self.kernel(X_s, X_s)
+        cov_s = K_ss - K_s.T @ np.linalg.inv(self.K) @ K_s
+        sigma = np.diag(cov_s)
 
-        # Extracting the standard deviation
-        sigma = np.sqrt(np.diag(cov_s))
-
-        return mu_s.flatten(), sigma
+        return mu, sigma
