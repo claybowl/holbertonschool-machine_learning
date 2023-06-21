@@ -48,6 +48,7 @@ class GaussianProcess:
         """
         s = X_s.shape[0]
 
+        # Mean and covariance of posterior predictive distribution
         K_s = self.kernel(self.X, X_s)
         mu = K_s.T @ np.linalg.inv(self.K) @ self.Y
         mu = mu.reshape(s,)

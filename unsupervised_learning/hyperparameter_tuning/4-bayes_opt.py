@@ -62,4 +62,4 @@ class BayesianOptimization:
         # Find the next best sample point
         X_next = self.X_s[np.argmax(EI)]
 
-        return X_next, EI
+        return X_next, np.array(EI)
