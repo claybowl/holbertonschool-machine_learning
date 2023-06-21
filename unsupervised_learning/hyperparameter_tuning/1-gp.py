@@ -28,9 +28,11 @@ class GaussianProcess:
     def kernel(self, X1, X2):
         """Calculates the covariance kernel matrix between
         two matrices using the RBF kernel."""
-        sqdist = np.sum(X1**2, 1).reshape(-1, 1) +\
-            np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
-        return self.sigma_f**2 * np.exp(-0.5 / self.l**2 * sqdist)
+        arg1 = np.sum(X1**2, 1).reshape(-1, 1)
+        arg2 = np.sum(X2**2, 1)
+        arg3 = np.dot(X1, X2.T)
+        sqdist = arg1 + arg2 - 2 * arg3
+        return self.sigma_f**2 * np.exp(-.5 / self.l**2 * sqdist)
 
     def predict(self, X_s):
         """
