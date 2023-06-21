@@ -54,4 +54,4 @@ class GaussianProcess:
         mu_s = K_s.T.dot(K_inv).dot(self.Y)
         cov_s = K_ss - K_s.T.dot(K_inv).dot(K_s)
 
-        return mu_s.flatten(), cov_s
+        return mu_s.flatten(), cov_s.flatten()
