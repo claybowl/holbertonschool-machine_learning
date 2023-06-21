@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""module 3-bayes_opt.py
+"""module 4-bayes_opt.py
 Creates the class BayesianOptimization that performs
 Bayesian optimization on a noiseless 1d Gaussian
 process.
