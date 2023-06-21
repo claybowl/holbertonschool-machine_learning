@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 supervised_learning/0x00-object_detection/data/yolo.h5
+supervised_learning/data/yolo.h5
