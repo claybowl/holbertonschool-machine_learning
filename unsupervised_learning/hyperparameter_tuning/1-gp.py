@@ -48,7 +48,7 @@ class GaussianProcess:
         """
         K_s = self.kernel(self.X, X_s)
         K_ss = self.kernel(X_s, X_s) + 1e-8 * np.eye(len(X_s))
-        K_inv = np.linalg.inv(self.K)
+        K_inv = np.linalg.inv(self.K + 1e-8 * np.eye(len(self.X)))
 
         # Mean and covariance of posterior predictive distribution
         mu_s = K_s.T.dot(K_inv).dot(self.Y)
