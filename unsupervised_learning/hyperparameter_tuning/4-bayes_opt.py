@@ -51,8 +51,9 @@ class BayesianOptimization:
 
         # Calculate Z
         with np.errstate(divide='warn'):
-            Z = (mu - f_plus - self.xsi) / sigma
-            Z[sigma == 0.0] = 0.0
+            Z = np.zeros_like(sigma)
+            mask = sigma > 0
+            Z[mask] = (mu[mask] - f_plus - self.xsi) / sigma[mask]
 
         # Calculate the Expected Improvement
         EI = (mu - f_plus - self.xsi) * norm.cdf(Z) + sigma * norm.pdf(Z)
