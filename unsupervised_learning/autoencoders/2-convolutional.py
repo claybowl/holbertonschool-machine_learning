@@ -3,7 +3,6 @@
 contains the function autoencoder
 """
 import tensorflow.keras as keras
-from tensorflow.keras import layers, Model
 
 
 def autoencoder(input_dims, filters, latent_dims):

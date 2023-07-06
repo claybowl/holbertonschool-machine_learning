@@ -2,8 +2,7 @@
 """module 2-convolutional
 contains the function autoencoder
 """
-import tensorflow as tf
-from tensorflow.keras import layers, Model, backend as K
+import tensorflow.keras as keras
 
 
 def sampling(args):
