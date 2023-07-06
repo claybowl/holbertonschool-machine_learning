@@ -16,11 +16,11 @@ def sampling(args):
 def autoencoder(input_dims, hidden_layers, latent_dims):
     """
     Creates a variational autoencoder
-    
+
     input_dims: integer, dimensions of the model input
     hidden_layers: list, number of nodes for each hidden layer in the encoder
     latent_dims: integer, dimensions of the latent space representation
-    
+
     Returns: encoder, decoder, auto
         encoder: the encoder model
         decoder: the decoder model
