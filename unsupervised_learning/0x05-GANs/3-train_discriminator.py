@@ -53,9 +53,3 @@ def train_dis(Gen, Dis, dInputSize, gInputSize, mbatchSize, steps, optimizer, cr
         optimizer.step()
 
     return error_real, error_fake, real_data, fake_data
-
-# Example usage:
-# Assuming Gen and Dis are instances of the Generator and Discriminator classes
-# Assuming optimizer is an instance of torch.optim.SGD
-# crit = nn.BCELoss()
-# train_dis(Gen, Dis, dInputSize=784, gInputSize=100, mbatchSize=64, steps=1000, optimizer=optimizer, crit=crit)
