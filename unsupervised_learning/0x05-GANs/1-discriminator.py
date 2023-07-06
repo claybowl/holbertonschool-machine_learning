@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
+"""module 1-discriminator
+contains the function discriminator
+"""
 import torch
 import torch.nn as nn
+
 
 
 class Discriminator(nn.Module):

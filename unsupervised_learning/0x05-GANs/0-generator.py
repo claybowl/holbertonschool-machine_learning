@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
+"""module 0-generator
+contains the function generator
+"""
 import torch
 import torch.nn as nn
+
 
 
 class Generator(nn.Module):
