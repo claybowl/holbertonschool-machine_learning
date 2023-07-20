@@ -61,3 +61,22 @@ class BidirectionalCell:
         h_next = np.tanh(np.dot(concat, self.Whf) + self.bhf)
 
         return h_next
+
+    def backward(self, h_next, x_t):
+        """
+        Perform backward propagation for one time step.
+
+        Parameters:
+        h_next: numpy array of shape (m, h), contains the next hidden state
+        x_t: numpy array of shape (m, i), contains the data input for the cell
+
+        Returns:
+        h_prev: previous hidden state
+        """
+        # Concatenate h_next and x_t to match dimensions for matrix multiplication
+        concat = np.concatenate((h_next, x_t), axis=1)
+
+        # Compute previous hidden state using the formula: tanh(W . concat + b)
+        h_prev = np.tanh(np.dot(concat, self.Whb) + self.bhb)
+
+        return h_prev
