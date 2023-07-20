@@ -63,6 +63,7 @@ def bi_rnn(bi_cell, X, h_0, h_t):
 
     return H, Y
 
+
 def output(self, H):
     """Output"""
     Y = np.dot(H, self.Wy) + self.by
