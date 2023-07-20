@@ -5,68 +5,85 @@ contains the class RNNCell
 import numpy as np
 
 
-def bi_rnn(bi_cell, X, h_0, h_t):
+class BidirectionalCell():
     """
-    Function to perform forward propagation for
-    a bidirectional RNN.
-
-    Parameters:
-    bi_cell: an instance of the class BidirectionalCell
-    X: numpy array of shape (t, m, i) containing
-    the data input for the cell
-        t: the maximum number of time steps
-        m: the batch size
-        i: the dimensionality of the data
-    h_0: numpy array of shape (m, h) containing the
-    initial hidden state in the forward direction
-    h_t: numpy array of shape (m, h) containing the
-    initial hidden state in the backward direction
-
-    Returns:
-    H: numpy array of shape (t, m, 2 * h) containing the
-    concatenated hidden states from both directions,
-    excluding their initialized states
-    Y: numpy array of shape (t, m, o) containing
-    the outputs of the bidirectional RNN
+    Bidirectional cell of an RNN
     """
-    # Get the dimensions of the input data and the hidden state
-    t, m, i = X.shape
-    _, h = h_0.shape
 
-    # Get the dimensionality of the output
-    o = bi_cell.Wy.shape[1]
+    def __init__(self, i, h, o):
+        """
+        Class constructor
 
-    # Initialize the forward and backward hidden states
-    Hf = np.zeros((t + 1, m, h))  # Forward hidden states
-    Hb = np.zeros((t + 1, m, h))  # Backward hidden states
+        Args:
+            i: dimensionality of the data
+            h: dimensionality of the hidden states
+            o: dimensionality of the outputs
 
-    # Initialize the output
-    Y = np.zeros((t, m, o))
+        Creates public instance attributes Whf, Whb, Wy, bhf, bhb, by
+            Whf, bhf: hidden weights and biases in forward direction
+            Whb, Bhb: hidden weights and biases in backward direction
+            Wy, by: for the outputs
+        """
+        self.Whf = np.random.normal(size=(i + h, h))
+        self.Whb = np.random.normal(size=(i + h, h))
+        self.Wy = np.random.normal(size=(2*h, o))
+        self.bhf = np.zeros((1, h))
+        self.bhb = np.zeros((1, h))
+        self.by = np.zeros((1, o))
 
-    # Set the initial hidden states
-    Hf[0] = h_0
-    Hb[-1] = h_t
+    def forward(self, h_prev, x_t):
+        """
+        Perform forward propagation for ONE time step
+        Args:
+            h_prev: np.ndarray shape(m, h) containing the previous hidden state
+            x_t: np.ndarray shape(m, i) contains the data input for the cell
+                m: batch size for the data
 
-    # Loop over all time steps
-    for step in range(t):
-        # Forward propagation in forward direction
-        Hf[step + 1] = bi_cell.forward(Hf[step], X[step])
+        Returns:
+            h_next: the next hidden state
+        """
+        # Previous hidden layer and input data are what we put in
+        cell_input = np.concatenate((h_prev, x_t), axis=1)
 
-        # Forward propagation in backward direction
-        Hb[-step - 2] = bi_cell.backward(Hb[-step - 1], X[-step - 1])
+        # Next hidden state is tanh of (cell_input * weights + bias)
+        h_next = np.tanh(np.matmul(cell_input, self.Whf) + self.bhf)
 
-    # Concatenate the forward and backward hidden states
-    H = np.concatenate((Hf[1:], Hb[:-1]), axis=-1)
+        return h_next
 
-    # Compute the output
-    Y = bi_cell.softmax(np.dot(H, bi_cell.Wy) + bi_cell.by)
+    def backward(self, h_next, x_t):
+        """
+        Perform forward propagation for ONE time step in the backward direction
+        Args:
+            h_next: np.ndarray shape(m, h) containing the next hidden state
+            x_t: np.ndarray shape(m, i) contains the data input for the cell
+                m: batch size for the data
 
-    return H, Y
+        Returns:
+            h_prev: the next hidden state
+        """
+        # Next hidden layer and input data are what we put in
+        cell_input = np.concatenate((h_next, x_t), axis=1)
 
+        # Previous hidden state is tanh of (cell_input * weights + bias)
+        h_prev = np.tanh(np.matmul(cell_input, self.Whb) + self.bhb)
 
-def output(self, H):
-    """Output"""
-    Y = np.dot(H, self.Wy) + self.by
-    Y = np.exp(Y) / np.sum(np.exp(Y), axis=2, keepdims=True)
+        return h_prev
 
-    return Y
+    def output(self, H):
+        """
+        Calculates all outputs for the RNN
+
+        Args:
+            H: np.ndarray shape(t, m, 2h) that contains the concatenated hidden
+                states from both directions, excluding their initialized states
+                t: number of time steps
+                m: batch size for the data
+                h: dimensionality of the hidden states
+
+        Returns:
+            Y: the outputs of the network
+        """
+        Y = np.dot(H, self.Wy) + self.by
+        Y = np.exp(Y) / np.sum(np.exp(Y), axis=2, keepdims=True)
+
+        return Y
