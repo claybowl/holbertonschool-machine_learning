@@ -30,23 +30,28 @@ class LSTMCell:
         """sigmoid function"""
         return 1 / (1 + np.exp(-x))
 
-    def forward(self, h_prev, x_t):
+    def forward(self, h_prev, c_prev, x_t):
         """Function that performs forward propagation for one time step"""
-        # h_prev is a numpy.ndarray of shape (m, h) containing the previous
-        #
-        concat = np.concatenate((h_prev, x_t), axis=1)
-        # forget gate
-        f_t = self.sigmoid(np.dot(concat, self.Wf) + self.bf)
-        # update gate
-        u_t = self.sigmoid(np.dot(concat, self.Wu) + self.bu)
-        # intermediate cell state
-        c_intermediate = np.tanh(np.dot(concat, self.Wc) + self.bc)
-        # cell state
-        c_next = f_t * c_prev + u_t * c_intermediate
-        # output gate
-        o_t = self.sigmoid(np.dot(concat, self.Wo) + self.bo)
-        # hidden state
-        h_next = o_t * np.tanh(c_next)
-        y = self.softmax(np.dot(h_next, self.Wy) + self.by)
+        cell_input = np.concatenate((h_prev, x_t), axis=1)
+
+        # Forget Gate
+        f = self.sigmoid(np.dot(cell_input, self.Wf) + self.bf)
+        # Update Gate
+        u = self.sigmoid(np.dot(cell_input, self.Wu) + self.bu)
+        # Output Gate
+        o = self.sigmoid(np.dot(cell_input, self.Wo) + self.bo)
+
+        # Intermediate Cell State
+        c_intermediate = np.tanh(np.dot(cell_input, self.Wc) + self.bc)
+
+        # Next Cell
+        c_next = c_prev * f + u * c_intermediate
+
+        # Next Hidden State
+        h_next = o * np.tanh(c_next)
+
+        # Compute Output
+        y = np.dot(h_next, self.Wy) + self.by
+        y = np.exp(y) / np.sum(np.exp(y), axis=1, keepdims=True)
 
         return h_next, c_next, y
