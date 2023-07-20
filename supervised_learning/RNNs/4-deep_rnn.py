@@ -10,7 +10,8 @@ def deep_rnn(rnn_cells, X, h_0):
     Function to implement a deep RNN.
 
     Parameters:
-    rnn_cells: list of RNNCell instances of length l that will be used for the forward prop
+    rnn_cells: list of RNNCell instances of length
+    l that will be used for the forward prop
     X: data to be used, given as a numpy.ndarray of shape (t, m, i)
     h_0: initial hidden state, given as a numpy.ndarray of shape (l, m, h)
 
