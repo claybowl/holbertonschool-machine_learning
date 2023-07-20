@@ -66,10 +66,3 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     auto.compile(optimizer='adam')
 
     return encoder, decoder, auto
-
-
-# Example usage:
-input_dims = 784
-hidden_layers = [256, 128]
-latent_dims = 2
-encoder, decoder, auto = autoencoder(input_dims, hidden_layers, latent_dims)
