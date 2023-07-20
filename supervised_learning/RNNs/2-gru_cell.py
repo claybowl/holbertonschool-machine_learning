@@ -24,6 +24,7 @@ class GRUCell:
         return e_x / e_x.sum(axis=1, keepdims=True)
 
     def sigmoid(self, x):
+        """sigmoid function"""
         return 1 / (1 + np.exp(-x))
 
     def forward(self, h_prev, x_t):
