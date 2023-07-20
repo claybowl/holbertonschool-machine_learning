@@ -40,7 +40,7 @@ class BidirectionalCell:
         A numpy array representing softmax of input x.
         """
         e_x = np.exp(
-            x - np.max(x))  # Subtract max(x) to compute in a numerically stable way
+            x - np.max(x))  # Subtract max(x) to compute
         return e_x / e_x.sum(axis=1, keepdims=True)
 
     def forward(self, h_prev, x_t):
@@ -54,7 +54,7 @@ class BidirectionalCell:
         Returns:
         h_next: next hidden state
         """
-        # Concatenate h_prev and x_t to match dimensions for matrix multiplication
+        # Concatenate h_prev and x_t to
         concat = np.concatenate((h_prev, x_t), axis=1)
 
         # Compute next hidden state using the formula: tanh(W . concat + b)
