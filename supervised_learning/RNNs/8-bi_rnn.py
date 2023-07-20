@@ -26,7 +26,7 @@ def bi_rnn(bi_cell, X, h_0, h_t):
     """
 
     # Get the dimensions of the input data and
-	# the initial hidden states
+    # the initial hidden states
     t, m, i = X.shape
     _, h = h_0.shape
 
@@ -34,7 +34,7 @@ def bi_rnn(bi_cell, X, h_0, h_t):
     o = bi_cell.Wy.shape[1]
 
     # Initialize the arrays to store the forward
-	# and backward hidden states and the outputs
+    # and backward hidden states and the outputs
     Hf = np.zeros((t + 1, m, h))
     Hb = np.zeros((t + 1, m, h))
     Y = np.zeros((t, m, o))
