@@ -7,20 +7,27 @@ import numpy as np
 
 def bi_rnn(bi_cell, X, h_0, h_t):
     """
-    Function to perform forward propagation for a bidirectional RNN.
+    Function to perform forward propagation for
+    a bidirectional RNN.
 
     Parameters:
     bi_cell: an instance of the class BidirectionalCell
-    X: numpy array of shape (t, m, i) containing the data input for the cell
+    X: numpy array of shape (t, m, i) containing
+    the data input for the cell
         t: the maximum number of time steps
         m: the batch size
         i: the dimensionality of the data
-    h_0: numpy array of shape (m, h) containing the initial hidden state in the forward direction
-    h_t: numpy array of shape (m, h) containing the initial hidden state in the backward direction
+    h_0: numpy array of shape (m, h) containing the
+    initial hidden state in the forward direction
+    h_t: numpy array of shape (m, h) containing the
+    initial hidden state in the backward direction
 
     Returns:
-    H: numpy array of shape (t, m, 2 * h) containing the concatenated hidden states from both directions, excluding their initialized states
-    Y: numpy array of shape (t, m, o) containing the outputs of the bidirectional RNN
+    H: numpy array of shape (t, m, 2 * h) containing the
+    concatenated hidden states from both directions,
+    excluding their initialized states
+    Y: numpy array of shape (t, m, o) containing
+    the outputs of the bidirectional RNN
     """
     # Get the dimensions of the input data and the hidden state
     t, m, i = X.shape

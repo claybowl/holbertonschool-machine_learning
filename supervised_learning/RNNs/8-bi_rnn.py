@@ -7,27 +7,34 @@ import numpy as np
 
 def bi_rnn(bi_cell, X, h_0, h_t):
     """
-    Function to implement a bidirectional recurrent neural network (Bi-RNN).
-    
+    Function to implement a bidirectional
+    recurrent neural network (Bi-RNN).
+
     Parameters:
     bi_cell: An instance of the BidirectionalCell class.
     X: A numpy array of shape (t, m, i) containing the input data.
-    h_0: A numpy array of shape (m, h) containing the initial hidden state in the forward direction.
-    h_t: A numpy array of shape (m, h) containing the initial hidden state in the backward direction.
-    
+    h_0: A numpy array of shape (m, h) containing the initial
+    hidden state in the forward direction.
+    h_t: A numpy array of shape (m, h) containing the initial
+    hidden state in the backward direction.
+
     Returns:
-    H: A numpy array of shape (t, m, 2 * h) containing the concatenated hidden states from both directions.
-    Y: A numpy array of shape (t, m, o) containing the outputs of the bidirectional RNN.
+    H: A numpy array of shape (t, m, 2 * h) containing the
+    concatenated hidden states from both directions.
+    Y: A numpy array of shape (t, m, o)
+    containing the outputs of the bidirectional RNN.
     """
 
-    # Get the dimensions of the input data and the initial hidden states
+    # Get the dimensions of the input data and
+	# the initial hidden states
     t, m, i = X.shape
     _, h = h_0.shape
 
     # Get the number of outputs of the bidirectional cell
     o = bi_cell.Wy.shape[1]
 
-    # Initialize the arrays to store the forward and backward hidden states and the outputs
+    # Initialize the arrays to store the forward
+	# and backward hidden states and the outputs
     Hf = np.zeros((t + 1, m, h))
     Hb = np.zeros((t + 1, m, h))
     Y = np.zeros((t, m, o))
