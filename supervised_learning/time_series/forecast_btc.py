@@ -12,7 +12,6 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 
 
-
 def create_dataset(dataset, look_back=1):
     X, Y = [], []
     for i in range(len(dataset)-look_back-1):
@@ -20,6 +19,7 @@ def create_dataset(dataset, look_back=1):
         X.append(a)
         Y.append(dataset[i + look_back, 0])
     return np.array(X), np.array(Y)
+
 
 look_back = 24
 X_train, Y_train = create_dataset(train, look_back)
@@ -32,14 +32,15 @@ X_test = np.reshape(X_test, (X_test.shape[0], 1, X_test.shape[1]))
 # Split the data into training and testing sets
 train_size = int(len(data) * 0.8)
 test_size = len(data) - train_size
-train, test = data[0:train_size,:], data[train_size:len(data),:]
+train, test = data[0:train_size, :], data[train_size:len(data), :]
 
 
 # Initialize the LSTM model
 model = Sequential()
 
 # Add the first LSTM layer
-model.add(LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], 1)))
+model.add(LSTM(units=50, return_sequences=True,
+               input_shape=(X_train.shape[1], 1)))
 model.add(Dropout(0.2))
 
 # Add the second LSTM layer
@@ -64,7 +65,7 @@ model.compile(optimizer='adam', loss='mean_squared_error')
 model.summary()
 
 # Plotting the results
-plt.figure(figsize=(16,8))
+plt.figure(figsize=(16, 8))
 plt.plot(closing_price, label='Predicted Close Price')
 plt.title('BTC Price Prediction')
 plt.xlabel('Time')
