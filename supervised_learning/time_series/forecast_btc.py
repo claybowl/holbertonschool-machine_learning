@@ -12,6 +12,12 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 
 
+# Split the data into training and testing sets
+train_size = int(len(data) * 0.8)
+test_size = len(data) - train_size
+train, test = data[0:train_size, :], data[train_size:len(data), :]
+
+
 def create_dataset(dataset, look_back=1):
     X, Y = [], []
     for i in range(len(dataset)-look_back-1):
@@ -29,40 +35,35 @@ X_test, Y_test = create_dataset(test, look_back)
 X_train = np.reshape(X_train, (X_train.shape[0], 1, X_train.shape[1]))
 X_test = np.reshape(X_test, (X_test.shape[0], 1, X_test.shape[1]))
 
-# Split the data into training and testing sets
-train_size = int(len(data) * 0.8)
-test_size = len(data) - train_size
-train, test = data[0:train_size, :], data[train_size:len(data), :]
+# Convert the numpy arrays to tf.data.Dataset
+train_data = tf.data.Dataset.from_tensor_slices((X_train, Y_train))
+test_data = tf.data.Dataset.from_tensor_slices((X_test, Y_test))
 
+# Batch the datasets
+train_data = train_data.batch(20)
+test_data = test_data.batch(20)
 
-# Initialize the LSTM model
+# Create and fit the LSTM network
 model = Sequential()
-
-# Add the first LSTM layer
 model.add(LSTM(units=50, return_sequences=True,
-               input_shape=(X_train.shape[1], 1)))
-model.add(Dropout(0.2))
-
-# Add the second LSTM layer
-model.add(LSTM(units=50, return_sequences=True))
-model.add(Dropout(0.2))
-
-# Add the third LSTM layer
-model.add(LSTM(units=50, return_sequences=True))
-model.add(Dropout(0.2))
-
-# Add the fourth LSTM layer
+          input_shape=(X_train.shape[1], 1)))
 model.add(LSTM(units=50))
-model.add(Dropout(0.2))
+model.add(Dense(1))
 
-# Add the output layer
-model.add(Dense(units=1))
+model.compile(loss='mean_squared_error', optimizer='adam')
+model.fit(X_train, Y_train, epochs=1, batch_size=1, verbose=2)
 
-# Compile the model
-model.compile(optimizer='adam', loss='mean_squared_error')
+# Predicting future stock prices for next hour
+inputs = data[len(data) - look_back:].reshape(-1, 1)
+inputs = scaler.transform(inputs)
 
-# Print the model summary
-model.summary()
+X_test = []
+for i in range(look_back, inputs.shape[0]):
+    X_test.append(inputs[i-look_back:i, 0])
+X_test = np.array(X_test)
+
+X_test = np.reshape(X_test, (X_test.shape[0], 1, X_test.shape[1]))
+closing_price = model.predict(X_test)
 
 # Plotting the results
 plt.figure(figsize=(16, 8))
