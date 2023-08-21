@@ -55,3 +55,25 @@ class Dataset:
         pt_tokens.set_shape([None])
         en_tokens.set_shape([None])
         return pt_tokens, en_tokens
+
+    def create_masks(inputs, target):
+        """Creates all masks for training/validation"""
+        # Encoder padding mask
+        encoder_mask = tf.cast(tf.math.equal(inputs, 0), tf.float32)
+        encoder_mask = encoder_mask[:, tf.newaxis, tf.newaxis, :]
+
+        # Used in the 2nd attention block in the decoder
+        decoder_mask = encoder_mask
+
+        # Decoder padding mask
+        dec_target_padding_mask = tf.cast(tf.math.equal(target, 0), tf.float32)
+        dec_target_padding_mask = dec_target_padding_mask[:, tf.newaxis, tf.newaxis, :]
+
+        # Look ahead mask (to mask future tokens in the input received by the decoder)
+        look_ahead_mask = 1 - tf.linalg.band_part(tf.ones((tf.shape(target)[1], tf.shape(target)[1])), -1, 0)
+        look_ahead_mask = look_ahead_mask[tf.newaxis, tf.newaxis, :, :]
+
+        # Combined mask takes the maximum between look ahead mask and decoder target padding mask
+        combined_mask = tf.maximum(dec_target_padding_mask, look_ahead_mask)
+
+        return encoder_mask, combined_mask, decoder_mask
