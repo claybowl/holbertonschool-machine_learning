@@ -56,7 +56,7 @@ class Dataset:
         en_tokens.set_shape([None])
         return pt_tokens, en_tokens
 
-    def create_masks(inputs, target):
+    def create_masks(self, inputs, target):
         """Creates all masks for training/validation"""
         # Encoder padding mask
         encoder_mask = tf.cast(tf.math.equal(inputs, 0), tf.float32)
