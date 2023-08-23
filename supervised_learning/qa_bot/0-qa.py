@@ -18,20 +18,6 @@ bert_qa_model = hub.load(bert_qa_model_url)
 tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
 
 
-def question_answer(question, reference):
-    """Finds a snippet of text within a reference document to answer a question.
-
-    Args:
-        question (str): The question to answer.
-        reference (str): The reference document from which to find the answer.
-
-    Returns:
-        str: The answer as a string or None if no answer is found.
-    """
-    # TODO: Implement the function to find the answer using the BERT model and tokenizer
-    pass
-
-
 def preprocess_input(question, reference, tokenizer):
     """Preprocesses the question and reference text for the BERT model.
 
@@ -59,3 +45,32 @@ def preprocess_input(question, reference, tokenizer):
     }
 
     return model_input
+
+
+def question_answer(question, reference):
+    """Finds a snippet of text within a reference document to answer a question.
+
+    Args:
+        question (str): The question to answer.
+        reference (str): The reference document from which to find the answer.
+
+    Returns:
+        str: The answer as a string or None if no answer is found.
+    """
+    # Preprocess the input
+    model_input = preprocess_input(question, reference, tokenizer)
+
+    # Run the BERT model
+    outputs = bert_qa_model(model_input)
+    start_logits, end_logits = outputs['start_logits'], outputs['end_logits']
+
+    # Find the answer span
+    start_token_idx = tf.argmax(start_logits, axis=-1)[0]
+    end_token_idx = tf.argmax(end_logits, axis=-1)[0]
+
+    # Extract the answer text
+    input_ids = model_input['input_ids'].numpy()[0]
+    answer_tokens = tokenizer.convert_ids_to_tokens(input_ids[start_token_idx:end_token_idx + 1])
+    answer = tokenizer.convert_tokens_to_string(answer_tokens)
+
+    return answer if answer else None
