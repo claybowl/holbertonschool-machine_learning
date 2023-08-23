@@ -5,6 +5,7 @@ question_answer = __import__('0-qa').question_answer
 
 
 def answer_loop(reference):
+    """answers questions from a reference text"""
     while True:
         question = input("Q: ").strip().lower()
         if question in ["exit", "quit", "goodbye", "bye"]:
