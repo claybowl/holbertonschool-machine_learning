@@ -5,6 +5,9 @@
 import tensorflow as tf
 import tensorflow_hub as hub
 from transformers import BertTokenizer
+import tensorflow_text as text
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Checking the installed versions
 print('Tensorflow version:', tf.__version__)
