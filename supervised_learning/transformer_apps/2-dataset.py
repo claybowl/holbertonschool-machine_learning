@@ -5,7 +5,7 @@ loads and preps a
 dataset for machine translation
 """
 import tensorflow_datasets as tfds
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 
 class Dataset:
@@ -39,3 +39,14 @@ class Dataset:
         pt_tokens.set_shape([None])
         en_tokens.set_shape([None])
         return pt_tokens, en_tokens
+
+
+if __name__ == "__main__":
+    import tensorflow as tf
+
+    data = Dataset()
+    print('got here')
+    for pt, en in data.data_train.take(1):
+        print(pt, en)
+    for pt, en in data.data_valid.take(1):
+        print(pt, en)
