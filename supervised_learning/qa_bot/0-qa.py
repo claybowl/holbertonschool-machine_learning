@@ -14,8 +14,8 @@ print('Tensorflow version:', tf.__version__)
 print('Numpy version:', np.__version__)
 
 # Loading the BERT model for question answering
-bert_qa_model_url = 'https://tfhub.dev/tensorflow/bert_en_uncased_L-24_H-1024_A-16/3'
-bert_qa_model = hub.load(bert_qa_model_url)
+url = 'https://tfhub.dev/tensorflow/bert_en_uncased_L-24_H-1024_A-16/3'
+bert_qa_model = hub.load(url)
 
 # Loading the pre-trained BERT tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
