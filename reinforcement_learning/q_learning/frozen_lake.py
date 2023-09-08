@@ -12,6 +12,7 @@ from gym.envs.toy_text.frozen_lake import generate_random_map
 
 
 def load_frozen_lake(desc=None, map_name=None, is_slippery=False):
+    """Load a frozen lake environment from OpenAI Gym."""
     if desc is not None:
         env = gym.make('FrozenLake-v0', desc=desc, is_slippery=is_slippery)
     elif map_name is not None:
@@ -21,16 +22,21 @@ def load_frozen_lake(desc=None, map_name=None, is_slippery=False):
     return env
 
 def q_init(env):
+    """Initialize Q-table to zeros."""
     return np.zeros([env.observation_space.n, env.action_space.n])
 
 def epsilon_greedy(Q, state, epsilon):
+    """Epsilon-greedy policy."""
     if random.uniform(0, 1) < epsilon:
         action = env.action_space.sample()  # Explore action space
     else:
         action = np.argmax(Q[state])  # Exploit learned values
     return action
 
-def train(env, Q, episodes=5000, max_steps=100, alpha=0.1, gamma=0.99, epsilon=1, min_epsilon=0.1, epsilon_decay=0.05):
+def train(env, Q, episodes=5000, max_steps=100,
+          alpha=0.1, gamma=0.99, epsilon=1,
+          min_epsilon=0.1, epsilon_decay=0.05):
+    """Train agent to learn Q-values."""
     total_rewards = []
     for episode in range(episodes):
         state = env.reset()
@@ -50,6 +56,7 @@ def train(env, Q, episodes=5000, max_steps=100, alpha=0.1, gamma=0.99, epsilon=1
     return Q, total_rewards
 
 def play(env, Q, max_steps=100):
+    """Play agent with learned Q-values."""
     state = env.reset()
     total_rewards = 0
     for step in range(max_steps):
