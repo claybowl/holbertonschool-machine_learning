@@ -2,7 +2,11 @@
 """Module 0-load_env
 loads the pre-made FrozenLakeEnv environment from OpenAIs gym
 """
-import gym
+import numpy as np
+import gymnasium as gym
+import random
+import time
+from IPython.display import clear_output
 from gym.envs.toy_text.frozen_lake import generate_random_map
 
 
