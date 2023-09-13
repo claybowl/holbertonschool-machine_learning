@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>README.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///r%3A/2.Travail/1.Enseignement/Cours/_1.Outils/2.Developpement/1.SCSS/main.css" type="text/css"><link rel="stylesheet" href="file:///d%3A/rdaros/Cours/_1.Outils/2.Developpement/1.SCSS/main.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="atari-breakout-with-reinforcement-learning">Atari Breakout with Reinforcement Learning</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#atari-breakout-with-reinforcement-learning">Atari Breakout with Reinforcement Learning</a>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#setting-up-a-conda-environment">Setting Up a Conda Environment</a></li>
+<li><a href="#installing-dependencies">Installing Dependencies</a></li>
+<li><a href="#running-the-code">Running the Code</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#contributing">Contributing</a></li>
+</ul>
+</li>
+<li><a href="#project-badge">Project badge</a>
+<ul>
+<li><a href="#deep-q-learning">Deep Q-learning</a></li>
+</ul>
+</li>
+<li><a href="#resources">Resources</a>
+<ul>
+<li><a href="#read-or-watch">Read or watch:</a></li>
+<li><a href="#references">References:</a></li>
+<li><a href="#learning-objectives">Learning Objectives</a></li>
+</ul>
+</li>
+<li><a href="#requirements-1">Requirements</a>
+<ul>
+<li><a href="#general">General</a></li>
+</ul>
+</li>
+<li><a href="#tasks">Tasks</a>
+<ul>
+<li><a href="#0-breakout">0. Breakout</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>This project aims to train a reinforcement learning agent to play Atari's Breakout game. We use Python 3.5 and various libraries like Gym, Keras, and Keras-RL to accomplish this. The project contains two main scripts:</p>
+<ul>
+<li><code>train.py</code>: Trains the agent using DQN (Deep Q-Network).</li>
+<li><code>play.py</code>: Allows the trained agent to play the game.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Python 3.5</li>
+<li>NumPy 1.15</li>
+<li>Gym 0.17.2</li>
+<li>Keras 2.2.5</li>
+<li>Keras-RL 0.4.2</li>
+</ul>
+<h2 id="setting-up-a-conda-environment">Setting Up a Conda Environment</h2>
+<p>Conda is a package and environment management system that allows you to install software packages and manage different environments for various projects. Follow these steps to set up a Conda environment:</p>
+<ol>
+<li><strong>Install Anaconda or Miniconda</strong>: Download from <a href="https://www.anaconda.com/products/distribution">Anaconda</a> or <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>.</li>
+<li><strong>Open Terminal</strong>: Open your terminal (Command Prompt on Windows, Terminal on macOS or Linux).</li>
+<li><strong>Create a New Environment</strong>: Run <code>conda create --name atari_breakout python=3.5</code>.</li>
+<li><strong>Activate the Environment</strong>: Run <code>conda activate atari_breakout</code> on Windows or <code>source activate atari_breakout</code> on macOS and Linux.</li>
+</ol>
+<pre class="hljs"><code><div>Environment Creation/Configuration
+
+Create these files under a folder of your choice.
+
+Environment.yml
+
+name: deep
+channels:
+<span class="hljs-bullet">  - </span>anaconda
+<span class="hljs-bullet">  - </span>defaults
+dependencies:
+<span class="hljs-bullet">  - </span>python=3.6
+<span class="hljs-bullet">  - </span>pip
+<span class="hljs-bullet">  - </span>pip:
+<span class="hljs-bullet">    - </span>pip
+
+(notice that I wrote pip three times; the first one is to install pip, but, that installs pip version 20.2.4
+the two other lines are to upgrade pip to the latest version to avoid annoying errors/warnings later)
+
+Requirements.txt
+
+h5py==2.10.0
+keras==2.2.4
+keras-rl==0.4.2
+numpy==1.18.5
+opencv-python==4.4.0.42
+pyyaml==5.3.1
+six==1.15.0
+gym
+Pillow
+tensorflow==1.14.0
+
+Store both these files in a folder and open command prompt (powershell for windows and terminal in ubuntu :) ) and cd to the directory where you put those files.
+
+You need to create the anaconda environment, so enter this command:
+
+conda env create -f environment.yml
+
+Second, you should activate the environment created
+
+conda activate deep
+
+(notice that the name of the environment deep is mentioned in the first line in the environment.yml file)
+
+So now, that you are inside the anaconda environment. You need to complete the installation of the remaining requirements.
+
+pip install -r requirements.txt # installs all packages in the file
+
+Lastly, is to install atari_py
+Windows:
+
+pip install --no-index -f https://github.com/Kojoley/atari-py/releases atari_py
+</div></code></pre>
+<p>For more details, check the <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html">Conda documentation</a>.</p>
+<h2 id="installing-dependencies">Installing Dependencies</h2>
+<p>After activating your Conda environment, install the required packages:</p>
+<pre class="hljs"><code><div>conda install numpy=1.15 gym=0.17.2
+pip install keras==2.2.5 keras-rl==0.4.2
+</div></code></pre>
+<h2 id="running-the-code">Running the Code</h2>
+<pre><code>- Train the Agent: Run python train.py to train the agent. The trained model will be saved as policy.h5.
+- Play the Game: Run python play.py to see the trained agent in action.
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<pre><code>- Conda Command Not Found: Make sure Anaconda/Miniconda is installed and added to your system's PATH. See detailed guide.
+- Environment Doesn't Exist: Ensure you have the correct Gym version and have installed the Atari dependencies (pip install gym[atari]).
+</code></pre>
+<h2 id="contributing">Contributing</h2>
+<p>Feel free to contribute to this project by opening issues or submitting pull requests.</p>
+<h1 id="project-badge">Project badge</h1>
+<h2 id="deep-q-learning">Deep Q-learning</h2>
+<pre><code>Master
+By: Alexa Orrico, Software Engineer at Holberton School
+Weight: 6
+Manual QA review must be done (request it when you are done with the project)
+</code></pre>
+<h1 id="resources">Resources</h1>
+<h2 id="read-or-watch">Read or watch:</h2>
+<pre><code>Deep Q-Learning - Combining Neural Networks and Reinforcement Learning
+Replay Memory Explained - Experience for Deep Q-Network Training
+Training a Deep Q-Network - Reinforcement Learning
+Training a Deep Q-Network with Fixed Q-targets - Reinforcement Learning
+</code></pre>
+<h2 id="references">References:</h2>
+<pre><code>Setting up anaconda for keras-rl
+keras-rl
+    rl.policy
+    rl.memory
+    rl.agents.dqn
+Playing Atari with Deep Reinforcement Learning
+</code></pre>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<pre><code>What is Deep Q-learning?
+What is the policy network?
+What is replay memory?
+What is the target network?
+Why must we utilize two separate networks during training?
+What is keras-rl? How do you use it?
+</code></pre>
+<h1 id="requirements">Requirements</h1>
+<h2 id="general">General</h2>
+<pre><code>Allowed editors: vi, vim, emacs
+All your files will be interpreted/compiled on Ubuntu 16.04 LTS using python3 (version 3.5)
+Your files will be executed with numpy (version 1.15), gym (version 0.17.2), keras (version 2.2.5), and keras-rl (version 0.4.2)
+All your files should end with a new line
+The first line of all your files should be exactly #!/usr/bin/env python3
+A README.md file, at the root of the folder of the project, is mandatory
+Your code should use the pycodestyle style (version 2.4)
+All your modules should have documentation (python3 -c 'print(__import__(&quot;my_module&quot;).__doc__)')
+All your classes should have documentation (python3 -c 'print(__import__(&quot;my_module&quot;).MyClass.__doc__)')
+All your functions (inside and outside a class) should have documentation (python3 -c 'print(__import__(&quot;my_module&quot;).my_function.__doc__)' and python3 -c 'print(__import__(&quot;my_module&quot;).MyClass.my_function.__doc__)')
+All your files must be executable
+Your code should use the minimum number of operations
+</code></pre>
+<p>Installing Keras-RL</p>
+<p>pip install --user keras-rl</p>
+<p>Dependencies (that should already be installed)</p>
+<p>pip install --user keras==2.2.4<br>
+pip install --user Pillow<br>
+pip install --user h5py</p>
+<h1 id="tasks">Tasks</h1>
+<h2 id="0-breakout">0. Breakout</h2>
+<p>mandatory</p>
+<p>Write a python script train.py that utilizes keras, keras-rl, and gym to train an agent that can play Atari’s Breakout:</p>
+<pre><code>Your script should utilize keras-rl‘s DQNAgent, SequentialMemory, and EpsGreedyQPolicy
+Your script should save the final policy network as policy.h5
+</code></pre>
+<p>Write a python script play.py that can display a game played by the agent trained by train.py:</p>
+<pre><code>Your script should load the policy network saved in policy.h5
+Your agent should use the GreedyQPolicy
+</code></pre>
+<p>Repo:</p>
+<pre><code>GitHub repository: holbertonschool-machine_learning
+Directory: reinforcement_learning/deep_q_learning
+File: train.py, play.py
+</code></pre>
+
+</body>
+
+</html>

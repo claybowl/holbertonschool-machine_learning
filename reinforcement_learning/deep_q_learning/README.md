@@ -46,6 +46,61 @@ Conda is a package and environment management system that allows you to install 
 3. **Create a New Environment**: Run `conda create --name atari_breakout python=3.5`.
 4. **Activate the Environment**: Run `conda activate atari_breakout` on Windows or `source activate atari_breakout` on macOS and Linux.
 
+```Markdown
+Environment Creation/Configuration
+
+Create these files under a folder of your choice.
+
+Environment.yml
+
+name: deep
+channels:
+  - anaconda
+  - defaults
+dependencies:
+  - python=3.6
+  - pip
+  - pip:
+    - pip
+
+(notice that I wrote pip three times; the first one is to install pip, but, that installs pip version 20.2.4
+the two other lines are to upgrade pip to the latest version to avoid annoying errors/warnings later)
+
+Requirements.txt
+
+h5py==2.10.0
+keras==2.2.4
+keras-rl==0.4.2
+numpy==1.18.5
+opencv-python==4.4.0.42
+pyyaml==5.3.1
+six==1.15.0
+gym
+Pillow
+tensorflow==1.14.0
+
+Store both these files in a folder and open command prompt (powershell for windows and terminal in ubuntu :) ) and cd to the directory where you put those files.
+
+You need to create the anaconda environment, so enter this command:
+
+conda env create -f environment.yml
+
+Second, you should activate the environment created
+
+conda activate deep
+
+(notice that the name of the environment deep is mentioned in the first line in the environment.yml file)
+
+So now, that you are inside the anaconda environment. You need to complete the installation of the remaining requirements.
+
+pip install -r requirements.txt # installs all packages in the file
+
+Lastly, is to install atari_py
+Windows:
+
+pip install --no-index -f https://github.com/Kojoley/atari-py/releases atari_py
+```
+
 For more details, check the [Conda documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html).
 
 ## Installing Dependencies
@@ -55,6 +110,7 @@ After activating your Conda environment, install the required packages:
 ```bash
 conda install numpy=1.15 gym=0.17.2
 pip install keras==2.2.5 keras-rl==0.4.2
+```
 
 ## Running the Code
 
