@@ -89,11 +89,39 @@ Second, you should activate the environment created
 
 conda activate deep
 
+Initialize Conda for Your Shell
+
+    Open Terminal: Open your terminal (Command Prompt on Windows, Terminal on macOS or Linux).
+
+    Run Conda Init: Run the conda init command for your specific shell. The shell name is usually the name of the terminal you are using. For example, if you are using bash, you would run:
+
+    bash
+
+    conda init bash
+
+    If you're using a different shell, replace bash with the name of your shell (e.g., zsh, fish, cmd.exe, etc.).
+
+    Restart Shell: Close and reopen your terminal window or start a new shell session to apply the changes.
+
+Verify Configuration
+
+After restarting your shell, try activating your environment again:
+
+bash
+
+conda activate deepQ
+
+If everything is set up correctly, this should activate your deepQ environment without any issues.
+
 (notice that the name of the environment deep is mentioned in the first line in the environment.yml file)
+
 
 So now, that you are inside the anaconda environment. You need to complete the installation of the remaining requirements.
 
+
 pip install -r requirements.txt # installs all packages in the file
+
+
 
 Lastly, is to install atari_py
 Windows:
@@ -111,6 +139,36 @@ After activating your Conda environment, install the required packages:
 conda install numpy=1.15 gym=0.17.2
 pip install keras==2.2.5 keras-rl==0.4.2
 ```
+
+    Playing Atari Games: The atari_py library is generally used for training machine learning models rather than human gameplay. However, you can use the Gym library to create an environment where you can play Atari games using Python code. It won't be a traditional gaming experience but more of a programmatic one.
+
+    Watching the Model Play: You can absolutely watch your trained model play an Atari game. When you set up your Gym environment, you can enable rendering to visualize the game in a window. This is often done by calling env.render() within the game loop in your code.
+
+Here's a simplified example using Gym to visualize a random agent playing an Atari game:
+
+```python
+import gym
+
+# Initialize environment
+env = gym.make('Breakout-v0')
+
+# Number of episodes
+for i_episode in range(5):
+    observation = env.reset()
+    for t in range(1000):
+        env.render()
+        action = env.action_space.sample()  # Take a random action
+        observation, reward, done, info = env.step(action)
+        if done:
+            print(f"Episode finished after {t+1} timesteps")
+            break
+
+env.close()
+
+```
+In this example, env.render() opens a window displaying the game. You can replace the random action with actions determined by your trained model to watch it play.
+
+Remember to close the rendering window by calling env.close() when you're done.
 
 ## Running the Code
 
