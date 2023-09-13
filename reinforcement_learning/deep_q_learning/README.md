@@ -127,6 +127,13 @@ Lastly, is to install atari_py
 Windows:
 
 pip install --no-index -f https://github.com/Kojoley/atari-py/releases atari_py
+
+
+Using Jupyter Notebook:
+    Install ipykernel conda install -c anaconda ipykernel
+    Send this environment to ipykernel python -m ipykernel install --user --name=deepQ
+    When starting the notebook select the deepQ kernel.
+
 ```
 
 For more details, check the [Conda documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html).
