@@ -6,7 +6,7 @@ monte_carlo = __import__('0-monte_carlo').monte_carlo
 
 np.random.seed(0)
 
-env = gym.make('FrozenLake8x8-v0')
+env = gym.make('FrozenLake8x8-v1')
 LEFT, DOWN, RIGHT, UP = 0, 1, 2, 3
 
 def policy(s):
