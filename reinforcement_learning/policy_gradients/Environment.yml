@@ -1,0 +1,9 @@
+name: policy_gradient
+channels:
+  - anaconda
+  - defaults
+dependencies:
+  - python=3.5.6
+  - pip
+  - pip:
+    - pip

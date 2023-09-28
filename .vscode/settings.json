@@ -17,5 +17,6 @@
 		"ckpt",
 		"logits",
 		"sess"
-	]
+	],
+	"CodeGPT.model": "gpt-4"
 }
