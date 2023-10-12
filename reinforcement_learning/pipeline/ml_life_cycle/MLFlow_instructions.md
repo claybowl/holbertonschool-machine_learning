@@ -76,7 +76,7 @@ You now have a markdown file with detailed step-by-step instructions on how to a
 
 
 `
-$ mlflow eperiments create --experiment-name first_mlflow
-Created experiment 'first_mlflow' with id 729553857325031014`
+$ mlflow experiments create --experiment-name KNN
+Created experiment 'first_mlflow' with id 736830243770428753`
 `
 

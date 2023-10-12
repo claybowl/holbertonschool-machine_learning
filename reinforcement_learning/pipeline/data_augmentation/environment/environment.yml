@@ -1,9 +1,0 @@
-name: MLflow
-channels:
-  - anaconda
-  - defaults
-dependencies:
-  - python=3.11
-  - pip
-  - pip:
-    - pip

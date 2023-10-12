@@ -1,6 +1,0 @@
-artifact_location: file:///C:/Users/clayb/Documents/GitHub/holbertonschool-machine_learning/mlruns/729553857325031014
-creation_time: 1697080786526
-experiment_id: '729553857325031014'
-last_update_time: 1697080786526
-lifecycle_stage: active
-name: first_mlflow

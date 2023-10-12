@@ -1,0 +1,10 @@
+digest: bbe261fa
+name: dataset
+profile: '{"features_shape": [100, 5], "features_size": 500, "features_nbytes": 4000,
+  "targets_shape": [100], "targets_size": 100, "targets_nbytes": 400}'
+schema: '{"mlflow_tensorspec": {"features": "[{\"type\": \"tensor\", \"tensor-spec\":
+  {\"dtype\": \"float64\", \"shape\": [-1, 5]}}]", "targets": "[{\"type\": \"tensor\",
+  \"tensor-spec\": {\"dtype\": \"int32\", \"shape\": [-1]}}]"}}'
+source: '{"tags": {"mlflow.user": "clayb", "mlflow.source.name": "c:\\Users\\clayb\\Anaconda3\\envs\\MLflow2\\Lib\\site-packages\\ipykernel_launcher.py",
+  "mlflow.source.type": "LOCAL"}}'
+source_type: code

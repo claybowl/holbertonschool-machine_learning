@@ -1,0 +1,6 @@
+artifact_location: file:///C:/Users/clayb/Documents/GitHub/holbertonschool-machine_learning/reinforcement_learning/pipeline/ml_life_cycle/K-NN_Music_Features/mlruns/489646313247833104
+creation_time: 1697096928364
+experiment_id: '489646313247833104'
+last_update_time: 1697096928364
+lifecycle_stage: active
+name: first_mlflow
