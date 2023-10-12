@@ -1,0 +1,13 @@
+aliases: []
+creation_timestamp: 1697104675428
+current_stage: None
+description: null
+last_updated_timestamp: 1697104675428
+name: K-NN
+run_id: 6e4915a2ee6e48c29654197071409b3b
+run_link: null
+source: file:///c:/Users/clayb/Documents/GitHub/holbertonschool-machine_learning/reinforcement_learning/pipeline/ml_life_cycle/remote_server_uri/0/6e4915a2ee6e48c29654197071409b3b/artifacts/sklearn-model
+status: READY
+status_message: null
+user_id: null
+version: 1
