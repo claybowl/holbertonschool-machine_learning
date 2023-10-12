@@ -269,3 +269,40 @@ reinforcement_learning/pipeline/data_augmentation/reinforcement_learning/pipelin
 reinforcement_learning/pipeline/data_augmentation/reinforcement_learning/pipeline/data_augmentation/K-NN_Music_Features_2/755551824411776114/203fef3e24b94e8cb8799849f7df2dae/tags/mlflow.source.name
 reinforcement_learning/pipeline/data_augmentation/reinforcement_learning/pipeline/data_augmentation/K-NN_Music_Features_2/755551824411776114/203fef3e24b94e8cb8799849f7df2dae/tags/mlflow.source.type
 reinforcement_learning/pipeline/data_augmentation/reinforcement_learning/pipeline/data_augmentation/K-NN_Music_Features_2/755551824411776114/203fef3e24b94e8cb8799849f7df2dae/tags/mlflow.user
+reinforcement_learning/pipeline/ML Life Cycle/K-NN_Music_Features/conda.yaml
+reinforcement_learning/pipeline/ML Life Cycle/K-NN_Music_Features/MLmodel
+reinforcement_learning/pipeline/ML Life Cycle/K-NN_Music_Features/model.pkl
+reinforcement_learning/pipeline/ML Life Cycle/K-NN_Music_Features/python_env.yaml
+reinforcement_learning/pipeline/ML Life Cycle/K-NN_Music_Features/requirements.txt
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/meta.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/meta.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/artifacts/KNN_Model/conda.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/artifacts/KNN_Model/MLmodel
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/artifacts/KNN_Model/model.pkl
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/artifacts/KNN_Model/python_env.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/artifacts/KNN_Model/requirements.txt
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/metrics/mean_distance_first_query
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/params/metric
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/params/n_neighbors
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/tags/mlflow.log-model.history
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/tags/mlflow.runName
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/tags/mlflow.source.name
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/tags/mlflow.source.type
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/tags/mlflow.user
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/meta.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/artifacts/KNN_Model/conda.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/artifacts/KNN_Model/MLmodel
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/artifacts/KNN_Model/model.pkl
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/artifacts/KNN_Model/python_env.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/artifacts/KNN_Model/requirements.txt
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/metrics/mean_distance_first_query
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/tags/mlflow.log-model.history
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/tags/mlflow.runName
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/tags/mlflow.source.name
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/tags/mlflow.source.type
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/53a81bf6ef6c45189ed228a8083205ee/tags/mlflow.user
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/8c964a1b5749432688367b6930256a75/meta.yaml
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/8c964a1b5749432688367b6930256a75/tags/mlflow.runName
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/8c964a1b5749432688367b6930256a75/tags/mlflow.source.name
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/8c964a1b5749432688367b6930256a75/tags/mlflow.source.type
+reinforcement_learning/pipeline/ML Life Cycle/mlruns/0/8c964a1b5749432688367b6930256a75/tags/mlflow.user
