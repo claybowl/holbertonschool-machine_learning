@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/clayb/Documents/GitHub/holbertonschool-machine_learning/reinforcement_learning/pipeline/data_augmentation/mlruns/0/3535813ed6a1486f8fa2e88c52586ca2/artifacts
+end_time: 1697084897995
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3535813ed6a1486f8fa2e88c52586ca2
+run_name: KNN_Audio_Features
+run_uuid: 3535813ed6a1486f8fa2e88c52586ca2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1697084872506
+status: 3
+tags: []
+user_id: clayb
