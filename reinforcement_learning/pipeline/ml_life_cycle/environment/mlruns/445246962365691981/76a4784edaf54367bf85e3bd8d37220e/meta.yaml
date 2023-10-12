@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/445246962365691981/76a4784edaf54367bf85e3bd8d37220e/artifacts
+end_time: 1697107460015
+entry_point_name: ''
+experiment_id: '445246962365691981'
+lifecycle_stage: active
+run_id: 76a4784edaf54367bf85e3bd8d37220e
+run_name: KNN_Audio_Features_2
+run_uuid: 76a4784edaf54367bf85e3bd8d37220e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1697106819323
+status: 3
+tags: []
+user_id: clayb

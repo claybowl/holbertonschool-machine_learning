@@ -1,5 +1,5 @@
 artifact_uri: file:///c:/Users/clayb/Documents/GitHub/holbertonschool-machine_learning/reinforcement_learning/pipeline/ml_life_cycle/remote_server_uri/149871096565536443/0de945f2e21a48fea9b94ceff4855a98/artifacts
-end_time: null
+end_time: 1697106060322
 entry_point_name: ''
 experiment_id: '149871096565536443'
 lifecycle_stage: active
@@ -10,6 +10,6 @@ source_name: ''
 source_type: 4
 source_version: ''
 start_time: 1697105870158
-status: 1
+status: 3
 tags: []
 user_id: clayb

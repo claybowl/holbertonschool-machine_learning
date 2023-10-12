@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/445246962365691981
+creation_time: 1697106796073
+experiment_id: '445246962365691981'
+last_update_time: 1697106796073
+lifecycle_stage: active
+name: KNN2
