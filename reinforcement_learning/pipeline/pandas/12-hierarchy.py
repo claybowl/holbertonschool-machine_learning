@@ -7,18 +7,17 @@ df1 = from_file('coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', ',')
 df2 = from_file('bitstampUSD_1-min_data_2012-01-01_to_2020-04-22.csv', ',')
 
 
-# Set the Timestamp column as the index for both DataFrames
-df1 = df1.set_index('Timestamp')
-df2 = df2.set_index('Timestamp')
+# Index the DataFrames on the Timestamp columns
+df1.set_index('Timestamp', inplace=True)
+df2.set_index('Timestamp', inplace=True)
 
-# Concatenate the two DataFrames
-df = pd.concat([df1, df2], axis=0)
+# Concatenate the bitstamp and coinbase tables from timestamps 1417411980 to 1417417980, inclusive
+df = pd.concat([df2, df1], axis=0)
 
-# Add keys to the data
-df['key'] = 'coinbase'
-df.loc[df['Timestamp'] >= 1417411980, 'key'] = 'bitstamp'
+# Add keys to the data labeled bitstamp and coinbase respectively
+df.columns = ['bitstamp', 'coinbase']
 
-# Rearrange the MultiIndex levels
-df.columns = df.columns.swaplevel(0, 1)
+# Display the rows in chronological order
+df.sort_index(inplace=True)
 
 print(df)
