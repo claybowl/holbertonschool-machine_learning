@@ -7,6 +7,7 @@
 		"dropna",
 		"dtype",
 		"fillna",
+		"homeworld",
 		"Keras",
 		"kmax",
 		"kmin",
