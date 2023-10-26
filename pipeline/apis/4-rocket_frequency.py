@@ -5,6 +5,7 @@ Returns the number of launches per rocket
 import requests
 from collections import Counter
 
+
 def fetch_launches_per_rocket():
     """Return the number of launches per rocket"""
     # Initialize rocket count dictionary
