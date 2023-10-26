@@ -12,7 +12,7 @@ def fetch_launches_per_rocket():
     rocket_count = Counter()
 
     # Fetch launches from SpaceX API
-    response = requests.get("https://api.spacexdata.com/v3/launches").json()
+    response = requests.get("https://api.spacexdata.com/v3/launches")
     launches = response.json()
 
     # Count launches per rocket
@@ -20,7 +20,7 @@ def fetch_launches_per_rocket():
         rocket_id = launch['rocket']['rocket_id']
 
         # Fetch rocket details
-        rocket_response = requests.get(f"https://api.spacexdata.com/v3/rockets").json()
+        rocket_response = requests.get(f"https://api.spacexdata.com/v3/rockets")
         rocket_name = rocket_response.json()['rocket_name']
 
         # Increment rocket count
