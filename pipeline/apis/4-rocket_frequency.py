@@ -5,9 +5,8 @@ Returns the number of launches per rocket
 import requests
 from collections import Counter
 
-
 def fetch_launches_per_rocket():
-    """Return the number of launches per"""
+    """Return the number of launches per rocket"""
     # Initialize rocket count dictionary
     rocket_count = Counter()
 
@@ -15,13 +14,15 @@ def fetch_launches_per_rocket():
     response = requests.get("https://api.spacexdata.com/v3/launches")
     launches = response.json()
 
+    # Fetch rocket details
+    rocket_response = requests.get("https://api.spacexdata.com/v3/rockets")
+    rockets = rocket_response.json()
+    rocket_dict = {rocket['rocket_id']: rocket['rocket_name'] for rocket in rockets}
+
     # Count launches per rocket
     for launch in launches:
         rocket_id = launch['rocket']['rocket_id']
-
-        # Fetch rocket details
-        rocket_response = requests.get(f"https://api.spacexdata.com/v3/rockets")
-        rocket_name = rocket_response.json()['rocket_name']
+        rocket_name = rocket_dict.get(rocket_id, "Unknown")
 
         # Increment rocket count
         rocket_count[rocket_name] += 1
@@ -32,3 +33,6 @@ def fetch_launches_per_rocket():
     # Print the sorted rocket count
     for rocket, count in sorted_rockets:
         print(f"{rocket}: {count}")
+
+if __name__ == "__main__":
+    fetch_launches_per_rocket()
