@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""module 2-user_location
-Returns the user location
+"""module 2-user_location git Returns the user location
 """
 import requests
 from datetime import datetime
@@ -31,7 +30,9 @@ def fetch_user_location(api_url):
         reset_time = datetime.fromtimestamp(reset_time) - datetime.now()
         minutes = reset_time.total_seconds() // 60
 
-        print(f"Reset in {int(minutes)} min")
+        # Using string concatenation
+        print("Reset in " + str(int(minutes)) + " min")
+
 
 
 
