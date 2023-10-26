@@ -29,7 +29,7 @@ def fetch_first_launch():
     
     # Fetch rocket details
     rocket_response = requests.get(
-        f"https://api.spacexdata.com/v4/rockets/{rocket_id}")
+        f"https://api.spacexdata.com/v4/rockets/")
     rocket_name = rocket_response.json()['name']
     
     # Fetch launchpad details
