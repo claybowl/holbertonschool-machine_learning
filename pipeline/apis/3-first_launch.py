@@ -28,7 +28,7 @@ def fetch_first_launch():
     launch_date = first_launch['date_local']
     rocket_id = first_launch['rocket']
     launchpad_id = first_launch['launchpad']
-    
+
     # Fetch rocket details
     rocket_response = requests.get("R_URL")
 
