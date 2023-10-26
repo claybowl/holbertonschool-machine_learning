@@ -10,7 +10,7 @@ df = from_file('coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', ',')
 # df = from_file('coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv', ',')
 
 # Transpose the DataFrame
-df = df.T
+df = df
 
 # Sort the DataFrame in reverse chronological order based on the 'Timestamp' values
 df = df.sort_values(by='Timestamp', ascending=False)
