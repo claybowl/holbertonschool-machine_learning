@@ -7,12 +7,14 @@ import requests
 import sys
 from datetime import datetime, timedelta
 
+L_URL = "https://api.spacexdata.com/v4/launchpads/"
+R_URL = "https://api.spacexdata.com/v4/rockets/"
+LA_URL = "https://api.spacexdata.com/v4/launches"
 
 def fetch_first_launch():
     """Return the first launch"""
     # Fetch launches from SpaceX API
-    response = requests.get(
-        "https://api.spacexdata.com/v4/launches")
+    response = requests.get("LA_URL")
     launches = response.json()
 
     # Sort launches by date_unix
@@ -26,21 +28,19 @@ def fetch_first_launch():
     launch_date = first_launch['date_local']
     rocket_id = first_launch['rocket']
     launchpad_id = first_launch['launchpad']
-
+    
     # Fetch rocket details
-    rocket_response = requests.get(
-    "https://api.spacexdata.com/v4/rockets/")
+    rocket_response = requests.get("R_URL")
 
     rocket_name = rocket_response.json()['name']
 
     # Fetch launchpad details
-    launchpad_response = requests.get(
-    "https://api.spacexdata.com/v4/launchpads/" + launchpad_id)
+    launchpad_response = requests.get("L_URL" + launchpad_id)
     launchpad_data = launchpad_response.json()
     launchpad_name = launchpad_data['name']
     launchpad_locality = launchpad_data['locality']
 
     # Print the information
     # Using join()
-    print(" ".join([launch_name, "(", launch_date, rocket_name, ")", "-", 
+    print(" ".join([launch_name, "(", launch_date, rocket_name, ")", "-",
                 launchpad_name, "(", launchpad_locality, ")"]))
