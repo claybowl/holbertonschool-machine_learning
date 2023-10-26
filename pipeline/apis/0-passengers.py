@@ -4,6 +4,7 @@ Fetches a list of ships from the API
 """
 import requests
 
+
 def availableShips(passengerCount):
     """Returns a list of ships available for a given
     passenger count"""
