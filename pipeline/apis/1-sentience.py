@@ -21,10 +21,9 @@ def sentientPlanets():
 
         # the loop for life
         for species in sentience_data['results']:
-            if species['designation'] == 'sentient' or species[
-                'classification'] == 'sentient':
-                homeworld_url = species[
-                    'homeworld']
+            if 'sentient' in (species['designation'],
+                              species['classification']):
+                homeworld_url = species['homeworld']
 
                 # get the name of the planet from the homeworld url
                 if homeworld_url:
@@ -33,4 +32,3 @@ def sentientPlanets():
                     sentient_planets.append(homeworld_response['name'])
         url = sentience_data['next']
     return sentience_data
-    
