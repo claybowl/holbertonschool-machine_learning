@@ -10,7 +10,7 @@ def availableShips(passengerCount):
     passenger count"""
     # empty list to hold names of available ships
     available_ships = []
-    
+
     # initialize URL for Swapi API endpoint for starships
     url = "https://swapi.dev/api/starships/"
 
@@ -29,7 +29,7 @@ def availableShips(passengerCount):
                 continue  # Skip to the next iteration if conversion fails
             if capacity >= passengerCount:
                 available_ships.append(starship['name'])
-        
+
         # Move on to the next page of results, if any
         url = ship_data['next']
 
