@@ -34,7 +34,5 @@ def fetch_user_location(api_url):
         print("Reset in " + str(int(minutes)) + " min")
 
 
-
-
 if __name__ == '__main__':
     fetch_user_location(sys.argv[1])
