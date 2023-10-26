@@ -7,6 +7,7 @@ from collections import Counter
 
 
 def fetch_launches_per_rocket():
+    """Return the number of launches per"""
     # Initialize rocket count dictionary
     rocket_count = Counter()
 
