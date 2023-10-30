@@ -11,7 +11,7 @@ def sentientPlanets():
     sentient_planets = []
 
     # create API object
-    url = "https://swapi-api.hbtn.io/api/species/"
+    url = "https://swapi-api.alx-tools.com/api/species/"
 
     while url:
         # make get request to url and store response
@@ -21,8 +21,7 @@ def sentientPlanets():
 
         # the loop for life
         for species in sentience_data['results']:
-            if 'sentient' in (species['designation'],
-                              species['classification']):
+            if species['designation'] == 'sentient' or species['classification'] == 'sentient':
                 homeworld_url = species['homeworld']
 
                 # get the name of the planet from the homeworld url

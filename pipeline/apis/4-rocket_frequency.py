@@ -1,39 +1,51 @@
 #!/usr/bin/env python3
-"""module 4-rocket_frequency
-Returns the number of launches per rocket
+"""module 3-first_launch
+write a script that displays
+the first launch information.
 """
 import requests
-from collections import Counter
+import sys
+from datetime import datetime, timedelta
+
+L_URL = "https://api.spacexdata.com/v4/launchpads/"
+R_URL = "https://api.spacexdata.com/v4/rockets/"
+LA_URL = "https://api.spacexdata.com/v4/launches"
 
 
-def fetch_launches_per_rocket():
-    """Return the number of launches per rocket"""
-    # Initialize rocket count dictionary
-    rocket_count = Counter()
-
+def fetch_first_launch():
+    """Return the first launch"""
     # Fetch launches from SpaceX API
-    response = requests.get("https://api.spacexdata.com/v3/launches")
+    response = requests.get(LA_URL)
     launches = response.json()
 
+    # Sort launches by date_unix
+    sorted_launches = sorted(launches, key=lambda x: x['date_unix'])
+
+    # Get the first launch
+    first_launch = sorted_launches[0]
+
+    # Extract required information
+    launch_name = first_launch['name']
+    launch_date = first_launch['date_local']
+    rocket_id = first_launch['rocket']
+    launchpad_id = first_launch['launchpad']
+
     # Fetch rocket details
-    rocket_response = requests.get("https://api.spacexdata.com/v3/rockets")
-    rockets = rocket_response.json()
-    rocket_dict = {rocket['rocket_id']: rocket['rocket_name'] for rocket in rockets}
+    rocket_response = requests.get(R_URL + rocket_id)
+    rocket_name = rocket_response.json()['name']
 
-    # Count launches per rocket
-    for launch in launches:
-        rocket_id = launch['rocket']['rocket_id']
-        rocket_name = rocket_dict.get(rocket_id, "Unknown")
+    # Fetch launchpad details
+    launchpad_response = requests.get(L_URL + launchpad_id)
+    launchpad_data = launchpad_response.json()
+    launchpad_name = launchpad_data['name']
+    launchpad_locality = launchpad_data['locality']
 
-        # Increment rocket count
-        rocket_count[rocket_name] += 1
+    # Print the information
+    # Using join()
+    print(" ".join([
+        launch_name, "(", launch_date, rocket_name, ")", "-",
+        launchpad_name, "(", launchpad_locality, ")"
+    ]))
 
-    # Sort by number of launches and then by rocket name
-    sorted_rockets = sorted(rocket_count.items(), key=lambda x: (-x[1], x[0]))
-
-    # Print the sorted rocket count
-    for rocket, count in sorted_rockets:
-        print(f"{rocket}: {count}")
-
-if __name__ == "__main__":
-    fetch_launches_per_rocket()
+# Uncomment the following line to execute the function when running the script
+# fetch_first_launch()
