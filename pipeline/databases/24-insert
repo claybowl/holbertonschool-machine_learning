@@ -1,0 +1,2 @@
+// switch to the database named 'my_db'. The actual database name will be passed as an option to the mongo command
+db.school.insert( { name: "Holberton school"} )
